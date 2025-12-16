@@ -1,0 +1,102 @@
+Video_ID,Video_Title,City,Activity,Reason,Activity_Simple,Reason_Simple
+1,kzNjmq63I_E,London,not planning correctly,populated areas only on weekends,Logistics,Friction
+1,kzNjmq63I_E,London,buying designer goods,no VAT refund post-Brexit,Commerce,Rules
+1,kzNjmq63I_E,London,not checking out the nightlife,limited club options for tourists,Sights,Value
+2,5GzACwRHguc,London,using Google Maps,not accurate,Mobility,Friction
+2,5GzACwRHguc,London,walking,not practical,Mobility,Friction
+2,5GzACwRHguc,London,crossing streets,not safe,Risk,Risk
+2,5GzACwRHguc,London,calling London 'London',not local,Conduct,Value
+3,nvTHBfZTld4,London,using Uber,dangerous,Mobility,Risk
+3,nvTHBfZTld4,London,skipping queues,disrespectful,Logistics,Norms
+3,nvTHBfZTld4,London,ordering still water,unnecessary,Commerce,Value
+4,RPuZsC35mKk,London,walking in sneakers,too many steps,Mobility,Friction
+4,RPuZsC35mKk,London,using Uber,limited service,Mobility,Friction
+4,RPuZsC35mKk,London,visiting Tate Modern,powerful storytelling,Sights,Value
+4,RPuZsC35mKk,London,visiting markets,crowded,Sights,Crowd
+5,WOLrcR6yJyw,London,confusing bridges,common tourist mistake,Mobility,Friction
+5,WOLrcR6yJyw,London,over-tipping,unnecessary double payment,Commerce,Value
+5,WOLrcR6yJyw,London,offensive gestures,could offend locals,Conduct,Norms
+5,WOLrcR6yJyw,London,wrong escalator side,inconvenient for rushing Londoners,Mobility,Norms
+6,i6tcnbseaBw,New York,visiting the Empire State Building,skyline feels incomplete,Sights,Crowd
+6,i6tcnbseaBw,New York,touching the bull statue,always long lines,Sights,Crowd
+6,i6tcnbseaBw,New York,visiting the Statue of Liberty,overrated,Sights,Value
+7,-7dUVAX-FEs,New York,looking for bike lanes,dangerous,Risk,Risk
+7,-7dUVAX-FEs,New York,wearing comfortable shoes,uncomfortable,Mobility,Value
+7,-7dUVAX-FEs,New York,using public transportation,faster and cheaper,Mobility,Value
+8,9FO3z-PfPoE,New York,monk bracelet scam,fake monks tie bracelets and demand money,Risk,Risk
+8,9FO3z-PfPoE,New York,mix tape scam,free mix tapes turn out to be expensive,Risk,Risk
+8,9FO3z-PfPoE,New York,costume photo scams,costumes charge for photos,Risk,Risk
+9,MEbEcv5hmfc,New York,overpaying for hotels,too expensive,Commerce,Value
+9,MEbEcv5hmfc,New York,using taxis,inefficient,Mobility,Friction
+9,MEbEcv5hmfc,New York,watching Times Square shows,overrated,Sights,Value
+10,hrqLIA1SWzs,New York,visiting the Statue of Liberty,too expensive,Sights,Value
+10,hrqLIA1SWzs,New York,eating at overpriced chains,poor quality,Commerce,Value
+10,hrqLIA1SWzs,New York,using the metro,overpriced,Mobility,Value
+10,hrqLIA1SWzs,New York,visiting Times Square during peak hours,crowded,Logistics,Crowd
+11,_WA-kBCxvMc.,Paris,standing in front of the Arc de Triomphe,too crowded,Sights,Crowd
+11,_WA-kBCxvMc.,Paris,looking at the Eiffel Tower from a balcony,not worth the view,Sights,Value
+11,_WA-kBCxvMc.,Paris,standing on a pedestal in front of a building,not recommended,Sights,Norms
+11,_WA-kBCxvMc.,Paris,walking up a grand staircase,not necessary,Mobility,Value
+11,_WA-kBCxvMc.,Paris,looking at the Eiffel Tower from the ground,overrated,Sights,Value
+11,_WA-kBCxvMc.,Paris,walking down a street with buildings,unnecessary,Sights,Value
+11,_WA-kBCxvMc.,Paris,standing in front of a large building,misses out on other cities,Sights,Value
+11,_WA-kBCxvMc.,Paris,walking through a large room with chandeliers,not as beautiful,Sights,Value
+12,wSYnQzZrWA,Paris,dinner cruises on the seine river,overpriced and mediocre meal,Commerce,Value
+12,wSYnQzZrWA,Paris,group bus tours to versailles,time-limited exploration and expensive,Mobility,Friction
+12,wSYnQzZrWA,Paris,waiting until arrival to get tickets,often booked out for weeks in advance,Logistics,Friction
+13,doHwzBVkCSA,Paris,visiting Sacr√©-C≈ìur after 9:00 am,crowded,Logistics,Crowd
+13,doHwzBVkCSA,Paris,buying Eiffel Tower tickets on site,long lines,Logistics,Crowd
+13,doHwzBVkCSA,Paris,using cars or taxis,traffic congestion,Mobility,Friction
+13,doHwzBVkCSA,Paris,expecting everyone to speak English,language barrier,Conduct,Friction
+13,doHwzBVkCSA,Paris,rushing from sight to sight,overwhelming,Logistics,Friction
+13,doHwzBVkCSA,Paris,being afraid to try typical French dishes,fear of unfamiliar food,Commerce,Value
+14,Kr7PWSxwgd4,Paris,using phone by metro doors,dangerous,Mobility,Risk
+14,Kr7PWSxwgd4,Paris,whistling the metro,unwise,Mobility,Risk
+14,Kr7PWSxwgd4,Paris,pickpocketing,common,Risk,Risk
+15,zjAsTm0Nd40,Paris,thinking that the Eiffel Tower is the center of Paris,far from other main attractions,Sights,Friction
+15,zjAsTm0Nd40,Paris,not learning basic French words,locals appreciate effort in speaking French,Conduct,Norms
+15,zjAsTm0Nd40,Paris,traveling during summer,lots of crowds and more expensive,Logistics,Crowd
+16,Fm8ohbqAMKA,Seoul,drinking on the bus,strictly prohibited,Mobility,Rules
+16,Fm8ohbqAMKA,Seoul,entering a taxi from the left side,door will be locked or driver will drive away,Mobility,Friction
+16,Fm8ohbqAMKA,Seoul,leaving a bike unlocked,bike can get stolen,Risk,Risk
+17,GCL6LX0MAjs,Seoul,talking to strangers,Koreans do not talk to strangers,Conduct,Norms
+17,GCL6LX0MAjs,Seoul,looking at people,it's considered rude,Conduct,Norms
+17,GCL6LX0MAjs,Seoul,wearing shoes indoors,it's a sign of disrespect,Conduct,Norms
+17,GCL6LX0MAjs,Seoul,using 'please' while paying,it's impolite,Commerce,Norms
+17,GCL6LX0MAjs,Seoul,holding paper money,it's unhygienic,Conduct,Norms
+17,GCL6LX0MAjs,Seoul,giving food to strangers,it's disrespectful,Risk,Norms
+17,GCL6LX0MAjs,Seoul,leaving bicycles unlocked,bicycles can be stolen,Risk,Risk
+18,qlntCoEjEbQ,Seoul,hailing a taxi,most taxi drivers do not speak English,Mobility,Friction
+18,qlntCoEjEbQ,Seoul,traveling during autumn and spring,accommodation and flights are expensive and crowded,Logistics,Crowd
+19,tXJRRImjWi4,Seoul,not knowing about the climate card,climate card saves money,Logistics,Value
+19,tXJRRImjWi4,Seoul,applying for K-ETA online,K-ETA is free for certain countries,Logistics,Rules
+19,tXJRRImjWi4,Seoul,fully relying on Apple Pay,most shops don't accept Apple Pay,Commerce,Friction
+19,tXJRRImjWi4,Seoul,not downloading Navermap or Kakao Map,Google Maps doesn't work,Mobility,Friction
+20,QbIZOru-hJk,Seoul,buying cushion foundations,too expensive for less product,Commerce,Value
+20,QbIZOru-hJk,Seoul,using eyeshadow palettes,most are similar,Commerce,Value
+20,QbIZOru-hJk,Seoul,focusing on global brands,less accessible globally,Commerce,Friction
+21,2HHv1AtwmEo,Tokyo,walking,too crowded,Mobility,Crowd
+21,2HHv1AtwmEo,Tokyo,eating ramen,wasted time and energy,Commerce,Friction
+21,2HHv1AtwmEo,Tokyo,applying makeup,not necessary,Commerce,Value
+21,2HHv1AtwmEo,Tokyo,walking at night,not recommended,Risk,Value
+21,2HHv1AtwmEo,Tokyo,shopping,expensive,Commerce,Value
+21,2HHv1AtwmEo,Tokyo,not staying in a hotel,location,Logistics,Friction
+21,2HHv1AtwmEo,Tokyo,not using a coin locker,expensive,Logistics,Value
+21,2HHv1AtwmEo,Tokyo,holding a red flare,fun,Risk,Value
+22,e8sAA40ll1Y,Tokyo,boarding out-of-service trains,can be misleading,Mobility,Friction
+22,e8sAA40ll1Y,Tokyo,using the train like a jungle gym,disruptive,Mobility,Norms
+22,e8sAA40ll1Y,Tokyo,ignoring vending machine colors,incorrect temperature,Commerce,Friction
+23,mHoPSKu4QT8,Tokyo,opening tax-free bags,tax implications,Commerce,Rules
+23,mHoPSKu4QT8,Tokyo,wearing shoes into changing rooms,hygiene concerns,Conduct,Norms
+23,mHoPSKu4QT8,Tokyo,ignoring escalator rules,local customs,Mobility,Norms
+24,xIGEgePw4Cw,Tokyo,eating while walking,socially awkward,Commerce,Norms
+24,xIGEgePw4Cw,Tokyo,talking loudly on trains,noise disturbance,Mobility,Norms
+24,xIGEgePw4Cw,Tokyo,skipping the shower before the onsen,disrespectful,Conduct,Norms
+24,xIGEgePw4Cw,Tokyo,tipping,seen as rude,Commerce,Norms
+24,xIGEgePw4Cw,Tokyo,pointing at animals,considered disrespectful,Conduct,Norms
+25,Ri2vqt6m0TQ,Tokyo,lying down on train seats,considered rude,Mobility,Norms
+25,Ri2vqt6m0TQ,Tokyo,touching taxi doors,automatic opening,Mobility,Friction
+25,Ri2vqt6m0TQ,Tokyo,wearing backpacks the normal way,inconvenient for others,Conduct,Friction
+25,Ri2vqt6m0TQ,Tokyo,using toilets incorrectly,unhygienic,Conduct,Norms
+25,Ri2vqt6m0TQ,Tokyo,hogging space on trains,disrupts social norms,Mobility,Norms
+25,Ri2vqt6m0TQ,Tokyo,drinking from vending machines,not ready to drink,Commerce,Value
