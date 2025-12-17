@@ -99,10 +99,6 @@ export default function DashboardPage() {
   const [rows, setRows] = useState<DontRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [heatmapSelection, setHeatmapSelection] = useState<{
-    activityLabel: string;
-    reasonLabel: string;
-  } | null>(null);
   const dashboard = useDashboardState();
 
   useEffect(() => {
@@ -162,32 +158,8 @@ export default function DashboardPage() {
   );
   const heatmap = useMemo(() => activityReasonMatrix(rows), [rows]);
 
-  const handleHeatmapSelect = (activityLabel: string, reasonLabel: string) => {
-    const isSame =
-      heatmapSelection?.activityLabel === activityLabel &&
-      heatmapSelection?.reasonLabel === reasonLabel;
-    if (isSame) {
-      setHeatmapSelection(null);
-      dashboard.setFiltersDirect({
-        ...dashboard.filters,
-        activityLabel: undefined,
-        reasonLabel: undefined,
-      });
-      dashboard.setSelection(null);
-      return;
-    }
-    setHeatmapSelection({ activityLabel, reasonLabel });
-    dashboard.setFiltersDirect({
-      ...dashboard.filters,
-      activityLabel,
-      reasonLabel,
-    });
-    dashboard.setSelection({ type: "link", value: `${activityLabel} × ${reasonLabel}` });
-  };
-
   const handleReset = () => {
     dashboard.resetFilters();
-    setHeatmapSelection(null);
   };
 
   return (
@@ -257,8 +229,6 @@ export default function DashboardPage() {
                   activityLabel: dashboard.filters.activityLabel,
                   reasonLabel: dashboard.filters.reasonLabel,
                 }}
-                selected={heatmapSelection}
-                onSelect={handleHeatmapSelect}
               />
             </div>
           )}
