@@ -43,6 +43,19 @@ const orderLabels = (counts: Record<string, number>) =>
 const includeIfSet = (selected: string | undefined, value: string) =>
   !selected || selected === value;
 
+const cityOrder = ["Seoul", "Tokyo", "London", "Paris", "New York"];
+const cityRank = (city: string) => {
+  const idx = cityOrder.indexOf(city);
+  return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
+};
+const sortCities = (cities: string[]) =>
+  [...cities].sort((a, b) => {
+    const aRank = cityRank(a);
+    const bRank = cityRank(b);
+    if (aRank === bRank) return a.localeCompare(b);
+    return aRank - bRank;
+  });
+
 export function filterRows(rows: DontRow[], filters: Filters) {
   return rows.filter(
     (row) =>
@@ -67,7 +80,7 @@ export function uniqueValues(rows: DontRow[]) {
   });
 
   return {
-    cities: [...cities].sort(),
+    cities: sortCities([...cities]),
     activityLabels: orderLabels(activityCounts),
     reasonLabels: orderLabels(reasonCounts),
     videos: [...videos].sort(),
@@ -88,7 +101,14 @@ export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
 
   const order = orderLabels(globalCounts);
 
-  return Object.entries(grouped).map(([city, map]) => {
+  const cityEntries = Object.entries(grouped).sort((a, b) => {
+    const aRank = cityRank(a[0]);
+    const bRank = cityRank(b[0]);
+    if (aRank === bRank) return a[0].localeCompare(b[0]);
+    return aRank - bRank;
+  });
+
+  return cityEntries.map(([city, map]) => {
     const total = totals[city] || 1;
     const segments = order
       .filter((label) => map[label])
@@ -118,7 +138,14 @@ export function cityReasonComposition(rows: DontRow[]): CityComposition[] {
 
   const order = orderLabels(globalCounts);
 
-  return Object.entries(grouped).map(([city, map]) => {
+  const cityEntries = Object.entries(grouped).sort((a, b) => {
+    const aRank = cityRank(a[0]);
+    const bRank = cityRank(b[0]);
+    if (aRank === bRank) return a[0].localeCompare(b[0]);
+    return aRank - bRank;
+  });
+
+  return cityEntries.map(([city, map]) => {
     const total = totals[city] || 1;
     const segments = order
       .filter((label) => map[label])
