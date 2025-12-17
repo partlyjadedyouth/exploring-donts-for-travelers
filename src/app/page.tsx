@@ -179,7 +179,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-amber-50 text-neutral-900 lg:h-screen">
+    <div className="min-h-screen bg-linear-to-br from-indigo-50 via-white to-amber-50 text-neutral-900 lg:h-screen">
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 lg:h-screen lg:min-h-0 lg:overflow-hidden">
         <header className="flex flex-col gap-2">
           <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">

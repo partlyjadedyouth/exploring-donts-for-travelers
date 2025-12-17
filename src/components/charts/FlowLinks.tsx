@@ -34,7 +34,7 @@ export default function FlowLinks({ links, onSelect, active }: Props) {
             <button
               key={`${link.activityLabel}-${link.reasonLabel}`}
               onClick={() => onSelect(link.activityLabel, link.reasonLabel)}
-              className="group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl border border-neutral-100 bg-gradient-to-r from-indigo-50 via-white to-white px-3 py-3 text-left transition hover:-translate-y-0.5 hover:shadow-sm"
+              className="group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl border border-neutral-100 bg-linear-to-r from-indigo-50 via-white to-white px-3 py-3 text-left transition hover:-translate-y-0.5 hover:shadow-sm"
             >
               <div className="relative h-10 flex-1 rounded-xl bg-neutral-100">
                 <div
@@ -44,7 +44,7 @@ export default function FlowLinks({ links, onSelect, active }: Props) {
                   style={{ width: `${width}%` }}
                 />
               </div>
-                <div className="flex min-w-[200px] flex-col">
+                <div className="flex min-w-50 flex-col">
                   <span className="text-sm font-semibold text-neutral-900">
                     {link.activityLabel} → {link.reasonLabel}
                   </span>

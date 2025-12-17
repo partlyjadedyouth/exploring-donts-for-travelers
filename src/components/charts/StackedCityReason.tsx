@@ -85,7 +85,7 @@ export default function StackedCityReason({
                     aria-label={`${seg.label} (${seg.count}, ${seg.pct}%)`}
                   >
                     <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/5" />
-                    <div className="pointer-events-none absolute -top-12 left-1/2 hidden min-w-[160px] -translate-x-1/2 flex-col rounded-xl bg-black/80 px-2 py-1 text-[11px] text-white shadow-sm group-hover:flex group-hover:opacity-100">
+                    <div className="pointer-events-none absolute -top-12 left-1/2 hidden min-w-40 -translate-x-1/2 flex-col rounded-xl bg-black/80 px-2 py-1 text-[11px] text-white shadow-sm group-hover:flex group-hover:opacity-100">
                       <span className="font-semibold leading-tight">
                         {seg.label}
                       </span>
