@@ -58,7 +58,9 @@ export default function StackedCityActivity({
               >
                 {row.city}
               </button>
-              <span>{row.total} rows</span>
+              <span>
+                {row.total} {row.total == 1 ? "activity" : "activities"}
+              </span>
             </div>
             <div
               className="relative flex rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
@@ -88,7 +90,8 @@ export default function StackedCityActivity({
                         {seg.label}
                       </span>
                       <span className="leading-tight">
-                        {seg.count} rows · {seg.pct}%
+                        {seg.count} {seg.count == 1 ? "activity" : "activities"}{" "}
+                        · {seg.pct}%
                       </span>
                     </div>
                   </button>

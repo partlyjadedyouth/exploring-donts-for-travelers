@@ -15,7 +15,7 @@ const colorFor = (count: number, max: number, active: boolean) => {
   return `rgba(99, 102, 241, ${base * alpha})`;
 };
 
-export default function CityReasonHeatmap({
+export default function ActivityReasonHeatmap({
   matrix,
   active,
 }: Props) {

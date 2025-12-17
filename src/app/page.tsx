@@ -16,7 +16,7 @@ import {
   activityReasonMatrix,
 } from "@/lib/aggregate";
 import { useDashboardState } from "@/hooks/useDashboardState";
-import CityReasonHeatmap from "@/components/charts/CityReasonHeatmap";
+import ActivityReasonHeatmap from "@/components/charts/ActivityReasonHeatmap";
 
 const activityLabelMap: Record<string, string> = {
   Mobility: "Transit Mistakes",
@@ -235,7 +235,7 @@ export default function DashboardPage() {
                 />
               </div>
 
-              <CityReasonHeatmap
+              <ActivityReasonHeatmap
                 matrix={heatmap}
                 active={{
                   activityLabel: dashboard.filters.activityLabel,
