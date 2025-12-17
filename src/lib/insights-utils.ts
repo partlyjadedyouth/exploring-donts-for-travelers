@@ -22,11 +22,30 @@ export const buildFilterTags = (filters: Filters) => {
   return tags;
 };
 
+const groupTags = (tags: string[]) =>
+  tags.reduce<Record<string, string[]>>((acc, tag) => {
+    const idx = tag.indexOf(":");
+    if (idx === -1) return acc;
+    const category = tag.slice(0, idx);
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(tag);
+    return acc;
+  }, {});
+
 export const insightMatches = (insight: Insight, filterTags: string[]) => {
   const tags = insight.tags ?? [];
   if (tags.length === 0) return true;
   if (filterTags.length === 0) return false;
-  return tags.some((tag) => filterTags.includes(tag));
+  const filterByCategory = groupTags(filterTags);
+  const insightByCategory = groupTags(tags);
+  for (const [category, filterList] of Object.entries(filterByCategory)) {
+    if (filterList.length === 0) continue;
+    const insightList = insightByCategory[category] ?? [];
+    if (insightList.length === 0) return false;
+    const hasOverlap = insightList.some((tag) => filterList.includes(tag));
+    if (!hasOverlap) return false;
+  }
+  return true;
 };
 
 export const matchedInsightTags = (insight: Insight, filterTags: string[]) => {
