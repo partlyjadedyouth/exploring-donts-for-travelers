@@ -11,8 +11,10 @@ export default function EvidenceTable({ rows }: Props) {
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-neutral-900">Evidence rows</p>
-          <p className="text-xs text-neutral-500">Pulled from the selected heatmap cell.</p>
+          <p className="text-sm font-semibold text-neutral-900">
+            Evidence rows
+          </p>
+          {/* <p className="text-xs text-neutral-500">Pulled from the selected heatmap cell.</p> */}
         </div>
         <span className="rounded-full bg-neutral-100 px-2 py-1 text-[11px] text-neutral-600">
           Snapshot
@@ -32,15 +34,27 @@ export default function EvidenceTable({ rows }: Props) {
             {rows.map((row) => (
               <tr key={row.id} className="transition hover:bg-indigo-50">
                 <td className="px-3 py-2 align-top text-neutral-900">
-                  <div className="text-sm font-semibold text-neutral-900">{row.city}</div>
-                  <div className="text-[11px] text-neutral-500">{row.activityCategory}</div>
+                  <div className="text-sm font-semibold text-neutral-900">
+                    {row.city}
+                  </div>
                 </td>
                 <td className="px-3 py-2 align-top text-neutral-800">
-                  <div className="font-medium text-neutral-900">{row.activity}</div>
-                  <div className="text-[11px] text-neutral-500">{row.reasonCategory}</div>
+                  <div className="font-medium text-neutral-900">
+                    {row.activity}
+                  </div>
+                  <div className="text-[11px] text-neutral-500">
+                    {row.activityLabel}
+                  </div>
                 </td>
-                <td className="px-3 py-2 align-top text-neutral-700">{row.reason}</td>
-                <td className="px-3 py-2 align-top text-neutral-600">{row.videoTitle}</td>
+                <td className="px-3 py-2 align-top text-neutral-700">
+                  {row.reason}
+                  <div className="text-[11px] text-neutral-500">
+                    {row.reasonLabel}
+                  </div>
+                </td>
+                <td className="px-3 py-2 align-top text-neutral-600">
+                  {row.videoTitle}
+                </td>
               </tr>
             ))}
             {rows.length === 0 && (

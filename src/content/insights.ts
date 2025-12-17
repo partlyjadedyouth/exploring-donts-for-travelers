@@ -1,7 +1,7 @@
 export type InsightCondition = {
   city?: string[];
-  activity_category?: string[];
-  reason_category?: string[];
+  activity_label?: string[];
+  reason_label?: string[];
   video_title?: string[];
 };
 
@@ -18,14 +18,14 @@ export type Insight = {
 export const insights: Insight[] = [
   {
     id: "mobility-london",
-    title: "London mobility gripes pile up quickly",
+    title: "London transit mistakes pile up quickly",
     summary:
-      "Mobility shows up repeatedly as a blocker when visitors try to navigate London without prep.",
+      "Transit mistakes show up repeatedly as a blocker when visitors try to navigate London without prep.",
     soWhat: "Double down on motion guides and call out the worst friction points early.",
-    conditions: { city: ["London"], activity_category: ["Mobility"] },
+    conditions: { city: ["London"], activity_label: ["Transit Mistakes"] },
     evidenceHints: [
       "Look for rows mentioning Uber and walking fatigue.",
-      "Cross-reference with Safety or Norms reasons.",
+      "Cross-reference with Safety Concerns or Cultural Misfits reasons.",
     ],
     priority: 1,
   },
@@ -36,8 +36,8 @@ export const insights: Insight[] = [
       "Shopping-related don’ts often show up next to Price and Quality reasons, hinting at hidden sticker shock.",
     soWhat: "Add a quick price expectations widget to reduce regret.",
     conditions: {
-      activity_category: ["Shopping"],
-      reason_category: ["Price and Quality", "Timing and Distance"],
+      activity_label: ["Shopping"],
+      reason_label: ["Price and Quality", "Timing and Distance"],
     },
     evidenceHints: ["Rows with VAT or tipping concerns.", "Any note calling out surprise fees."],
     priority: 2,

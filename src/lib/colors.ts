@@ -16,17 +16,18 @@ const palette = [
 
 // Common labels mapped explicitly to avoid collisions and ensure consistency.
 const predefined: Record<string, string> = {
-  Mobility: "#1f77b4",
-  Attraction: "#2ca02c",
-  "Booking and Timing": "#8c564b",
+  "Transit Mistakes": "#1f77b4",
+  Attractions: "#2ca02c",
+  "Inefficient Planning": "#8c564b",
   Shopping: "#ff7f0e",
-  Manners: "#9467bd",
-  Safety: "#d62728",
+  "Social Misconduct": "#9467bd",
+  "Unsafe Choices": "#d62728",
   "Price and Quality": "#7f7f7f",
-  Crowd: "#17becf",
-  Norms: "#e377c2",
+  Overcrowding: "#17becf",
+  "Cultural Misfits": "#e377c2",
   Regulations: "#bcbd22",
   "Timing and Distance": "#aec7e8",
+  "Safety Concerns": "#d62728",
 };
 
 const assigned = new Map<string, string>();

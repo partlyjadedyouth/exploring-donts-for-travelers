@@ -6,11 +6,11 @@ type Props = {
   filters: Filters;
   options: {
     cities: string[];
-    activityCategories: string[];
-    reasonCategories: string[];
+    activityLabels: string[];
+    reasonLabels: string[];
     videos: string[];
   };
-  onToggle: (field: "city" | "activityCategory" | "reasonCategory", value: string) => void;
+  onToggle: (field: "city" | "activityLabel" | "reasonLabel", value: string) => void;
   onReset: () => void;
 };
 
@@ -80,15 +80,15 @@ export default function FilterRail({
       />
       <FilterGroup
         label="Activity"
-        values={options.activityCategories}
-        selected={filters.activityCategory}
-        onToggle={(v) => onToggle("activityCategory", v)}
+        values={options.activityLabels}
+        selected={filters.activityLabel}
+        onToggle={(v) => onToggle("activityLabel", v)}
       />
       <FilterGroup
         label="Reason"
-        values={options.reasonCategories}
-        selected={filters.reasonCategory}
-        onToggle={(v) => onToggle("reasonCategory", v)}
+        values={options.reasonLabels}
+        selected={filters.reasonLabel}
+        onToggle={(v) => onToggle("reasonLabel", v)}
       />
     </aside>
   );

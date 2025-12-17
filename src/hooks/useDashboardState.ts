@@ -6,28 +6,28 @@ import { Filters } from "@/lib/aggregate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export type Selection =
-  | { type: "city" | "activity_category" | "reason_category" | "video_title"; value: string }
+  | { type: "city" | "activity_label" | "reason_label" | "video_title"; value: string }
   | { type: "link"; value: string }
   | null;
 
 const emptyFilters: Filters = {
   city: undefined,
-  activityCategory: undefined,
-  reasonCategory: undefined,
+  activityLabel: undefined,
+  reasonLabel: undefined,
   videoTitle: undefined,
 };
 
 const filtersEqual = (a: Filters, b: Filters) =>
   a.city === b.city &&
-  a.activityCategory === b.activityCategory &&
-  a.reasonCategory === b.reasonCategory &&
+  a.activityLabel === b.activityLabel &&
+  a.reasonLabel === b.reasonLabel &&
   a.videoTitle === b.videoTitle;
 
 const parseFiltersFromSearch = (params: URLSearchParams): Filters => {
   return {
     city: params.get("city") || undefined,
-    activityCategory: params.get("activity") || undefined,
-    reasonCategory: params.get("reason") || undefined,
+    activityLabel: params.get("activity") || undefined,
+    reasonLabel: params.get("reason") || undefined,
     videoTitle: params.get("video") || undefined,
   };
 };
@@ -35,8 +35,8 @@ const parseFiltersFromSearch = (params: URLSearchParams): Filters => {
 const toQueryString = (filters: Filters) => {
   const params = new URLSearchParams();
   if (filters.city) params.set("city", filters.city);
-  if (filters.activityCategory) params.set("activity", filters.activityCategory);
-  if (filters.reasonCategory) params.set("reason", filters.reasonCategory);
+  if (filters.activityLabel) params.set("activity", filters.activityLabel);
+  if (filters.reasonLabel) params.set("reason", filters.reasonLabel);
   if (filters.videoTitle) params.set("video", filters.videoTitle);
   return params.toString();
 };
@@ -62,7 +62,7 @@ export function useDashboardState() {
   }, [filters]);
 
   const toggleValue = (
-    field: "city" | "activityCategory" | "reasonCategory",
+    field: "city" | "activityLabel" | "reasonLabel",
     value: string,
   ) => {
     setFilters((prev) => {
@@ -88,11 +88,11 @@ export function useDashboardState() {
   const applyLinkCombo = (activity: string, reason: string) => {
     setFilters((prev) => {
       const hasBoth =
-        prev.activityCategory === activity && prev.reasonCategory === reason;
+        prev.activityLabel === activity && prev.reasonLabel === reason;
       return {
         ...prev,
-        activityCategory: hasBoth ? undefined : activity,
-        reasonCategory: hasBoth ? undefined : reason,
+        activityLabel: hasBoth ? undefined : activity,
+        reasonLabel: hasBoth ? undefined : reason,
       };
     });
     setSelection({ type: "link", value: `${activity} → ${reason}` });

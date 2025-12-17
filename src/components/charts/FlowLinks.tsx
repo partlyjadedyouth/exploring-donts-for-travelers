@@ -4,8 +4,8 @@ import { LinkStat } from "@/lib/aggregate";
 
 type Props = {
   links: LinkStat[];
-  onSelect: (activityCategory: string, reasonCategory: string) => void;
-  active: { activityCategories: string[]; reasonCategories: string[] };
+  onSelect: (activityLabel: string, reasonLabel: string) => void;
+  active: { activityLabels: string[]; reasonLabels: string[] };
 };
 
 export default function FlowLinks({ links, onSelect, active }: Props) {
@@ -28,12 +28,12 @@ export default function FlowLinks({ links, onSelect, active }: Props) {
         {links.map((link) => {
           const width = Math.max((link.count / max) * 100, 8);
           const selected =
-            active.activityCategories.includes(link.activityCategory) &&
-            active.reasonCategories.includes(link.reasonCategory);
+            active.activityLabels.includes(link.activityLabel) &&
+            active.reasonLabels.includes(link.reasonLabel);
           return (
             <button
-              key={`${link.activityCategory}-${link.reasonCategory}`}
-              onClick={() => onSelect(link.activityCategory, link.reasonCategory)}
+              key={`${link.activityLabel}-${link.reasonLabel}`}
+              onClick={() => onSelect(link.activityLabel, link.reasonLabel)}
               className="group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl border border-neutral-100 bg-gradient-to-r from-indigo-50 via-white to-white px-3 py-3 text-left transition hover:-translate-y-0.5 hover:shadow-sm"
             >
               <div className="relative h-10 flex-1 rounded-xl bg-neutral-100">
@@ -46,7 +46,7 @@ export default function FlowLinks({ links, onSelect, active }: Props) {
               </div>
                 <div className="flex min-w-[200px] flex-col">
                   <span className="text-sm font-semibold text-neutral-900">
-                    {link.activityCategory} → {link.reasonCategory}
+                    {link.activityLabel} → {link.reasonLabel}
                   </span>
                   <span className="text-xs text-neutral-500">{link.count} mentions</span>
                 </div>

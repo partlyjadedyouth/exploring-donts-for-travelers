@@ -19,29 +19,29 @@ import {
 import { useDashboardState } from "@/hooks/useDashboardState";
 import CityReasonHeatmap from "@/components/charts/CityReasonHeatmap";
 
-const activityCategoryMap: Record<string, string> = {
-  Mobility: "Mobility",
-  Sights: "Attraction",
-  Logistics: "Booking and Timing",
+const activityLabelMap: Record<string, string> = {
+  Mobility: "Transit Mistakes",
+  Sights: "Attractions",
+  Logistics: "Inefficient Planning",
   Commerce: "Shopping",
-  Conduct: "Manners",
-  Risk: "Safety",
+  Conduct: "Social Misconduct",
+  Risk: "Unsafe Choices",
 };
 
-const reasonCategoryMap: Record<string, string> = {
+const reasonLabelMap: Record<string, string> = {
   Value: "Price and Quality",
-  Risk: "Safety",
-  Crowd: "Crowd",
-  Norms: "Norms",
+  Risk: "Safety Concerns",
+  Crowd: "Overcrowding",
+  Norms: "Cultural Misfits",
   Rules: "Regulations",
   Friction: "Timing and Distance",
 };
 
-const mapActivityCategory = (value: string) =>
-  activityCategoryMap[value?.trim()] || value?.trim() || value;
+const mapActivityLabel = (value: string) =>
+  activityLabelMap[value?.trim()] || value?.trim() || value;
 
-const mapReasonCategory = (value: string) =>
-  reasonCategoryMap[value?.trim()] || value?.trim() || value;
+const mapReasonLabel = (value: string) =>
+  reasonLabelMap[value?.trim()] || value?.trim() || value;
 
 const parseCsvLine = (line: string) => {
   const values: string[] = [];
@@ -88,8 +88,8 @@ const parseCsv = (text: string): DontRow[] => {
       city: obj["City"],
       activity: obj["Activity"],
       reason: obj["Reason"],
-      activityCategory: mapActivityCategory(obj["Activity_Simple"]),
-      reasonCategory: mapReasonCategory(obj["Reason_Simple"]),
+      activityLabel: mapActivityLabel(obj["Activity_Simple"]),
+      reasonLabel: mapReasonLabel(obj["Reason_Simple"]),
     };
     row.id = hashRow(row);
     return row;
@@ -101,8 +101,8 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [heatmapSelection, setHeatmapSelection] = useState<{
-    activityCategory: string;
-    reasonCategory: string;
+    activityLabel: string;
+    reasonLabel: string;
   } | null>(null);
   const dashboard = useDashboardState();
 
@@ -125,8 +125,8 @@ export default function DashboardPage() {
             city: "Tokyo",
             activity: "crossing busy crossings",
             reason: "overwhelming crowds",
-            activityCategory: "Mobility",
-            reasonCategory: "Crowd",
+            activityLabel: "Transit Mistakes",
+            reasonLabel: "Overcrowding",
           },
           {
             id: "fallback-2",
@@ -135,8 +135,8 @@ export default function DashboardPage() {
             city: "Seoul",
             activity: "buying souvenirs",
             reason: "tourist traps",
-            activityCategory: "Shopping",
-            reasonCategory: "Price and Quality",
+            activityLabel: "Shopping",
+            reasonLabel: "Price and Quality",
           },
         ]);
         setError("Using fallback sample data because /data/donts.csv could not be loaded.");
@@ -163,14 +163,14 @@ export default function DashboardPage() {
   );
   const heatmap = useMemo(() => activityReasonMatrix(filteredRows), [filteredRows]);
 
-  const handleHeatmapSelect = (activityCategory: string, reasonCategory: string) => {
-    setHeatmapSelection({ activityCategory, reasonCategory });
+  const handleHeatmapSelect = (activityLabel: string, reasonLabel: string) => {
+    setHeatmapSelection({ activityLabel, reasonLabel });
     dashboard.setFiltersDirect({
       ...dashboard.filters,
-      activityCategory,
-      reasonCategory,
+      activityLabel,
+      reasonLabel,
     });
-    dashboard.setSelection({ type: "link", value: `${activityCategory} × ${reasonCategory}` });
+    dashboard.setSelection({ type: "link", value: `${activityLabel} × ${reasonLabel}` });
   };
 
   const handleReset = () => {
@@ -182,15 +182,15 @@ export default function DashboardPage() {
     if (!heatmapSelection) return filteredRows;
     return filteredRows.filter(
       (row) =>
-        row.activityCategory === heatmapSelection.activityCategory &&
-        row.reasonCategory === heatmapSelection.reasonCategory,
+        row.activityLabel === heatmapSelection.activityLabel &&
+        row.reasonLabel === heatmapSelection.reasonLabel,
     );
   }, [filteredRows, heatmapSelection]);
 
   const hasActiveFilters =
     Boolean(dashboard.filters.city) ||
-    Boolean(dashboard.filters.activityCategory) ||
-    Boolean(dashboard.filters.reasonCategory) ||
+    Boolean(dashboard.filters.activityLabel) ||
+    Boolean(dashboard.filters.reasonLabel) ||
     Boolean(dashboard.filters.videoTitle);
 
   return (
@@ -230,10 +230,10 @@ export default function DashboardPage() {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <StackedCityActivity
                   data={cityActivity}
-                  active={dashboard.filters.activityCategory}
+                  active={dashboard.filters.activityLabel}
                   onToggle={(v) => {
-                    dashboard.toggleValue("activityCategory", v);
-                    dashboard.setSelection({ type: "activity_category", value: v });
+                    dashboard.toggleValue("activityLabel", v);
+                    dashboard.setSelection({ type: "activity_label", value: v });
                   }}
                   onSelectCity={(v) => {
                     dashboard.toggleValue("city", v);
@@ -242,10 +242,10 @@ export default function DashboardPage() {
                 />
                 <StackedCityReason
                   data={cityReason}
-                  active={dashboard.filters.reasonCategory}
+                  active={dashboard.filters.reasonLabel}
                   onToggle={(v) => {
-                    dashboard.toggleValue("reasonCategory", v);
-                    dashboard.setSelection({ type: "reason_category", value: v });
+                    dashboard.toggleValue("reasonLabel", v);
+                    dashboard.setSelection({ type: "reason_label", value: v });
                   }}
                   onSelectCity={(v) => {
                     dashboard.toggleValue("city", v);
@@ -257,8 +257,8 @@ export default function DashboardPage() {
               <CityReasonHeatmap
                 matrix={heatmap}
                 active={{
-                  activityCategory: dashboard.filters.activityCategory,
-                  reasonCategory: dashboard.filters.reasonCategory,
+                  activityLabel: dashboard.filters.activityLabel,
+                  reasonLabel: dashboard.filters.reasonLabel,
                 }}
                 selected={heatmapSelection}
                 onSelect={handleHeatmapSelect}

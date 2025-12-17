@@ -4,9 +4,9 @@ import { Matrix } from "@/lib/aggregate";
 
 type Props = {
   matrix: Matrix;
-  active: { activityCategory?: string; reasonCategory?: string };
-  selected?: { activityCategory: string; reasonCategory: string } | null;
-  onSelect: (activityCategory: string, reason: string) => void;
+  active: { activityLabel?: string; reasonLabel?: string };
+  selected?: { activityLabel: string; reasonLabel: string } | null;
+  onSelect: (activityLabel: string, reasonLabel: string) => void;
 };
 
 const colorFor = (count: number, max: number, active: boolean) => {
@@ -22,7 +22,7 @@ export default function CityReasonHeatmap({
   selected,
   onSelect,
 }: Props) {
-  const { cities, reasonCategories, max, cells } = matrix;
+  const { activityLabels, reasonLabels, max, cells } = matrix;
 
   return (
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
@@ -42,7 +42,7 @@ export default function CityReasonHeatmap({
               <th className="w-32 px-2 py-2 text-left text-neutral-500">
                 What \ Why
               </th>
-              {reasonCategories.map((reason) => (
+              {reasonLabels.map((reason) => (
                 <th
                   key={reason}
                   className="px-2 py-2 text-center text-neutral-500"
@@ -53,21 +53,19 @@ export default function CityReasonHeatmap({
             </tr>
           </thead>
           <tbody>
-            {cities.map((activity) => (
+            {activityLabels.map((activity) => (
               <tr key={activity}>
                 <td className="px-2 py-2 text-sm font-semibold text-neutral-800">
                   {activity}
                 </td>
-                {reasonCategories.map((reason) => {
+                {reasonLabels.map((reason) => {
                   const count = cells[activity]?.[reason] ?? 0;
                   const isActive =
-                    (!active.activityCategory ||
-                      active.activityCategory === activity) &&
-                    (!active.reasonCategory ||
-                      active.reasonCategory === reason);
+                    (!active.activityLabel || active.activityLabel === activity) &&
+                    (!active.reasonLabel || active.reasonLabel === reason);
                   const isSelected =
-                    selected?.activityCategory === activity &&
-                    selected?.reasonCategory === reason;
+                    selected?.activityLabel === activity &&
+                    selected?.reasonLabel === reason;
                   return (
                     <td
                       key={`${activity}-${reason}`}
@@ -95,10 +93,10 @@ export default function CityReasonHeatmap({
                 })}
               </tr>
             ))}
-            {cities.length === 0 && (
+            {activityLabels.length === 0 && (
               <tr>
                 <td
-                  colSpan={reasonCategories.length + 1}
+                  colSpan={reasonLabels.length + 1}
                   className="px-3 py-4 text-center text-sm text-neutral-500"
                 >
                   No data for this slice.
