@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
+
 import { CityComposition } from "@/lib/aggregate";
 import { colorForLabel } from "@/lib/colors";
 
@@ -16,6 +18,26 @@ export default function StackedCityActivity({
   onToggle,
   onSelectCity,
 }: Props) {
+  const animationKey = useMemo(
+    () =>
+      data
+        .map(
+          (row) =>
+            `${row.city}:${row.total}:${row.segments
+              .map((seg) => `${seg.label}:${seg.count}`)
+              .join("|")}`,
+        )
+        .join("||"),
+    [data],
+  );
+  const [animateBars, setAnimateBars] = useState(false);
+
+  useEffect(() => {
+    setAnimateBars(false);
+    const id = requestAnimationFrame(() => setAnimateBars(true));
+    return () => cancelAnimationFrame(id);
+  }, [animationKey]);
+
   const legendLabels = Array.from(
     new Set(data.flatMap((row) => row.segments.map((seg) => seg.label))),
   );
@@ -75,8 +97,12 @@ export default function StackedCityActivity({
                 return (
                   <button
                     key={seg.label}
-                    style={{ width: `${pctWidth}%`, backgroundColor: color }}
-                    className={`group relative flex cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition duration-200 ${
+                    style={{
+                      width: animateBars ? `${pctWidth}%` : "0%",
+                      backgroundColor: color,
+                      transition: "width 650ms ease",
+                    }}
+                    className={`group relative flex cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-200 ${
                       isActive
                         ? "brightness-110 ring-2 ring-white hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
                         : "hover:brightness-110 hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
