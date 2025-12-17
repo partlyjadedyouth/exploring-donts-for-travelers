@@ -82,7 +82,8 @@ const parseCsv = (text: string): DontRow[] => {
     });
     const row: DontRow = {
       id: "",
-      videoId: obj["Video_ID"] || obj["VideoId"] || obj["video_id"] || obj["videoId"],
+      videoId:
+        obj["Video_ID"] || obj["VideoId"] || obj["video_id"] || obj["videoId"],
       videoTitle: obj["Video_Title"],
       city: obj["City"],
       activity: obj["Activity"],
@@ -134,7 +135,9 @@ export default function DashboardPage() {
             reasonLabel: "Price and Quality",
           },
         ]);
-        setError("Using fallback sample data because /data/donts.csv could not be loaded.");
+        setError(
+          "Using fallback sample data because /data/donts.csv could not be loaded.",
+        );
       } finally {
         setLoading(false);
       }
@@ -157,7 +160,8 @@ export default function DashboardPage() {
     [filteredRows],
   );
   const heatmapRows = useMemo(() => {
-    if (!dashboard.filters.city || dashboard.filters.city.length === 0) return rows;
+    if (!dashboard.filters.city || dashboard.filters.city.length === 0)
+      return rows;
     return rows.filter((row) => dashboard.filters.city?.includes(row.city));
   }, [rows, dashboard.filters.city]);
 
@@ -178,14 +182,19 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-amber-50 text-neutral-900 lg:h-screen">
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 lg:h-screen lg:min-h-0 lg:overflow-hidden">
         <header className="flex flex-col gap-2">
-          <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">Research story</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+            ID418 Data Analysis for Designers
+          </p>
           <h1 className="text-2xl font-semibold text-neutral-900">
-            Travel “don’ts” explorer
+            Exploring DON{`'`}Ts for Travelers
           </h1>
           <p className="text-sm text-neutral-600">
-            Click on any chart segment to drive filters. Heatmap highlights follow filters.
+            Click on any chart segment to drive filters. Heatmap highlights
+            follow filters.
           </p>
-          {error && <p className="text-xs font-semibold text-amber-600">{error}</p>}
+          {error && (
+            <p className="text-xs font-semibold text-amber-600">{error}</p>
+          )}
         </header>
 
         <div className="mt-4 flex flex-1 flex-col gap-4 lg:min-h-0 lg:flex-row lg:gap-6 lg:overflow-hidden">
@@ -219,7 +228,10 @@ export default function DashboardPage() {
                     active={dashboard.filters.activityLabel}
                     onToggle={(v) => {
                       dashboard.toggleValue("activityLabel", v);
-                      dashboard.setSelection({ type: "activity_label", value: v });
+                      dashboard.setSelection({
+                        type: "activity_label",
+                        value: v,
+                      });
                     }}
                     onSelectCity={(v) => {
                       dashboard.toggleValue("city", v);
@@ -231,7 +243,10 @@ export default function DashboardPage() {
                     active={dashboard.filters.reasonLabel}
                     onToggle={(v) => {
                       dashboard.toggleValue("reasonLabel", v);
-                      dashboard.setSelection({ type: "reason_label", value: v });
+                      dashboard.setSelection({
+                        type: "reason_label",
+                        value: v,
+                      });
                     }}
                     onSelectCity={(v) => {
                       dashboard.toggleValue("city", v);
