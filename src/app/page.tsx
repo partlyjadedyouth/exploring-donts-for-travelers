@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import FilterRail from "@/components/FilterRail";
 import StackedCityActivity from "@/components/charts/StackedCityActivity";
 import StackedCityReason from "@/components/charts/StackedCityReason";
-import EvidenceTable from "@/components/EvidenceTable";
 import InsightPanel from "@/components/InsightPanel";
 import {
   CityComposition,
@@ -178,21 +177,6 @@ export default function DashboardPage() {
     setHeatmapSelection(null);
   };
 
-  const evidenceRows = useMemo(() => {
-    if (!heatmapSelection) return filteredRows;
-    return filteredRows.filter(
-      (row) =>
-        row.activityLabel === heatmapSelection.activityLabel &&
-        row.reasonLabel === heatmapSelection.reasonLabel,
-    );
-  }, [filteredRows, heatmapSelection]);
-
-  const hasActiveFilters =
-    Boolean(dashboard.filters.city) ||
-    Boolean(dashboard.filters.activityLabel) ||
-    Boolean(dashboard.filters.reasonLabel) ||
-    Boolean(dashboard.filters.videoTitle);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-amber-50 px-4 py-6 text-neutral-900">
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
@@ -263,8 +247,6 @@ export default function DashboardPage() {
                 selected={heatmapSelection}
                 onSelect={handleHeatmapSelect}
               />
-
-              {hasActiveFilters && <EvidenceTable rows={evidenceRows} />}
             </div>
           )}
         </section>

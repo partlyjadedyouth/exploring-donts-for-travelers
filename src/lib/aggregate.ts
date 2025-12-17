@@ -55,21 +55,21 @@ export function filterRows(rows: DontRow[], filters: Filters) {
 
 export function uniqueValues(rows: DontRow[]) {
   const cities = new Set<string>();
-  const activities = new Set<string>();
-  const reasons = new Set<string>();
+  const activityCounts: Record<string, number> = {};
+  const reasonCounts: Record<string, number> = {};
   const videos = new Set<string>();
 
   rows.forEach((row) => {
     cities.add(row.city);
-    activities.add(row.activityLabel);
-    reasons.add(row.reasonLabel);
+    activityCounts[row.activityLabel] = (activityCounts[row.activityLabel] || 0) + 1;
+    reasonCounts[row.reasonLabel] = (reasonCounts[row.reasonLabel] || 0) + 1;
     videos.add(row.videoTitle);
   });
 
   return {
     cities: [...cities].sort(),
-    activityLabels: [...activities].sort(),
-    reasonLabels: [...reasons].sort(),
+    activityLabels: orderLabels(activityCounts),
+    reasonLabels: orderLabels(reasonCounts),
     videos: [...videos].sort(),
   };
 }
