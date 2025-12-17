@@ -25,8 +25,10 @@ export default function StackedCityReason({
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-neutral-900">City × Reason</p>
-          <p className="text-xs text-neutral-500">100% stacked; click segments to filter.</p>
+          <p className="text-sm font-semibold text-neutral-900">
+            WHY You Shouldn{`'`}t Do
+          </p>
+          {/* <p className="text-xs text-neutral-500">100% stacked; click segments to filter.</p> */}
         </div>
         <span className="rounded-full bg-neutral-100 px-2 py-1 text-[11px] text-neutral-600">
           Click to filter
@@ -60,7 +62,9 @@ export default function StackedCityReason({
             </div>
             <div
               className="relative flex rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
-              style={{ width: `${Math.max((row.total / maxTotal) * 100, 20)}%` }}
+              style={{
+                width: `${Math.max((row.total / maxTotal) * 100, 20)}%`,
+              }}
             >
               {row.segments.map((seg) => {
                 const pctWidth = Math.max(seg.pct, 4);
@@ -80,7 +84,9 @@ export default function StackedCityReason({
                   >
                     <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/5" />
                     <div className="pointer-events-none absolute -top-12 left-1/2 hidden min-w-[160px] -translate-x-1/2 flex-col rounded-xl bg-black/80 px-2 py-1 text-[11px] text-white shadow-sm group-hover:flex group-hover:opacity-100">
-                      <span className="font-semibold leading-tight">{seg.label}</span>
+                      <span className="font-semibold leading-tight">
+                        {seg.label}
+                      </span>
                       <span className="leading-tight">
                         {seg.count} rows · {seg.pct}%
                       </span>

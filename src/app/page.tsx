@@ -165,6 +165,11 @@ export default function DashboardPage() {
 
   const handleHeatmapSelect = (city: string, reasonCategory: string) => {
     setHeatmapSelection({ city, reasonCategory });
+    dashboard.setFiltersDirect({
+      ...dashboard.filters,
+      city,
+      reasonCategory,
+    });
     dashboard.setSelection({ type: "link", value: `${city} × ${reasonCategory}` });
   };
 
