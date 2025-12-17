@@ -5,7 +5,7 @@ import { colorForLabel } from "@/lib/colors";
 
 type Props = {
   data: CityComposition[];
-  active: string[];
+  active?: string;
   onToggle: (value: string) => void;
   onSelectCity: (value: string) => void;
 };
@@ -64,7 +64,7 @@ export default function StackedCityReason({
             >
               {row.segments.map((seg) => {
                 const pctWidth = Math.max(seg.pct, 4);
-                const isActive = active.includes(seg.label);
+                const isActive = active === seg.label;
                 const color = colorForLabel(seg.label);
                 return (
                   <button

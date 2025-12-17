@@ -5,14 +5,14 @@ export type DontRow = {
   city: string;
   activity: string;
   reason: string;
-  activitySimple: string;
-  reasonSimple: string;
+  activityCategory: string;
+  reasonCategory: string;
 };
 
 export type Filters = {
-  cities: string[];
-  activities: string[];
-  reasons: string[];
+  city?: string;
+  activityCategory?: string;
+  reasonCategory?: string;
   videoTitle?: string;
 };
 
@@ -23,27 +23,27 @@ export type CityComposition = {
 };
 
 export type LinkStat = {
-  activity: string;
-  reason: string;
+  activityCategory: string;
+  reasonCategory: string;
   count: number;
 };
 
 export type Matrix = {
   cities: string[];
-  reasons: string[];
+  reasonCategories: string[];
   max: number;
   cells: Record<string, Record<string, number>>;
 };
 
-const includeIfSet = (selected: string[], value: string) =>
-  selected.length === 0 || selected.includes(value);
+const includeIfSet = (selected: string | undefined, value: string) =>
+  !selected || selected === value;
 
 export function filterRows(rows: DontRow[], filters: Filters) {
   return rows.filter(
     (row) =>
-      includeIfSet(filters.cities, row.city) &&
-      includeIfSet(filters.activities, row.activitySimple) &&
-      includeIfSet(filters.reasons, row.reasonSimple) &&
+      includeIfSet(filters.city, row.city) &&
+      includeIfSet(filters.activityCategory, row.activityCategory) &&
+      includeIfSet(filters.reasonCategory, row.reasonCategory) &&
       (!filters.videoTitle || row.videoTitle === filters.videoTitle),
   );
 }
@@ -56,15 +56,15 @@ export function uniqueValues(rows: DontRow[]) {
 
   rows.forEach((row) => {
     cities.add(row.city);
-    activities.add(row.activitySimple);
-    reasons.add(row.reasonSimple);
+    activities.add(row.activityCategory);
+    reasons.add(row.reasonCategory);
     videos.add(row.videoTitle);
   });
 
   return {
     cities: [...cities].sort(),
-    activities: [...activities].sort(),
-    reasons: [...reasons].sort(),
+    activityCategories: [...activities].sort(),
+    reasonCategories: [...reasons].sort(),
     videos: [...videos].sort(),
   };
 }
@@ -76,9 +76,9 @@ export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
 
   rows.forEach((row) => {
     const cityMap = grouped[row.city] || (grouped[row.city] = {});
-    cityMap[row.activitySimple] = (cityMap[row.activitySimple] || 0) + 1;
+    cityMap[row.activityCategory] = (cityMap[row.activityCategory] || 0) + 1;
     totals[row.city] = (totals[row.city] || 0) + 1;
-    globalCounts[row.activitySimple] = (globalCounts[row.activitySimple] || 0) + 1;
+    globalCounts[row.activityCategory] = (globalCounts[row.activityCategory] || 0) + 1;
   });
 
   const order = Object.entries(globalCounts)
@@ -108,9 +108,9 @@ export function cityReasonComposition(rows: DontRow[]): CityComposition[] {
 
   rows.forEach((row) => {
     const cityMap = grouped[row.city] || (grouped[row.city] = {});
-    cityMap[row.reasonSimple] = (cityMap[row.reasonSimple] || 0) + 1;
+    cityMap[row.reasonCategory] = (cityMap[row.reasonCategory] || 0) + 1;
     totals[row.city] = (totals[row.city] || 0) + 1;
-    globalCounts[row.reasonSimple] = (globalCounts[row.reasonSimple] || 0) + 1;
+    globalCounts[row.reasonCategory] = (globalCounts[row.reasonCategory] || 0) + 1;
   });
 
   const order = Object.entries(globalCounts)
@@ -137,21 +137,21 @@ export function topLinks(rows: DontRow[], limit = 8): LinkStat[] {
   const map: Record<string, number> = {};
 
   rows.forEach((row) => {
-    const key = `${row.activitySimple}→${row.reasonSimple}`;
+    const key = `${row.activityCategory}→${row.reasonCategory}`;
     map[key] = (map[key] || 0) + 1;
   });
 
   return Object.entries(map)
     .map(([key, count]) => {
-      const [activity, reason] = key.split("→");
-      return { activity, reason, count };
+      const [activityCategory, reasonCategory] = key.split("→");
+      return { activityCategory, reasonCategory, count };
     })
     .sort((a, b) => b.count - a.count)
     .slice(0, limit);
 }
 
 export function hashRow(row: DontRow) {
-  return `${row.videoId}-${row.activitySimple}-${row.reasonSimple}-${row.city}-${row.activity}`;
+  return `${row.videoId}-${row.activityCategory}-${row.reasonCategory}-${row.city}-${row.activity}`;
 }
 
 export function cityReasonMatrix(rows: DontRow[]): Matrix {
@@ -162,15 +162,15 @@ export function cityReasonMatrix(rows: DontRow[]): Matrix {
 
   rows.forEach((row) => {
     citySet.add(row.city);
-    reasonSet.add(row.reasonSimple);
+    reasonSet.add(row.reasonCategory);
     if (!cells[row.city]) cells[row.city] = {};
-    cells[row.city][row.reasonSimple] = (cells[row.city][row.reasonSimple] || 0) + 1;
-    max = Math.max(max, cells[row.city][row.reasonSimple]);
+    cells[row.city][row.reasonCategory] = (cells[row.city][row.reasonCategory] || 0) + 1;
+    max = Math.max(max, cells[row.city][row.reasonCategory]);
   });
 
   return {
     cities: [...citySet],
-    reasons: [...reasonSet],
+    reasonCategories: [...reasonSet],
     max: Math.max(max, 1),
     cells,
   };

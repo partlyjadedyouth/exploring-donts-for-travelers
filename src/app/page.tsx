@@ -19,6 +19,30 @@ import {
 import { useDashboardState } from "@/hooks/useDashboardState";
 import CityReasonHeatmap from "@/components/charts/CityReasonHeatmap";
 
+const activityCategoryMap: Record<string, string> = {
+  Mobility: "Mobility",
+  Sights: "Attraction",
+  Logistics: "Booking and Timing",
+  Commerce: "Shopping",
+  Conduct: "Manners",
+  Risk: "Safety",
+};
+
+const reasonCategoryMap: Record<string, string> = {
+  Value: "Price and Quality",
+  Risk: "Safety",
+  Crowd: "Crowd",
+  Norms: "Norms",
+  Rules: "Regulations",
+  Friction: "Timing and Distance",
+};
+
+const mapActivityCategory = (value: string) =>
+  activityCategoryMap[value?.trim()] || value?.trim() || value;
+
+const mapReasonCategory = (value: string) =>
+  reasonCategoryMap[value?.trim()] || value?.trim() || value;
+
 const parseCsvLine = (line: string) => {
   const values: string[] = [];
   let current = "";
@@ -64,8 +88,8 @@ const parseCsv = (text: string): DontRow[] => {
       city: obj["City"],
       activity: obj["Activity"],
       reason: obj["Reason"],
-      activitySimple: obj["Activity_Simple"],
-      reasonSimple: obj["Reason_Simple"],
+      activityCategory: mapActivityCategory(obj["Activity_Simple"]),
+      reasonCategory: mapReasonCategory(obj["Reason_Simple"]),
     };
     row.id = hashRow(row);
     return row;
@@ -76,9 +100,10 @@ export default function DashboardPage() {
   const [rows, setRows] = useState<DontRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [heatmapSelection, setHeatmapSelection] = useState<{ city: string; reason: string } | null>(
-    null,
-  );
+  const [heatmapSelection, setHeatmapSelection] = useState<{
+    city: string;
+    reasonCategory: string;
+  } | null>(null);
   const dashboard = useDashboardState();
 
   useEffect(() => {
@@ -100,8 +125,8 @@ export default function DashboardPage() {
             city: "Tokyo",
             activity: "crossing busy crossings",
             reason: "overwhelming crowds",
-            activitySimple: "Mobility",
-            reasonSimple: "Crowd",
+            activityCategory: "Mobility",
+            reasonCategory: "Crowd",
           },
           {
             id: "fallback-2",
@@ -110,8 +135,8 @@ export default function DashboardPage() {
             city: "Seoul",
             activity: "buying souvenirs",
             reason: "tourist traps",
-            activitySimple: "Commerce",
-            reasonSimple: "Value",
+            activityCategory: "Shopping",
+            reasonCategory: "Price and Quality",
           },
         ]);
         setError("Using fallback sample data because /data/donts.csv could not be loaded.");
@@ -138,9 +163,9 @@ export default function DashboardPage() {
   );
   const heatmap = useMemo(() => cityReasonMatrix(filteredRows), [filteredRows]);
 
-  const handleHeatmapSelect = (city: string, reason: string) => {
-    setHeatmapSelection({ city, reason });
-    dashboard.setSelection({ type: "link", value: `${city} × ${reason}` });
+  const handleHeatmapSelect = (city: string, reasonCategory: string) => {
+    setHeatmapSelection({ city, reasonCategory });
+    dashboard.setSelection({ type: "link", value: `${city} × ${reasonCategory}` });
   };
 
   const handleReset = () => {
@@ -149,12 +174,19 @@ export default function DashboardPage() {
   };
 
   const evidenceRows = useMemo(() => {
-    if (!heatmapSelection) return [];
+    if (!heatmapSelection) return filteredRows;
     return filteredRows.filter(
       (row) =>
-        row.city === heatmapSelection.city && row.reasonSimple === heatmapSelection.reason,
+        row.city === heatmapSelection.city &&
+        row.reasonCategory === heatmapSelection.reasonCategory,
     );
   }, [filteredRows, heatmapSelection]);
+
+  const hasActiveFilters =
+    Boolean(dashboard.filters.city) ||
+    Boolean(dashboard.filters.activityCategory) ||
+    Boolean(dashboard.filters.reasonCategory) ||
+    Boolean(dashboard.filters.videoTitle);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-amber-50 px-4 py-6 text-neutral-900">
@@ -193,25 +225,25 @@ export default function DashboardPage() {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <StackedCityActivity
                   data={cityActivity}
-                  active={dashboard.filters.activities}
+                  active={dashboard.filters.activityCategory}
                   onToggle={(v) => {
-                    dashboard.toggleValue("activities", v);
-                    dashboard.setSelection({ type: "activity_simple", value: v });
+                    dashboard.toggleValue("activityCategory", v);
+                    dashboard.setSelection({ type: "activity_category", value: v });
                   }}
                   onSelectCity={(v) => {
-                    dashboard.toggleValue("cities", v);
+                    dashboard.toggleValue("city", v);
                     dashboard.setSelection({ type: "city", value: v });
                   }}
                 />
                 <StackedCityReason
                   data={cityReason}
-                  active={dashboard.filters.reasons}
+                  active={dashboard.filters.reasonCategory}
                   onToggle={(v) => {
-                    dashboard.toggleValue("reasons", v);
-                    dashboard.setSelection({ type: "reason_simple", value: v });
+                    dashboard.toggleValue("reasonCategory", v);
+                    dashboard.setSelection({ type: "reason_category", value: v });
                   }}
                   onSelectCity={(v) => {
-                    dashboard.toggleValue("cities", v);
+                    dashboard.toggleValue("city", v);
                     dashboard.setSelection({ type: "city", value: v });
                   }}
                 />
@@ -219,12 +251,15 @@ export default function DashboardPage() {
 
               <CityReasonHeatmap
                 matrix={heatmap}
-                active={{ cities: dashboard.filters.cities, reasons: dashboard.filters.reasons }}
+                active={{
+                  city: dashboard.filters.city,
+                  reasonCategory: dashboard.filters.reasonCategory,
+                }}
                 selected={heatmapSelection}
                 onSelect={handleHeatmapSelect}
               />
 
-              {heatmapSelection && <EvidenceTable rows={evidenceRows} />}
+              {hasActiveFilters && <EvidenceTable rows={evidenceRows} />}
             </div>
           )}
         </section>

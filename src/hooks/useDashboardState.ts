@@ -6,41 +6,37 @@ import { Filters } from "@/lib/aggregate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export type Selection =
-  | { type: "city" | "activity_simple" | "reason_simple" | "video_title"; value: string }
+  | { type: "city" | "activity_category" | "reason_category" | "video_title"; value: string }
   | { type: "link"; value: string }
   | null;
 
-const emptyFilters: Filters = { cities: [], activities: [], reasons: [], videoTitle: undefined };
-
-const arraysEqual = (a: string[], b: string[]) =>
-  a.length === b.length && a.every((v) => b.includes(v));
+const emptyFilters: Filters = {
+  city: undefined,
+  activityCategory: undefined,
+  reasonCategory: undefined,
+  videoTitle: undefined,
+};
 
 const filtersEqual = (a: Filters, b: Filters) =>
-  arraysEqual(a.cities, b.cities) &&
-  arraysEqual(a.activities, b.activities) &&
-  arraysEqual(a.reasons, b.reasons) &&
+  a.city === b.city &&
+  a.activityCategory === b.activityCategory &&
+  a.reasonCategory === b.reasonCategory &&
   a.videoTitle === b.videoTitle;
 
 const parseFiltersFromSearch = (params: URLSearchParams): Filters => {
-  const split = (key: string) =>
-    params
-      .get(key)
-      ?.split(",")
-      .filter(Boolean) ?? [];
-
   return {
-    cities: split("city"),
-    activities: split("activity"),
-    reasons: split("reason"),
+    city: params.get("city") || undefined,
+    activityCategory: params.get("activity") || undefined,
+    reasonCategory: params.get("reason") || undefined,
     videoTitle: params.get("video") || undefined,
   };
 };
 
 const toQueryString = (filters: Filters) => {
   const params = new URLSearchParams();
-  if (filters.cities.length) params.set("city", filters.cities.join(","));
-  if (filters.activities.length) params.set("activity", filters.activities.join(","));
-  if (filters.reasons.length) params.set("reason", filters.reasons.join(","));
+  if (filters.city) params.set("city", filters.city);
+  if (filters.activityCategory) params.set("activity", filters.activityCategory);
+  if (filters.reasonCategory) params.set("reason", filters.reasonCategory);
   if (filters.videoTitle) params.set("video", filters.videoTitle);
   return params.toString();
 };
@@ -65,15 +61,13 @@ export function useDashboardState() {
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   }, [filters]);
 
-  const toggleValue = (field: "cities" | "activities" | "reasons", value: string) => {
+  const toggleValue = (
+    field: "city" | "activityCategory" | "reasonCategory",
+    value: string,
+  ) => {
     setFilters((prev) => {
-      const set = new Set(prev[field]);
-      if (set.has(value)) {
-        set.delete(value);
-      } else {
-        set.add(value);
-      }
-      return { ...prev, [field]: [...set] };
+      const nextValue = prev[field] === value ? undefined : value;
+      return { ...prev, [field]: nextValue };
     });
   };
 
@@ -94,11 +88,11 @@ export function useDashboardState() {
   const applyLinkCombo = (activity: string, reason: string) => {
     setFilters((prev) => {
       const hasBoth =
-        prev.activities.includes(activity) && prev.reasons.includes(reason);
+        prev.activityCategory === activity && prev.reasonCategory === reason;
       return {
         ...prev,
-        activities: hasBoth ? prev.activities.filter((a) => a !== activity) : [activity],
-        reasons: hasBoth ? prev.reasons.filter((r) => r !== reason) : [reason],
+        activityCategory: hasBoth ? undefined : activity,
+        reasonCategory: hasBoth ? undefined : reason,
       };
     });
     setSelection({ type: "link", value: `${activity} → ${reason}` });

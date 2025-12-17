@@ -7,10 +7,10 @@ const renderConditions = (conditions?: InsightCondition) => {
   if (!conditions) return "Matches any slice.";
   const parts: string[] = [];
   if (conditions.city?.length) parts.push(`City: ${conditions.city.join(", ")}`);
-  if (conditions.activity_simple?.length)
-    parts.push(`Activity: ${conditions.activity_simple.join(", ")}`);
-  if (conditions.reason_simple?.length)
-    parts.push(`Reason: ${conditions.reason_simple.join(", ")}`);
+  if (conditions.activity_category?.length)
+    parts.push(`Activity: ${conditions.activity_category.join(", ")}`);
+  if (conditions.reason_category?.length)
+    parts.push(`Reason: ${conditions.reason_category.join(", ")}`);
   if (conditions.video_title) parts.push(`Video: ${conditions.video_title.join(", ") || "any"}`);
   return parts.join(" · ");
 };

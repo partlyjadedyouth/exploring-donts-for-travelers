@@ -4,8 +4,13 @@ import { Filters } from "@/lib/aggregate";
 
 type Props = {
   filters: Filters;
-  options: { cities: string[]; activities: string[]; reasons: string[]; videos: string[] };
-  onToggle: (field: "cities" | "activities" | "reasons", value: string) => void;
+  options: {
+    cities: string[];
+    activityCategories: string[];
+    reasonCategories: string[];
+    videos: string[];
+  };
+  onToggle: (field: "city" | "activityCategory" | "reasonCategory", value: string) => void;
   onReset: () => void;
 };
 
@@ -17,14 +22,14 @@ const FilterGroup = ({
 }: {
   label: string;
   values: string[];
-  selected: string[];
+  selected?: string;
   onToggle: (value: string) => void;
 }) => (
   <div className="space-y-2">
     <div className="text-sm font-semibold text-neutral-800">{label}</div>
     <div className="flex flex-wrap gap-2">
       {values.map((v) => {
-        const active = selected.includes(v);
+        const active = selected === v;
         return (
           <button
             key={v}
@@ -68,10 +73,22 @@ export default function FilterRail({
       </div>
 
       <FilterGroup
+        label="City"
+        values={options.cities}
+        selected={filters.city}
+        onToggle={(v) => onToggle("city", v)}
+      />
+      <FilterGroup
         label="Activity"
-        values={options.activities}
-        selected={filters.activities}
-        onToggle={(v) => onToggle("activities", v)}
+        values={options.activityCategories}
+        selected={filters.activityCategory}
+        onToggle={(v) => onToggle("activityCategory", v)}
+      />
+      <FilterGroup
+        label="Reason"
+        values={options.reasonCategories}
+        selected={filters.reasonCategory}
+        onToggle={(v) => onToggle("reasonCategory", v)}
       />
     </aside>
   );

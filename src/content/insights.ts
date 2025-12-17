@@ -1,7 +1,7 @@
 export type InsightCondition = {
   city?: string[];
-  activity_simple?: string[];
-  reason_simple?: string[];
+  activity_category?: string[];
+  reason_category?: string[];
   video_title?: string[];
 };
 
@@ -22,22 +22,22 @@ export const insights: Insight[] = [
     summary:
       "Mobility shows up repeatedly as a blocker when visitors try to navigate London without prep.",
     soWhat: "Double down on motion guides and call out the worst friction points early.",
-    conditions: { city: ["London"], activity_simple: ["Mobility"] },
+    conditions: { city: ["London"], activity_category: ["Mobility"] },
     evidenceHints: [
       "Look for rows mentioning Uber and walking fatigue.",
-      "Cross-reference with Risk or Norms reasons.",
+      "Cross-reference with Safety or Norms reasons.",
     ],
     priority: 1,
   },
   {
     id: "commerce-fatigue",
-    title: "Commerce pain signals purchase hesitation",
+    title: "Shopping pain signals purchase hesitation",
     summary:
-      "Commerce-related don’ts often show up next to Value reasons, hinting at hidden sticker shock.",
+      "Shopping-related don’ts often show up next to Price and Quality reasons, hinting at hidden sticker shock.",
     soWhat: "Add a quick price expectations widget to reduce regret.",
     conditions: {
-      activity_simple: ["Commerce"],
-      reason_simple: ["Value", "Friction"],
+      activity_category: ["Shopping"],
+      reason_category: ["Price and Quality", "Timing and Distance"],
     },
     evidenceHints: ["Rows with VAT or tipping concerns.", "Any note calling out surprise fees."],
     priority: 2,

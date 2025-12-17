@@ -33,11 +33,11 @@ export default function EvidenceTable({ rows }: Props) {
               <tr key={row.id} className="transition hover:bg-indigo-50">
                 <td className="px-3 py-2 align-top text-neutral-900">
                   <div className="text-sm font-semibold text-neutral-900">{row.city}</div>
-                  <div className="text-[11px] text-neutral-500">{row.activitySimple}</div>
+                  <div className="text-[11px] text-neutral-500">{row.activityCategory}</div>
                 </td>
                 <td className="px-3 py-2 align-top text-neutral-800">
                   <div className="font-medium text-neutral-900">{row.activity}</div>
-                  <div className="text-[11px] text-neutral-500">{row.reasonSimple}</div>
+                  <div className="text-[11px] text-neutral-500">{row.reasonCategory}</div>
                 </td>
                 <td className="px-3 py-2 align-top text-neutral-700">{row.reason}</td>
                 <td className="px-3 py-2 align-top text-neutral-600">{row.videoTitle}</td>

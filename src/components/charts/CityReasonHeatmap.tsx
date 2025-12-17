@@ -4,8 +4,8 @@ import { Matrix } from "@/lib/aggregate";
 
 type Props = {
   matrix: Matrix;
-  active: { cities: string[]; reasons: string[] };
-  selected?: { city: string; reason: string } | null;
+  active: { city?: string; reasonCategory?: string };
+  selected?: { city: string; reasonCategory: string } | null;
   onSelect: (city: string, reason: string) => void;
 };
 
@@ -17,7 +17,7 @@ const colorFor = (count: number, max: number, active: boolean) => {
 };
 
 export default function CityReasonHeatmap({ matrix, active, selected, onSelect }: Props) {
-  const { cities, reasons, max, cells } = matrix;
+  const { cities, reasonCategories, max, cells } = matrix;
 
   return (
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
@@ -35,7 +35,7 @@ export default function CityReasonHeatmap({ matrix, active, selected, onSelect }
           <thead>
             <tr>
               <th className="px-2 py-2 text-left text-neutral-500">City</th>
-              {reasons.map((reason) => (
+              {reasonCategories.map((reason) => (
                 <th key={reason} className="px-2 py-2 text-center text-neutral-500">
                   {reason}
                 </th>
@@ -46,13 +46,13 @@ export default function CityReasonHeatmap({ matrix, active, selected, onSelect }
             {cities.map((city) => (
               <tr key={city}>
                 <td className="px-2 py-2 text-sm font-semibold text-neutral-800">{city}</td>
-                {reasons.map((reason) => {
+                {reasonCategories.map((reason) => {
                   const count = cells[city]?.[reason] ?? 0;
                   const isActive =
-                    (active.cities.length === 0 || active.cities.includes(city)) &&
-                    (active.reasons.length === 0 || active.reasons.includes(reason));
+                    (!active.city || active.city === city) &&
+                    (!active.reasonCategory || active.reasonCategory === reason);
                   const isSelected =
-                    selected?.city === city && selected?.reason === reason;
+                    selected?.city === city && selected?.reasonCategory === reason;
                   return (
                     <td key={`${city}-${reason}`} className="px-2 py-1 text-center">
                       <button
@@ -75,7 +75,7 @@ export default function CityReasonHeatmap({ matrix, active, selected, onSelect }
             {cities.length === 0 && (
               <tr>
                 <td
-                  colSpan={reasons.length + 1}
+                  colSpan={reasonCategories.length + 1}
                   className="px-3 py-4 text-center text-sm text-neutral-500"
                 >
                   No data for this slice.
