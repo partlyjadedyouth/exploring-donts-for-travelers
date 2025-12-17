@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { Matrix } from "@/lib/aggregate";
 
 type Props = {
@@ -20,6 +22,13 @@ export default function ActivityReasonHeatmap({
   active,
 }: Props) {
   const { activityLabels, reasonLabels, max, cells } = matrix;
+  const animationKey = useMemo(
+    () =>
+      `${activityLabels.join("|")}::${reasonLabels.join(
+        "|",
+      )}::${max}`,
+    [activityLabels, reasonLabels, max],
+  );
 
   return (
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
@@ -33,7 +42,7 @@ export default function ActivityReasonHeatmap({
         </span>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full table-fixed text-xs">
+        <table key={animationKey} className="w-full table-fixed text-xs">
           <thead>
             <tr>
               <th className="w-32 px-2 py-2 text-left text-neutral-500">
@@ -68,7 +77,7 @@ export default function ActivityReasonHeatmap({
                       className="px-2 py-1 text-center"
                     >
                       <div
-                        className={`flex h-12 w-full items-center justify-center rounded-xl border text-base font-semibold text-neutral-900 transition ${
+                        className={`flex h-12 w-full items-center justify-center rounded-xl border text-base font-semibold text-neutral-900 transition-all duration-500 ${
                           isActive
                             ? "border-2 border-indigo-700 ring-4 ring-indigo-400 shadow-[0_0_12px_rgba(79,70,229,0.45)]"
                             : "border-neutral-100"
@@ -78,6 +87,7 @@ export default function ActivityReasonHeatmap({
                             count === 0
                               ? "#f8fafc"
                               : colorFor(count, max, isActive),
+                          animation: "heatmap-pop 500ms ease forwards",
                         }}
                         title={`${activity} × ${reason}: ${count}`}
                       >

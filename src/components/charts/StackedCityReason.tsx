@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { CityComposition } from "@/lib/aggregate";
 import { colorForLabel } from "@/lib/colors";
 
@@ -16,6 +18,19 @@ export default function StackedCityReason({
   onToggle,
   onSelectCity,
 }: Props) {
+  const animationKey = useMemo(
+    () =>
+      data
+        .map(
+          (row) =>
+            `${row.city}:${row.total}:${row.segments
+              .map((seg) => `${seg.label}:${seg.count}`)
+              .join("|")}`,
+        )
+        .join("||"),
+    [data],
+  );
+
   const legendLabels = Array.from(
     new Set(data.flatMap((row) => row.segments.map((seg) => seg.label))),
   );
@@ -48,7 +63,7 @@ export default function StackedCityReason({
           <span className="text-neutral-400">No segments to display.</span>
         )}
       </div>
-      <div className="space-y-3">
+      <div key={animationKey} className="space-y-3">
         {data.map((row) => (
           <div key={row.city} className="space-y-2">
             <div className="flex items-center justify-between text-xs text-neutral-600">
@@ -63,9 +78,10 @@ export default function StackedCityReason({
               </span>
             </div>
             <div
-              className="relative flex rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
+              className="relative flex origin-left rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
               style={{
                 width: `${Math.max((row.total / maxTotal) * 100, 20)}%`,
+                animation: "bar-grow 650ms ease forwards",
               }}
             >
               {row.segments.map((seg) => {
@@ -75,8 +91,11 @@ export default function StackedCityReason({
                 return (
                   <button
                     key={seg.label}
-                    style={{ width: `${pctWidth}%`, backgroundColor: color }}
-                    className={`group relative flex cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition duration-200 ${
+                    style={{
+                      width: `${pctWidth}%`,
+                      backgroundColor: color,
+                    }}
+                    className={`group relative flex origin-left cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-500 ease-out ${
                       isActive
                         ? "brightness-110 ring-2 ring-white hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
                         : "hover:brightness-110 hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"

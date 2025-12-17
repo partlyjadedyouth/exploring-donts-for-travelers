@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import { CityComposition } from "@/lib/aggregate";
 import { colorForLabel } from "@/lib/colors";
@@ -30,13 +30,6 @@ export default function StackedCityActivity({
         .join("||"),
     [data],
   );
-  const [animateBars, setAnimateBars] = useState(false);
-
-  useEffect(() => {
-    setAnimateBars(false);
-    const id = requestAnimationFrame(() => setAnimateBars(true));
-    return () => cancelAnimationFrame(id);
-  }, [animationKey]);
 
   const legendLabels = Array.from(
     new Set(data.flatMap((row) => row.segments.map((seg) => seg.label))),
@@ -70,7 +63,7 @@ export default function StackedCityActivity({
           <span className="text-neutral-400">No segments to display.</span>
         )}
       </div>
-      <div className="space-y-3">
+      <div key={animationKey} className="space-y-3">
         {data.map((row) => (
           <div key={row.city} className="space-y-2">
             <div className="flex items-center justify-between text-xs text-neutral-600">
@@ -85,9 +78,10 @@ export default function StackedCityActivity({
               </span>
             </div>
             <div
-              className="relative flex rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
+              className="relative flex origin-left rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
               style={{
                 width: `${Math.max((row.total / maxTotal) * 100, 20)}%`,
+                animation: "bar-grow 650ms ease forwards",
               }}
             >
               {row.segments.map((seg) => {
@@ -98,11 +92,10 @@ export default function StackedCityActivity({
                   <button
                     key={seg.label}
                     style={{
-                      width: animateBars ? `${pctWidth}%` : "0%",
+                      width: `${pctWidth}%`,
                       backgroundColor: color,
-                      transition: "width 650ms ease",
                     }}
-                    className={`group relative flex cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-200 ${
+                    className={`group relative flex origin-left cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-500 ease-out ${
                       isActive
                         ? "brightness-110 ring-2 ring-white hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
                         : "hover:brightness-110 hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
