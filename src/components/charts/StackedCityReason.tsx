@@ -30,9 +30,9 @@ export default function StackedCityReason({
           </p>
           {/* <p className="text-xs text-neutral-500">100% stacked; click segments to filter.</p> */}
         </div>
-        <span className="rounded-full bg-neutral-100 px-2 py-1 text-[11px] text-neutral-600">
+        {/* <span className="rounded-full bg-neutral-100 px-2 py-1 text-[11px] text-neutral-600">
           Click to filter
-        </span>
+        </span> */}
       </div>
       <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-neutral-600">
         {legendLabels.map((label) => (
@@ -53,7 +53,7 @@ export default function StackedCityReason({
           <div key={row.city} className="space-y-2">
             <div className="flex items-center justify-between text-xs text-neutral-600">
               <button
-                className="font-semibold text-neutral-800 hover:text-indigo-600"
+                className="cursor-pointer font-semibold text-neutral-800 hover:text-indigo-600"
                 onClick={() => onSelectCity(row.city)}
               >
                 {row.city}
@@ -76,7 +76,7 @@ export default function StackedCityReason({
                   <button
                     key={seg.label}
                     style={{ width: `${pctWidth}%`, backgroundColor: color }}
-                    className={`group relative flex items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition duration-200 ${
+                    className={`group relative flex cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition duration-200 ${
                       isActive
                         ? "brightness-110 ring-2 ring-white hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
                         : "hover:brightness-110 hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"

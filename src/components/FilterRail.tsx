@@ -34,7 +34,7 @@ const FilterGroup = ({
           <button
             key={v}
             onClick={() => onToggle(v)}
-            className={`rounded-full border px-3 py-1 text-xs transition ${
+            className={`cursor-pointer rounded-full border px-3 py-1 text-xs transition ${
               active
                 ? "border-transparent bg-indigo-600 text-white shadow-sm"
                 : "border-neutral-200 bg-white text-neutral-700 hover:border-indigo-200 hover:text-indigo-700"
@@ -66,7 +66,7 @@ export default function FilterRail({
         </div>
         <button
           onClick={onReset}
-          className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700 transition hover:bg-neutral-200"
+          className="cursor-pointer rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700 transition hover:bg-neutral-200 hover:text-neutral-900 hover:shadow-sm"
         >
           Reset
         </button>

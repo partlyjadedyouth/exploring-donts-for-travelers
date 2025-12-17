@@ -12,7 +12,7 @@ export const insights: Insight[] = [
     title: "London transit mistakes pile up quickly",
     summary:
       "Transit mistakes show up repeatedly as a blocker when visitors try to navigate London without prep.",
-    tags: ["city:London", "activity:Transit Mistakes", "activity:Shopping"],
+    tags: ["city:London", "activity:Transit Mistakes"],
     quotes: [
       "Look for rows mentioning Uber and walking fatigue.",
       "Cross-reference with Safety Concerns or Cultural Misfits reasons.",
