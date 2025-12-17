@@ -1,8 +1,8 @@
 "use client";
 
-import { insightMatches } from "@/lib/insights-utils";
+import { buildFilterTags, insightMatches, matchedInsightTags } from "@/lib/insights-utils";
 import { Filters } from "@/lib/aggregate";
-import { Insight, insights } from "@/content/insights";
+import { insights } from "@/content/insights";
 import InsightCard from "./InsightCard";
 import { useMemo, useState } from "react";
 
@@ -12,12 +12,17 @@ type Props = {
 
 export default function InsightPanel({ filters }: Props) {
   const [tab, setTab] = useState<"rows" | "quotes" | "shots">("rows");
+  const filterTags = useMemo(() => buildFilterTags(filters), [filters]);
   const matches = useMemo(
     () =>
       insights
-        .filter((insight) => insightMatches(insight, filters))
-        .sort((a, b) => a.priority - b.priority),
-    [filters],
+        .map((insight) => ({
+          insight,
+          matchedTags: matchedInsightTags(insight, filterTags),
+        }))
+        .filter(({ insight }) => insightMatches(insight, filterTags))
+        .sort((a, b) => a.insight.priority - b.insight.priority),
+    [filterTags],
   );
 
   const placeholder =
@@ -40,8 +45,8 @@ export default function InsightPanel({ filters }: Props) {
           </div>
         )}
         <div className="space-y-3">
-          {matches.map((insight: Insight) => (
-            <InsightCard key={insight.id} insight={insight} />
+          {matches.map(({ insight, matchedTags }) => (
+            <InsightCard key={insight.id} insight={insight} matchedTags={matchedTags} />
           ))}
         </div>
       </div>

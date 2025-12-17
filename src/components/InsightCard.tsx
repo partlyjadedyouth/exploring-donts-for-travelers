@@ -1,21 +1,28 @@
 "use client";
 
-import { Insight, InsightCondition } from "@/content/insights";
+import { Insight } from "@/content/insights";
 import { useState } from "react";
 
-const renderConditions = (conditions?: InsightCondition) => {
-  if (!conditions) return "Matches any slice.";
-  const parts: string[] = [];
-  if (conditions.city?.length) parts.push(`City: ${conditions.city.join(", ")}`);
-  if (conditions.activity_label?.length)
-    parts.push(`Activity: ${conditions.activity_label.join(", ")}`);
-  if (conditions.reason_label?.length)
-    parts.push(`Reason: ${conditions.reason_label.join(", ")}`);
-  if (conditions.video_title) parts.push(`Video: ${conditions.video_title.join(", ") || "any"}`);
-  return parts.join(" · ");
-};
+const renderTags = (tags: string[]) => (
+  <div className="flex flex-wrap gap-2">
+    {tags.map((tag) => (
+      <span
+        key={tag}
+        className="rounded-full bg-indigo-50 px-2 py-1 text-[11px] font-semibold text-indigo-700"
+      >
+        {tag}
+      </span>
+    ))}
+  </div>
+);
 
-export default function InsightCard({ insight }: { insight: Insight }) {
+export default function InsightCard({
+  insight,
+  matchedTags,
+}: {
+  insight: Insight;
+  matchedTags: string[];
+}) {
   const [open, setOpen] = useState(false);
   return (
     <article className="space-y-3 rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
@@ -51,7 +58,20 @@ export default function InsightCard({ insight }: { insight: Insight }) {
       </button>
       {open && (
         <div className="rounded-2xl bg-indigo-50/60 px-3 py-2 text-xs text-neutral-700">
-          {renderConditions(insight.conditions)}
+          {insight.tags && insight.tags.length > 0 ? (
+            <div className="space-y-2">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-500">
+                Matched tags
+              </p>
+              {matchedTags.length > 0 ? (
+                renderTags(matchedTags)
+              ) : (
+                <p className="text-xs text-neutral-600">No active tags match yet.</p>
+              )}
+            </div>
+          ) : (
+            <p className="text-xs text-neutral-600">Matches any slice.</p>
+          )}
         </div>
       )}
     </article>

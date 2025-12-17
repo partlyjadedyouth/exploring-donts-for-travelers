@@ -1,16 +1,9 @@
-export type InsightCondition = {
-  city?: string[];
-  activity_label?: string[];
-  reason_label?: string[];
-  video_title?: string[];
-};
-
 export type Insight = {
   id: string;
   title: string;
   summary: string;
   soWhat: string;
-  conditions?: InsightCondition;
+  tags?: string[];
   evidenceHints: string[];
   priority: number;
 };
@@ -23,10 +16,7 @@ export const insights: Insight[] = [
       "Transit mistakes show up repeatedly as a blocker when visitors try to navigate London without prep.",
     soWhat:
       "Double down on motion guides and call out the worst friction points early.",
-    conditions: {
-      city: ["London"],
-      activity_label: ["Transit Mistakes", "Shopping"],
-    },
+    tags: ["city:London", "activity:Transit Mistakes", "activity:Shopping"],
     evidenceHints: [
       "Look for rows mentioning Uber and walking fatigue.",
       "Cross-reference with Safety Concerns or Cultural Misfits reasons.",
@@ -39,10 +29,7 @@ export const insights: Insight[] = [
     summary:
       "Shopping-related don’ts often show up next to Price and Quality reasons, hinting at hidden sticker shock.",
     soWhat: "Add a quick price expectations widget to reduce regret.",
-    conditions: {
-      activity_label: ["Shopping"],
-      reason_label: ["Price and Quality", "Timing and Distance"],
-    },
+    tags: ["activity:Shopping", "reason:Price and Quality", "reason:Timing and Distance"],
     evidenceHints: [
       "Rows with VAT or tipping concerns.",
       "Any note calling out surprise fees.",
@@ -55,7 +42,7 @@ export const insights: Insight[] = [
     summary:
       "When focused on one video, clusters of repeated issues emerge—useful for storyboard moments.",
     soWhat: "Pull 2–3 strongest don’ts from this clip into the highlight reel.",
-    conditions: { video_title: [] },
+    tags: ["video:any"],
     evidenceHints: [
       "Pinned rows from this video.",
       "Look for repeated Activity_Simple tags.",
