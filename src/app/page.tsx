@@ -157,8 +157,8 @@ export default function DashboardPage() {
     [filteredRows],
   );
   const heatmapRows = useMemo(() => {
-    if (!dashboard.filters.city) return rows;
-    return rows.filter((row) => row.city === dashboard.filters.city);
+    if (!dashboard.filters.city || dashboard.filters.city.length === 0) return rows;
+    return rows.filter((row) => dashboard.filters.city?.includes(row.city));
   }, [rows, dashboard.filters.city]);
 
   const heatmap = useMemo(

@@ -22,14 +22,14 @@ const FilterGroup = ({
 }: {
   label: string;
   values: string[];
-  selected?: string;
+  selected?: string | string[];
   onToggle: (value: string) => void;
 }) => (
   <div className="space-y-2">
     <div className="text-sm font-semibold text-neutral-800">{label}</div>
     <div className="flex flex-wrap gap-2">
       {values.map((v) => {
-        const active = selected === v;
+        const active = Array.isArray(selected) ? selected.includes(v) : selected === v;
         return (
           <button
             key={v}

@@ -10,7 +10,7 @@ export type DontRow = {
 };
 
 export type Filters = {
-  city?: string;
+  city?: string[];
   activityLabel?: string;
   reasonLabel?: string;
   videoTitle?: string;
@@ -40,8 +40,11 @@ const orderLabels = (counts: Record<string, number>) =>
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     .map(([label]) => label);
 
-const includeIfSet = (selected: string | undefined, value: string) =>
-  !selected || selected === value;
+const includeIfSet = (selected: string | string[] | undefined, value: string) => {
+  if (!selected || (Array.isArray(selected) && selected.length === 0)) return true;
+  if (Array.isArray(selected)) return selected.includes(value);
+  return selected === value;
+};
 
 const cityOrder = ["Seoul", "Tokyo", "London", "Paris", "New York"];
 const cityRank = (city: string) => {

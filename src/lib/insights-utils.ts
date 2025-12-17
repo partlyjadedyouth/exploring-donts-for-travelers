@@ -1,8 +1,15 @@
 import { Insight } from "@/content/insights";
 import { Filters } from "./aggregate";
 
-const matchesIfSet = (value: string | undefined, needles?: string[]) =>
-  !needles || needles.length === 0 ? Boolean(value) : Boolean(value && needles.includes(value));
+const matchesIfSet = (value: string | string[] | undefined, needles?: string[]) => {
+  if (!needles || needles.length === 0) {
+    if (!value) return false;
+    return Array.isArray(value) ? value.length > 0 : true;
+  }
+  if (!value) return false;
+  if (Array.isArray(value)) return value.some((entry) => needles.includes(entry));
+  return needles.includes(value);
+};
 
 export const insightMatches = (insight: Insight, filters: Filters) => {
   if (!insight.conditions) return true;
