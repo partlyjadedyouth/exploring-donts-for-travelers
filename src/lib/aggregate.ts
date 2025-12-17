@@ -35,6 +35,11 @@ export type Matrix = {
   cells: Record<string, Record<string, number>>;
 };
 
+const orderLabels = (counts: Record<string, number>) =>
+  Object.entries(counts)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([label]) => label);
+
 const includeIfSet = (selected: string | undefined, value: string) =>
   !selected || selected === value;
 
@@ -81,9 +86,7 @@ export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
     globalCounts[row.activityCategory] = (globalCounts[row.activityCategory] || 0) + 1;
   });
 
-  const order = Object.entries(globalCounts)
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-    .map(([label]) => label);
+  const order = orderLabels(globalCounts);
 
   return Object.entries(grouped).map(([city, map]) => {
     const total = totals[city] || 1;
@@ -113,9 +116,7 @@ export function cityReasonComposition(rows: DontRow[]): CityComposition[] {
     globalCounts[row.reasonCategory] = (globalCounts[row.reasonCategory] || 0) + 1;
   });
 
-  const order = Object.entries(globalCounts)
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-    .map(([label]) => label);
+  const order = orderLabels(globalCounts);
 
   return Object.entries(grouped).map(([city, map]) => {
     const total = totals[city] || 1;
@@ -154,23 +155,24 @@ export function hashRow(row: DontRow) {
   return `${row.videoId}-${row.activityCategory}-${row.reasonCategory}-${row.city}-${row.activity}`;
 }
 
-export function cityReasonMatrix(rows: DontRow[]): Matrix {
+export function activityReasonMatrix(rows: DontRow[]): Matrix {
   const cells: Record<string, Record<string, number>> = {};
-  const citySet = new Set<string>();
-  const reasonSet = new Set<string>();
+  const activityCounts: Record<string, number> = {};
+  const reasonCounts: Record<string, number> = {};
   let max = 0;
 
   rows.forEach((row) => {
-    citySet.add(row.city);
-    reasonSet.add(row.reasonCategory);
-    if (!cells[row.city]) cells[row.city] = {};
-    cells[row.city][row.reasonCategory] = (cells[row.city][row.reasonCategory] || 0) + 1;
-    max = Math.max(max, cells[row.city][row.reasonCategory]);
+    activityCounts[row.activityCategory] = (activityCounts[row.activityCategory] || 0) + 1;
+    reasonCounts[row.reasonCategory] = (reasonCounts[row.reasonCategory] || 0) + 1;
+    if (!cells[row.activityCategory]) cells[row.activityCategory] = {};
+    cells[row.activityCategory][row.reasonCategory] =
+      (cells[row.activityCategory][row.reasonCategory] || 0) + 1;
+    max = Math.max(max, cells[row.activityCategory][row.reasonCategory]);
   });
 
   return {
-    cities: [...citySet],
-    reasonCategories: [...reasonSet],
+    cities: orderLabels(activityCounts),
+    reasonCategories: orderLabels(reasonCounts),
     max: Math.max(max, 1),
     cells,
   };

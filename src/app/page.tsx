@@ -14,7 +14,7 @@ import {
   uniqueValues,
   cityActivityComposition,
   cityReasonComposition,
-  cityReasonMatrix,
+  activityReasonMatrix,
 } from "@/lib/aggregate";
 import { useDashboardState } from "@/hooks/useDashboardState";
 import CityReasonHeatmap from "@/components/charts/CityReasonHeatmap";
@@ -101,7 +101,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [heatmapSelection, setHeatmapSelection] = useState<{
-    city: string;
+    activityCategory: string;
     reasonCategory: string;
   } | null>(null);
   const dashboard = useDashboardState();
@@ -161,16 +161,16 @@ export default function DashboardPage() {
     () => cityReasonComposition(filteredRows),
     [filteredRows],
   );
-  const heatmap = useMemo(() => cityReasonMatrix(filteredRows), [filteredRows]);
+  const heatmap = useMemo(() => activityReasonMatrix(filteredRows), [filteredRows]);
 
-  const handleHeatmapSelect = (city: string, reasonCategory: string) => {
-    setHeatmapSelection({ city, reasonCategory });
+  const handleHeatmapSelect = (activityCategory: string, reasonCategory: string) => {
+    setHeatmapSelection({ activityCategory, reasonCategory });
     dashboard.setFiltersDirect({
       ...dashboard.filters,
-      city,
+      activityCategory,
       reasonCategory,
     });
-    dashboard.setSelection({ type: "link", value: `${city} × ${reasonCategory}` });
+    dashboard.setSelection({ type: "link", value: `${activityCategory} × ${reasonCategory}` });
   };
 
   const handleReset = () => {
@@ -182,7 +182,7 @@ export default function DashboardPage() {
     if (!heatmapSelection) return filteredRows;
     return filteredRows.filter(
       (row) =>
-        row.city === heatmapSelection.city &&
+        row.activityCategory === heatmapSelection.activityCategory &&
         row.reasonCategory === heatmapSelection.reasonCategory,
     );
   }, [filteredRows, heatmapSelection]);
@@ -257,7 +257,7 @@ export default function DashboardPage() {
               <CityReasonHeatmap
                 matrix={heatmap}
                 active={{
-                  city: dashboard.filters.city,
+                  activityCategory: dashboard.filters.activityCategory,
                   reasonCategory: dashboard.filters.reasonCategory,
                 }}
                 selected={heatmapSelection}
