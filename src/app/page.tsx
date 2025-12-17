@@ -175,76 +175,82 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-amber-50 px-4 py-6 text-neutral-900">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4">
-        <div className="flex flex-col gap-2">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-amber-50 text-neutral-900 lg:h-screen">
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 lg:h-screen lg:min-h-0 lg:overflow-hidden">
+        <header className="flex flex-col gap-2">
           <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">Research story</p>
           <h1 className="text-2xl font-semibold text-neutral-900">
             Travel “don’ts” explorer
           </h1>
           <p className="text-sm text-neutral-600">
-            Click on any chart segment to drive filters. Heatmap clicks also surface evidence rows.
+            Click on any chart segment to drive filters. Heatmap highlights follow filters.
           </p>
           {error && <p className="text-xs font-semibold text-amber-600">{error}</p>}
-        </div>
+        </header>
 
-        <section className="flex flex-col gap-4">
-          <FilterRail
-            filters={dashboard.filters}
-            options={options}
-            onToggle={dashboard.toggleValue}
-            onReset={handleReset}
-          />
-
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <div className="lg:col-span-2">
-              <InsightPanel filters={dashboard.filters} />
+        <div className="mt-4 flex flex-1 flex-col gap-4 lg:min-h-0 lg:flex-row lg:gap-6 lg:overflow-hidden">
+          <aside className="lg:w-[30%] lg:shrink-0 lg:self-start">
+            <div className="lg:sticky lg:top-4">
+              <FilterRail
+                filters={dashboard.filters}
+                options={options}
+                onToggle={dashboard.toggleValue}
+                onReset={handleReset}
+              />
             </div>
-          </div>
+          </aside>
 
-          {loading ? (
-            <div className="rounded-3xl bg-white/80 p-6 text-center text-sm text-neutral-600 shadow-sm">
-              Loading CSV…
+          <main className="flex flex-col gap-4 lg:min-h-0 lg:w-[70%] lg:overflow-y-auto lg:pr-2">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <div className="lg:col-span-2">
+                <InsightPanel filters={dashboard.filters} />
+              </div>
             </div>
-          ) : (
-            <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <StackedCityActivity
-                  data={cityActivity}
-                  active={dashboard.filters.activityLabel}
-                  onToggle={(v) => {
-                    dashboard.toggleValue("activityLabel", v);
-                    dashboard.setSelection({ type: "activity_label", value: v });
-                  }}
-                  onSelectCity={(v) => {
-                    dashboard.toggleValue("city", v);
-                    dashboard.setSelection({ type: "city", value: v });
-                  }}
-                />
-                <StackedCityReason
-                  data={cityReason}
-                  active={dashboard.filters.reasonLabel}
-                  onToggle={(v) => {
-                    dashboard.toggleValue("reasonLabel", v);
-                    dashboard.setSelection({ type: "reason_label", value: v });
-                  }}
-                  onSelectCity={(v) => {
-                    dashboard.toggleValue("city", v);
-                    dashboard.setSelection({ type: "city", value: v });
+
+            {loading ? (
+              <div className="rounded-3xl bg-white/80 p-6 text-center text-sm text-neutral-600 shadow-sm">
+                Loading CSV…
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <StackedCityActivity
+                    data={cityActivity}
+                    active={dashboard.filters.activityLabel}
+                    onToggle={(v) => {
+                      dashboard.toggleValue("activityLabel", v);
+                      dashboard.setSelection({ type: "activity_label", value: v });
+                    }}
+                    onSelectCity={(v) => {
+                      dashboard.toggleValue("city", v);
+                      dashboard.setSelection({ type: "city", value: v });
+                    }}
+                  />
+                  <StackedCityReason
+                    data={cityReason}
+                    active={dashboard.filters.reasonLabel}
+                    onToggle={(v) => {
+                      dashboard.toggleValue("reasonLabel", v);
+                      dashboard.setSelection({ type: "reason_label", value: v });
+                    }}
+                    onSelectCity={(v) => {
+                      dashboard.toggleValue("city", v);
+                      dashboard.setSelection({ type: "city", value: v });
+                    }}
+                  />
+                </div>
+
+                <ActivityReasonHeatmap
+                  matrix={heatmap}
+                  active={{
+                    activityLabel: dashboard.filters.activityLabel,
+                    reasonLabel: dashboard.filters.reasonLabel,
                   }}
                 />
               </div>
-
-              <ActivityReasonHeatmap
-                matrix={heatmap}
-                active={{
-                  activityLabel: dashboard.filters.activityLabel,
-                  reasonLabel: dashboard.filters.reasonLabel,
-                }}
-              />
-            </div>
-          )}
-        </section>
+            )}
+          </main>
+        </div>
       </div>
     </div>
   );

@@ -21,8 +21,12 @@ export const insights: Insight[] = [
     title: "London transit mistakes pile up quickly",
     summary:
       "Transit mistakes show up repeatedly as a blocker when visitors try to navigate London without prep.",
-    soWhat: "Double down on motion guides and call out the worst friction points early.",
-    conditions: { city: ["London"], activity_label: ["Transit Mistakes"] },
+    soWhat:
+      "Double down on motion guides and call out the worst friction points early.",
+    conditions: {
+      city: ["London"],
+      activity_label: ["Transit Mistakes", "Shopping"],
+    },
     evidenceHints: [
       "Look for rows mentioning Uber and walking fatigue.",
       "Cross-reference with Safety Concerns or Cultural Misfits reasons.",
@@ -39,7 +43,10 @@ export const insights: Insight[] = [
       activity_label: ["Shopping"],
       reason_label: ["Price and Quality", "Timing and Distance"],
     },
-    evidenceHints: ["Rows with VAT or tipping concerns.", "Any note calling out surprise fees."],
+    evidenceHints: [
+      "Rows with VAT or tipping concerns.",
+      "Any note calling out surprise fees.",
+    ],
     priority: 2,
   },
   {
@@ -49,7 +56,10 @@ export const insights: Insight[] = [
       "When focused on one video, clusters of repeated issues emerge—useful for storyboard moments.",
     soWhat: "Pull 2–3 strongest don’ts from this clip into the highlight reel.",
     conditions: { video_title: [] },
-    evidenceHints: ["Pinned rows from this video.", "Look for repeated Activity_Simple tags."],
+    evidenceHints: [
+      "Pinned rows from this video.",
+      "Look for repeated Activity_Simple tags.",
+    ],
     priority: 3,
   },
 ];

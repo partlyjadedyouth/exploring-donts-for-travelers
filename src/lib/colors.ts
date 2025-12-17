@@ -27,7 +27,7 @@ const predefined: Record<string, string> = {
   "Cultural Misfits": "#e377c2",
   Regulations: "#bcbd22",
   "Timing and Distance": "#aec7e8",
-  "Safety Concerns": "#d62728",
+  "Safety Concerns": "#ffbb78",
 };
 
 const assigned = new Map<string, string>();
