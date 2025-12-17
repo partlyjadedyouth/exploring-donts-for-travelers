@@ -10,7 +10,10 @@ type Props = {
     reasonLabels: string[];
     videos: string[];
   };
-  onToggle: (field: "city" | "activityLabel" | "reasonLabel", value: string) => void;
+  onToggle: (
+    field: "city" | "activityLabel" | "reasonLabel",
+    value: string,
+  ) => void;
   onReset: () => void;
 };
 
@@ -29,7 +32,9 @@ const FilterGroup = ({
     <div className="text-sm font-semibold text-neutral-800">{label}</div>
     <div className="flex flex-wrap gap-2">
       {values.map((v) => {
-        const active = Array.isArray(selected) ? selected.includes(v) : selected === v;
+        const active = Array.isArray(selected)
+          ? selected.includes(v)
+          : selected === v;
         return (
           <button
             key={v}
@@ -62,7 +67,11 @@ export default function FilterRail({
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-semibold text-neutral-900">Filters</p>
-          <p className="text-xs text-neutral-500">Click items in charts or pick below.</p>
+          <p className="text-xs text-neutral-500">
+            Click items in the charts or select from the options below.{" "}
+            <b>Multiple cities</b> can be selected, but you can only choose{" "}
+            <b>one activity and one reason.</b>
+          </p>
         </div>
         <button
           onClick={onReset}
