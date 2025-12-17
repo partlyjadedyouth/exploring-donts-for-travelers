@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Travel Don'ts Research Dashboard
 
-## Getting Started
+This project is a data-driven dashboard for exploring travel "don’ts" by city, activity, and reason.
+It focuses on a research-story workflow: scan high-level patterns, apply filters, and interpret
+insights. The UI is intentionally lightweight and visual-first, with fast filtering and consistent
+category ordering across charts.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router) + React 19
+- Tailwind CSS v4
+- Client-side CSV parsing (MVP)
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Data
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The dataset is a CSV stored at `public/data/donts.csv`. Relevant columns:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `City`
+- `Activity_Simple` (mapped to display labels)
+- `Reason_Simple` (mapped to display labels)
 
-## Learn More
+Label mapping happens on the client in `src/app/page.tsx` so the UI can evolve without reworking
+the CSV schema.
 
-To learn more about Next.js, take a look at the following resources:
+## UX Overview
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Filters are single-select: City, Activity, Reason.
+- Stacked bars show City × Activity and City × Reason compositions.
+- Activity × Reason heatmap shows density and highlights based on current filters.
+- Insight cards are rule-based and update as filters change.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Code Structure
 
-## Deploy on Vercel
+```
+src/
+  app/
+    page.tsx            # Dashboard shell + data load + wiring
+    layout.tsx          # Metadata and base layout
+    globals.css         # Global styling scale
+  components/
+    FilterRail.tsx      # City/Activity/Reason filters
+    InsightPanel.tsx    # Insight cards + evidence tabs
+    InsightCard.tsx     # Individual insight UI
+    charts/
+      StackedCityActivity.tsx
+      StackedCityReason.tsx
+      ActivityReasonHeatmap.tsx
+  content/
+    insights.ts         # Rule-based insight definitions
+  hooks/
+    useDashboardState.ts # Filters + URL sync + selection state
+  lib/
+    aggregate.ts        # Filtering + aggregation utilities
+    colors.ts           # Deterministic color mapping for categories
+    insights-utils.ts   # Insight matching logic
+public/
+  data/
+    donts.csv           # Dashboard dataset
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Interaction Model
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Filter changes update URL query params without scrolling.
+- Stacked bars are clickable to toggle a single Activity/Reason.
+- Heatmap is read-only; highlights reflect current filters.
+
+## Design Notes
+
+- Consistent category ordering is enforced in `aggregate.ts` so legends, filters, and heatmaps align.
+- City order is fixed (Seoul → Tokyo → London → Paris → New York) for narrative clarity.
+- Colors are explicitly mapped by label in `lib/colors.ts` to avoid collisions.
+
+## Development Direction
+
+Planned evolution (if needed):
+
+1. Move CSV parsing to the server and cache in a route handler.
+2. Replace heatmap with an alluvial/sankey view once the data grows.
+3. Add user-authored insight annotations and exportable snapshots.
+
+## Scripts
+
+- `npm run dev` — start the local dev server
+- `npm run build` — production build
+- `npm run lint` — lint the codebase
