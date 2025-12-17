@@ -62,7 +62,7 @@ export function useDashboardState() {
 
   useEffect(() => {
     const qs = toQueryString(filters);
-    router.replace(qs ? `${pathname}?${qs}` : pathname);
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   }, [filters]);
 
   const toggleValue = (field: "cities" | "activities" | "reasons", value: string) => {

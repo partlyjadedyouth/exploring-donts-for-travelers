@@ -70,6 +70,7 @@ export function uniqueValues(rows: DontRow[]) {
 }
 
 export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
+  const globalCounts: Record<string, number> = {};
   const grouped: Record<string, Record<string, number>> = {};
   const totals: Record<string, number> = {};
 
@@ -77,22 +78,31 @@ export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
     const cityMap = grouped[row.city] || (grouped[row.city] = {});
     cityMap[row.activitySimple] = (cityMap[row.activitySimple] || 0) + 1;
     totals[row.city] = (totals[row.city] || 0) + 1;
+    globalCounts[row.activitySimple] = (globalCounts[row.activitySimple] || 0) + 1;
   });
+
+  const order = Object.entries(globalCounts)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([label]) => label);
 
   return Object.entries(grouped).map(([city, map]) => {
     const total = totals[city] || 1;
-    const segments = Object.entries(map)
-      .sort((a, b) => b[1] - a[1])
-      .map(([label, count]) => ({
-        label,
-        count,
-        pct: Math.round((count / total) * 1000) / 10,
-      }));
+    const segments = order
+      .filter((label) => map[label])
+      .map((label) => {
+        const count = map[label];
+        return {
+          label,
+          count,
+          pct: Math.round((count / total) * 1000) / 10,
+        };
+      });
     return { city, total, segments };
   });
 }
 
 export function cityReasonComposition(rows: DontRow[]): CityComposition[] {
+  const globalCounts: Record<string, number> = {};
   const grouped: Record<string, Record<string, number>> = {};
   const totals: Record<string, number> = {};
 
@@ -100,17 +110,25 @@ export function cityReasonComposition(rows: DontRow[]): CityComposition[] {
     const cityMap = grouped[row.city] || (grouped[row.city] = {});
     cityMap[row.reasonSimple] = (cityMap[row.reasonSimple] || 0) + 1;
     totals[row.city] = (totals[row.city] || 0) + 1;
+    globalCounts[row.reasonSimple] = (globalCounts[row.reasonSimple] || 0) + 1;
   });
+
+  const order = Object.entries(globalCounts)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([label]) => label);
 
   return Object.entries(grouped).map(([city, map]) => {
     const total = totals[city] || 1;
-    const segments = Object.entries(map)
-      .sort((a, b) => b[1] - a[1])
-      .map(([label, count]) => ({
-        label,
-        count,
-        pct: Math.round((count / total) * 1000) / 10,
-      }));
+    const segments = order
+      .filter((label) => map[label])
+      .map((label) => {
+        const count = map[label];
+        return {
+          label,
+          count,
+          pct: Math.round((count / total) * 1000) / 10,
+        };
+      });
     return { city, total, segments };
   });
 }
