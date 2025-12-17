@@ -28,6 +28,13 @@ export type LinkStat = {
   count: number;
 };
 
+export type Matrix = {
+  cities: string[];
+  reasons: string[];
+  max: number;
+  cells: Record<string, Record<string, number>>;
+};
+
 const includeIfSet = (selected: string[], value: string) =>
   selected.length === 0 || selected.includes(value);
 
@@ -127,4 +134,26 @@ export function topLinks(rows: DontRow[], limit = 8): LinkStat[] {
 
 export function hashRow(row: DontRow) {
   return `${row.videoId}-${row.activitySimple}-${row.reasonSimple}-${row.city}-${row.activity}`;
+}
+
+export function cityReasonMatrix(rows: DontRow[]): Matrix {
+  const cells: Record<string, Record<string, number>> = {};
+  const citySet = new Set<string>();
+  const reasonSet = new Set<string>();
+  let max = 0;
+
+  rows.forEach((row) => {
+    citySet.add(row.city);
+    reasonSet.add(row.reasonSimple);
+    if (!cells[row.city]) cells[row.city] = {};
+    cells[row.city][row.reasonSimple] = (cells[row.city][row.reasonSimple] || 0) + 1;
+    max = Math.max(max, cells[row.city][row.reasonSimple]);
+  });
+
+  return {
+    cities: [...citySet],
+    reasons: [...reasonSet],
+    max: Math.max(max, 1),
+    cells,
+  };
 }

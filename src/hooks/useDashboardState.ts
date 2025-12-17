@@ -82,6 +82,8 @@ export function useDashboardState() {
 
   const resetFilters = () => setFilters(emptyFilters);
 
+  const setFiltersDirect = (next: Filters) => setFilters(next);
+
   const togglePin = (id: string) =>
     setPinnedRows((prev) =>
       prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id],
@@ -108,6 +110,7 @@ export function useDashboardState() {
     pinnedRows,
     toggleValue,
     resetFilters,
+    setFiltersDirect,
     setVideo,
     togglePin,
     setSelection: setSelectionWith,

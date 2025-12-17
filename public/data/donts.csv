@@ -1,7 +1,7 @@
 Video_ID,Video_Title,City,Activity,Reason,Activity_Simple,Reason_Simple
 1,kzNjmq63I_E,London,not planning correctly,populated areas only on weekends,Logistics,Friction
 1,kzNjmq63I_E,London,buying designer goods,no VAT refund post-Brexit,Commerce,Rules
-1,kzNjmq63I_E,London,not checking out the nightlife,limited club options for tourists,Sights,Value
+1,kzNjmq63I_E,London,checking out the nightlife,limited club options for tourists,Sights,Value
 2,5GzACwRHguc,London,using Google Maps,not accurate,Mobility,Friction
 2,5GzACwRHguc,London,walking,not practical,Mobility,Friction
 2,5GzACwRHguc,London,crossing streets,not safe,Risk,Risk
@@ -11,7 +11,7 @@ Video_ID,Video_Title,City,Activity,Reason,Activity_Simple,Reason_Simple
 3,nvTHBfZTld4,London,ordering still water,unnecessary,Commerce,Value
 4,RPuZsC35mKk,London,walking in sneakers,too many steps,Mobility,Friction
 4,RPuZsC35mKk,London,using Uber,limited service,Mobility,Friction
-4,RPuZsC35mKk,London,visiting Tate Modern,powerful storytelling,Sights,Value
+4,RPuZsC35mKk,London,not visiting Tate Modern,powerful storytelling,Sights,Value
 4,RPuZsC35mKk,London,visiting markets,crowded,Sights,Crowd
 5,WOLrcR6yJyw,London,confusing bridges,common tourist mistake,Mobility,Friction
 5,WOLrcR6yJyw,London,over-tipping,unnecessary double payment,Commerce,Value

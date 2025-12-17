@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import FilterRail from "@/components/FilterRail";
 import StackedCityActivity from "@/components/charts/StackedCityActivity";
 import StackedCityReason from "@/components/charts/StackedCityReason";
-import FlowLinks from "@/components/charts/FlowLinks";
 import EvidenceTable from "@/components/EvidenceTable";
 import InsightPanel from "@/components/InsightPanel";
 import {
@@ -12,12 +11,13 @@ import {
   DontRow,
   filterRows,
   hashRow,
-  topLinks,
   uniqueValues,
   cityActivityComposition,
   cityReasonComposition,
+  cityReasonMatrix,
 } from "@/lib/aggregate";
 import { useDashboardState } from "@/hooks/useDashboardState";
+import CityReasonHeatmap from "@/components/charts/CityReasonHeatmap";
 
 const parseCsvLine = (line: string) => {
   const values: string[] = [];
@@ -76,6 +76,9 @@ export default function DashboardPage() {
   const [rows, setRows] = useState<DontRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [heatmapSelection, setHeatmapSelection] = useState<{ city: string; reason: string } | null>(
+    null,
+  );
   const dashboard = useDashboardState();
 
   useEffect(() => {
@@ -133,14 +136,25 @@ export default function DashboardPage() {
     () => cityReasonComposition(filteredRows),
     [filteredRows],
   );
-  const links = useMemo(() => topLinks(filteredRows, 8), [filteredRows]);
+  const heatmap = useMemo(() => cityReasonMatrix(filteredRows), [filteredRows]);
 
-  const handleShare = () => {
-    const url = typeof window !== "undefined" ? window.location.href : "";
-    if (!url) return;
-    navigator.clipboard?.writeText(url).catch(() => {});
-    alert("Link with current filters copied to clipboard");
+  const handleHeatmapSelect = (city: string, reason: string) => {
+    setHeatmapSelection({ city, reason });
+    dashboard.setSelection({ type: "link", value: `${city} × ${reason}` });
   };
+
+  const handleReset = () => {
+    dashboard.resetFilters();
+    setHeatmapSelection(null);
+  };
+
+  const evidenceRows = useMemo(() => {
+    if (!heatmapSelection) return [];
+    return filteredRows.filter(
+      (row) =>
+        row.city === heatmapSelection.city && row.reasonSimple === heatmapSelection.reason,
+    );
+  }, [filteredRows, heatmapSelection]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-amber-50 px-4 py-6 text-neutral-900">
@@ -151,76 +165,69 @@ export default function DashboardPage() {
             Travel “don’ts” explorer
           </h1>
           <p className="text-sm text-neutral-600">
-            Click on any chart segment to drive filters. Filters sync to the URL, so you can copy
-            and share the current slice.
+            Click on any chart segment to drive filters. Heatmap clicks also surface evidence rows.
           </p>
           {error && <p className="text-xs font-semibold text-amber-600">{error}</p>}
         </div>
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[280px_minmax(0,1fr)_320px]">
+        <section className="flex flex-col gap-4">
           <FilterRail
             filters={dashboard.filters}
             options={options}
             onToggle={dashboard.toggleValue}
-            onVideoSelect={dashboard.setVideo}
-            onReset={dashboard.resetFilters}
-            onShare={handleShare}
+            onReset={handleReset}
           />
 
-          <main className="flex flex-col gap-4">
-            {loading ? (
-              <div className="rounded-3xl bg-white/80 p-6 text-center text-sm text-neutral-600 shadow-sm">
-                Loading CSV…
-              </div>
-            ) : (
-              <>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <StackedCityActivity
-                    data={cityActivity}
-                    active={dashboard.filters.activities}
-                    onToggle={(v) => {
-                      dashboard.toggleValue("activities", v);
-                      dashboard.setSelection({ type: "activity_simple", value: v });
-                    }}
-                    onSelectCity={(v) => {
-                      dashboard.toggleValue("cities", v);
-                      dashboard.setSelection({ type: "city", value: v });
-                    }}
-                  />
-                  <StackedCityReason
-                    data={cityReason}
-                    active={dashboard.filters.reasons}
-                    onToggle={(v) => {
-                      dashboard.toggleValue("reasons", v);
-                      dashboard.setSelection({ type: "reason_simple", value: v });
-                    }}
-                    onSelectCity={(v) => {
-                      dashboard.toggleValue("cities", v);
-                      dashboard.setSelection({ type: "city", value: v });
-                    }}
-                  />
-                </div>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="lg:col-span-2">
+              <InsightPanel filters={dashboard.filters} />
+            </div>
+          </div>
 
-                <FlowLinks
-                  links={links}
-                  active={{
-                    activities: dashboard.filters.activities,
-                    reasons: dashboard.filters.reasons,
+          {loading ? (
+            <div className="rounded-3xl bg-white/80 p-6 text-center text-sm text-neutral-600 shadow-sm">
+              Loading CSV…
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <StackedCityActivity
+                  data={cityActivity}
+                  active={dashboard.filters.activities}
+                  onToggle={(v) => {
+                    dashboard.toggleValue("activities", v);
+                    dashboard.setSelection({ type: "activity_simple", value: v });
                   }}
-                  onSelect={(activity, reason) => dashboard.applyLinkCombo(activity, reason)}
+                  onSelectCity={(v) => {
+                    dashboard.toggleValue("cities", v);
+                    dashboard.setSelection({ type: "city", value: v });
+                  }}
                 />
-
-                <EvidenceTable
-                  rows={filteredRows}
-                  pinned={dashboard.pinnedRows}
-                  onTogglePin={dashboard.togglePin}
+                <StackedCityReason
+                  data={cityReason}
+                  active={dashboard.filters.reasons}
+                  onToggle={(v) => {
+                    dashboard.toggleValue("reasons", v);
+                    dashboard.setSelection({ type: "reason_simple", value: v });
+                  }}
+                  onSelectCity={(v) => {
+                    dashboard.toggleValue("cities", v);
+                    dashboard.setSelection({ type: "city", value: v });
+                  }}
                 />
-              </>
-            )}
-          </main>
+              </div>
 
-          <InsightPanel filters={dashboard.filters} />
-        </div>
+              <CityReasonHeatmap
+                matrix={heatmap}
+                active={{ cities: dashboard.filters.cities, reasons: dashboard.filters.reasons }}
+                selected={heatmapSelection}
+                onSelect={handleHeatmapSelect}
+              />
+
+              {heatmapSelection && <EvidenceTable rows={evidenceRows} />}
+            </div>
+          )}
+        </section>
       </div>
     </div>
   );

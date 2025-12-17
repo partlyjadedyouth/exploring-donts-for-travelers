@@ -10,17 +10,6 @@ type Props = {
   filters: Filters;
 };
 
-const selectionLabel = (filters: Filters) => {
-  const bits = [
-    filters.cities.join(" · "),
-    filters.activities.join(" · "),
-    filters.reasons.join(" · "),
-  ]
-    .filter(Boolean)
-    .join(" × ");
-  return bits || "All cities × activities × reasons";
-};
-
 export default function InsightPanel({ filters }: Props) {
   const [tab, setTab] = useState<"rows" | "quotes" | "shots">("rows");
   const matches = useMemo(
@@ -39,12 +28,7 @@ export default function InsightPanel({ filters }: Props) {
         : "Screenshot dropspace coming soon.";
 
   return (
-    <aside className="sticky top-4 flex h-fit min-w-[280px] flex-col gap-4 rounded-3xl bg-white/80 p-4 shadow-sm ring-1 ring-neutral-100 backdrop-blur">
-      <div>
-        <p className="text-xs uppercase tracking-wide text-neutral-500">Current focus</p>
-        <p className="text-sm font-semibold text-neutral-900">{selectionLabel(filters)}</p>
-      </div>
-
+    <aside className="flex h-full min-h-[260px] flex-col gap-4 rounded-3xl bg-white/80 p-5 shadow-sm ring-1 ring-neutral-100 backdrop-blur">
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <p className="text-xs uppercase tracking-wide text-neutral-500">Insights</p>
