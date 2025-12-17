@@ -26,7 +26,7 @@ export default function StackedCityActivity({
       <div className="mb-3 flex items-center justify-between">
         <div>
           <p className="text-sm font-semibold text-neutral-900">
-            Activities that are not recommended
+            WHAT people don{`'`}t recommend
           </p>
           {/* <p className="text-xs text-neutral-500">Click segments to filter.</p> */}
         </div>

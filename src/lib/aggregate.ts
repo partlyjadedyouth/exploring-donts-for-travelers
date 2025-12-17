@@ -182,7 +182,10 @@ export function hashRow(row: DontRow) {
   return `${row.videoId}-${row.activityLabel}-${row.reasonLabel}-${row.city}-${row.activity}`;
 }
 
-export function activityReasonMatrix(rows: DontRow[]): Matrix {
+export function activityReasonMatrix(
+  rows: DontRow[],
+  labelOrder?: { activityLabels: string[]; reasonLabels: string[] },
+): Matrix {
   const cells: Record<string, Record<string, number>> = {};
   const activityCounts: Record<string, number> = {};
   const reasonCounts: Record<string, number> = {};
@@ -198,8 +201,8 @@ export function activityReasonMatrix(rows: DontRow[]): Matrix {
   });
 
   return {
-    activityLabels: orderLabels(activityCounts),
-    reasonLabels: orderLabels(reasonCounts),
+    activityLabels: labelOrder?.activityLabels ?? orderLabels(activityCounts),
+    reasonLabels: labelOrder?.reasonLabels ?? orderLabels(reasonCounts),
     max: Math.max(max, 1),
     cells,
   };

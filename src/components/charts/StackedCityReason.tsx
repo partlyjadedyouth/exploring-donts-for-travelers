@@ -26,7 +26,7 @@ export default function StackedCityReason({
       <div className="mb-3 flex items-center justify-between">
         <div>
           <p className="text-sm font-semibold text-neutral-900">
-            WHY You Shouldn{`'`}t Do
+            WHY people don{`'`}t recommend
           </p>
           {/* <p className="text-xs text-neutral-500">100% stacked; click segments to filter.</p> */}
         </div>

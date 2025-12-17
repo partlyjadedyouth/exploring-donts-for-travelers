@@ -156,7 +156,19 @@ export default function DashboardPage() {
     () => cityReasonComposition(filteredRows),
     [filteredRows],
   );
-  const heatmap = useMemo(() => activityReasonMatrix(rows), [rows]);
+  const heatmapRows = useMemo(() => {
+    if (!dashboard.filters.city) return rows;
+    return rows.filter((row) => row.city === dashboard.filters.city);
+  }, [rows, dashboard.filters.city]);
+
+  const heatmap = useMemo(
+    () =>
+      activityReasonMatrix(heatmapRows, {
+        activityLabels: options.activityLabels,
+        reasonLabels: options.reasonLabels,
+      }),
+    [heatmapRows, options.activityLabels, options.reasonLabels],
+  );
 
   const handleReset = () => {
     dashboard.resetFilters();
