@@ -160,9 +160,22 @@ export default function DashboardPage() {
     () => cityReasonComposition(filteredRows),
     [filteredRows],
   );
-  const heatmap = useMemo(() => activityReasonMatrix(filteredRows), [filteredRows]);
+  const heatmap = useMemo(() => activityReasonMatrix(rows), [rows]);
 
   const handleHeatmapSelect = (activityLabel: string, reasonLabel: string) => {
+    const isSame =
+      heatmapSelection?.activityLabel === activityLabel &&
+      heatmapSelection?.reasonLabel === reasonLabel;
+    if (isSame) {
+      setHeatmapSelection(null);
+      dashboard.setFiltersDirect({
+        ...dashboard.filters,
+        activityLabel: undefined,
+        reasonLabel: undefined,
+      });
+      dashboard.setSelection(null);
+      return;
+    }
     setHeatmapSelection({ activityLabel, reasonLabel });
     dashboard.setFiltersDirect({
       ...dashboard.filters,

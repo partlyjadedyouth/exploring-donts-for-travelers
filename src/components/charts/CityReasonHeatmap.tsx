@@ -11,8 +11,9 @@ type Props = {
 
 const colorFor = (count: number, max: number, active: boolean) => {
   const pct = count / max;
-  const base = Math.max(0.1, pct);
-  const alpha = active ? 0.8 : 0.6;
+  const eased = Math.pow(pct, 0.7);
+  const base = Math.max(0.2, eased);
+  const alpha = active ? 0.95 : 0.75;
   return `rgba(99, 102, 241, ${base * alpha})`;
 };
 
@@ -73,9 +74,9 @@ export default function CityReasonHeatmap({
                     >
                       <button
                         onClick={() => onSelect(activity, reason)}
-                        className={`flex h-10 w-full items-center justify-center rounded-xl border text-[11px] font-semibold text-neutral-700 transition hover:-translate-y-0.5 hover:shadow-sm ${
+                        className={`flex h-12 w-full items-center justify-center rounded-xl border text-base font-semibold text-neutral-900 transition hover:-translate-y-0.5 hover:shadow-sm ${
                           isSelected
-                            ? "border-indigo-600 ring-2 ring-indigo-300"
+                            ? "border-2 border-indigo-700 ring-4 ring-indigo-400 shadow-[0_0_12px_rgba(79,70,229,0.45)]"
                             : "border-neutral-100"
                         }`}
                         style={{
