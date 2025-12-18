@@ -209,9 +209,9 @@ export default function AlluvialCityActivityReason({
           <p className="text-sm font-semibold text-neutral-900">
             Alluvial Diagram
           </p>
-          <p className="text-xs text-neutral-500">
+          {/* <p className="text-xs text-neutral-500">
             Ribbons follow the current filters.
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="relative overflow-visible">
@@ -233,9 +233,13 @@ export default function AlluvialCityActivityReason({
             const control = Math.max(32, (x1 - x0) / 2);
             const path = `
               M ${x0} ${y0 - width / 2}
-              C ${x0 + control} ${y0 - width / 2}, ${x1 - control} ${y1 - width / 2}, ${x1} ${y1 - width / 2}
+              C ${x0 + control} ${y0 - width / 2}, ${x1 - control} ${
+              y1 - width / 2
+            }, ${x1} ${y1 - width / 2}
               L ${x1} ${y1 + width / 2}
-              C ${x1 - control} ${y1 + width / 2}, ${x0 + control} ${y0 + width / 2}, ${x0} ${y0 + width / 2}
+              C ${x1 - control} ${y1 + width / 2}, ${x0 + control} ${
+              y0 + width / 2
+            }, ${x0} ${y0 + width / 2}
               Z
             `;
             return (
