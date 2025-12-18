@@ -8,10 +8,11 @@ state, and consistent category ordering across charts.
 ## Features
 
 - Client-side CSV parsing with graceful fallback data if the file is missing
-- Multi-city selection plus single activity/reason filters; every chart segment is clickable
+- Multi-city selection plus single activity/reason filters; every chart segment and legend chip is clickable
 - URL query params stay in sync so views can be bookmarked or shared without scroll jumps
 - Rule-based insight cards keyed off filters (city/activity/reason/video)
 - Deterministic label ordering and coloring so charts remain stable as filters change
+- Alluvial ribbon view to follow flows from city → activity → reason without losing context
 
 ## Stack
 
@@ -63,7 +64,8 @@ warning in the header.
 ## UX Overview
 
 - Filters: City (multi-select), Activity (single), Reason (single).
-- Stacked bars show City × Activity and City × Reason compositions.
+- Stacked bars show City × Activity and City × Reason compositions; bars and legends toggle filters.
+- Alluvial diagram traces City → Activity → Reason flow with proportional ribbons.
 - Activity × Reason heatmap shows density and highlights based on current filters.
 - Insight cards are rule-based and update as filters change.
 - Filters are mirrored into the URL (`city`, `activity`, `reason`, `video`) via
@@ -117,4 +119,6 @@ tag category; omit tags to make a card always show.
 - Consistent category ordering is enforced via `aggregate.ts` using the global label order so charts
   stay stable even when filtered.
 - City order is fixed (Seoul → Tokyo → London → Paris → New York City) for narrative clarity.
-- Colors are explicitly mapped by label in `lib/colors.ts` to avoid collisions.
+- Colors are explicitly mapped by label in `lib/colors.ts` to avoid collisions; UI leans on a teal/
+  terracotta accent pair over a parchment gradient background with rounded cards and pill bars to
+  keep the data viz legible.
