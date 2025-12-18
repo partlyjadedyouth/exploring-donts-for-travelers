@@ -3,7 +3,6 @@
 import {
   buildFilterTags,
   insightMatches,
-  matchedInsightTags,
 } from "@/lib/insights-utils";
 import { Filters } from "@/lib/aggregate";
 import { insights } from "@/content/insights";
@@ -19,10 +18,7 @@ export default function InsightPanel({ filters }: Props) {
   const matches = useMemo(
     () =>
       insights
-        .map((insight) => ({
-          insight,
-          matchedTags: matchedInsightTags(insight, filterTags),
-        }))
+        .map((insight) => ({ insight }))
         .filter(({ insight }) => insightMatches(insight, filterTags)),
     [filterTags],
   );
@@ -42,12 +38,8 @@ export default function InsightPanel({ filters }: Props) {
           </div>
         )}
         <div className="space-y-3">
-          {matches.map(({ insight, matchedTags }) => (
-            <InsightCard
-              key={insight.id}
-              insight={insight}
-              matchedTags={matchedTags}
-            />
+          {matches.map(({ insight }) => (
+            <InsightCard key={insight.id} insight={insight} />
           ))}
         </div>
       </div>
