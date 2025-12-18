@@ -53,12 +53,12 @@ export default function DashboardPage() {
   );
 
   const cityActivity: CityComposition[] = useMemo(
-    () => cityActivityComposition(filteredRows),
-    [filteredRows],
+    () => cityActivityComposition(filteredRows, options.activityLabels),
+    [filteredRows, options.activityLabels],
   );
   const cityReason: CityComposition[] = useMemo(
-    () => cityReasonComposition(filteredRows),
-    [filteredRows],
+    () => cityReasonComposition(filteredRows, options.reasonLabels),
+    [filteredRows, options.reasonLabels],
   );
   const heatmapRows = useMemo(() => {
     if (!dashboard.filters.city || dashboard.filters.city.length === 0)

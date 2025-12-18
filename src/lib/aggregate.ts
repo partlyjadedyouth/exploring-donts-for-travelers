@@ -86,6 +86,7 @@ type CompositionKey = "activityLabel" | "reasonLabel";
 const buildCityComposition = (
   rows: DontRow[],
   key: CompositionKey,
+  labelOrder?: string[],
 ): CityComposition[] => {
   const globalCounts: Record<string, number> = {};
   const grouped: Record<string, Record<string, number>> = {};
@@ -100,7 +101,8 @@ const buildCityComposition = (
     globalCounts[label] = (globalCounts[label] || 0) + 1;
   });
 
-  const order = orderLabels(globalCounts);
+  const order =
+    labelOrder && labelOrder.length > 0 ? labelOrder : orderLabels(globalCounts);
 
   return sortCities(Object.keys(grouped)).map((city) => {
     const map = grouped[city];
@@ -119,12 +121,18 @@ const buildCityComposition = (
   });
 };
 
-export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
-  return buildCityComposition(rows, "activityLabel");
+export function cityActivityComposition(
+  rows: DontRow[],
+  labelOrder?: string[],
+): CityComposition[] {
+  return buildCityComposition(rows, "activityLabel", labelOrder);
 }
 
-export function cityReasonComposition(rows: DontRow[]): CityComposition[] {
-  return buildCityComposition(rows, "reasonLabel");
+export function cityReasonComposition(
+  rows: DontRow[],
+  labelOrder?: string[],
+): CityComposition[] {
+  return buildCityComposition(rows, "reasonLabel", labelOrder);
 }
 
 export function hashRow(row: DontRow) {
