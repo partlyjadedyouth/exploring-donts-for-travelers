@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Filters } from "@/lib/aggregate";
+import { Filters, normalizeCity } from "@/lib/aggregate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const emptyFilters: Filters = {
@@ -29,7 +29,7 @@ const parseFiltersFromSearch = (params: URLSearchParams): Filters => {
   const cities = cityParam
     ? cityParam
         .split(",")
-        .map((value) => value.trim())
+        .map((value) => normalizeCity(value.trim()))
         .filter(Boolean)
     : undefined;
   return {
@@ -43,7 +43,10 @@ const parseFiltersFromSearch = (params: URLSearchParams): Filters => {
 const toQueryString = (filters: Filters) => {
   const params = new URLSearchParams();
   if (filters.city && filters.city.length > 0) {
-    params.set("city", filters.city.join(","));
+    params.set(
+      "city",
+      filters.city.map((city) => normalizeCity(city)).join(","),
+    );
   }
   if (filters.activityLabel) params.set("activity", filters.activityLabel);
   if (filters.reasonLabel) params.set("reason", filters.reasonLabel);

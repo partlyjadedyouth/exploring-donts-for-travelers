@@ -22,6 +22,16 @@ export type CityComposition = {
   segments: { label: string; count: number; pct: number }[];
 };
 
+const cityLabelMap: Record<string, string> = {
+  "New York": "New York City",
+};
+
+export const normalizeCity = (value?: string) => {
+  const trimmed = value?.trim();
+  if (!trimmed) return value ?? "";
+  return cityLabelMap[trimmed] ?? trimmed;
+};
+
 export type Matrix = {
   activityLabels: string[];
   reasonLabels: string[];
@@ -40,7 +50,7 @@ const includeIfSet = (selected: string | string[] | undefined, value: string) =>
   return selected === value;
 };
 
-const cityOrder = ["Seoul", "Tokyo", "London", "Paris", "New York"];
+const cityOrder = ["Seoul", "Tokyo", "London", "Paris", "New York City"];
 const cityRank = (city: string) => {
   const idx = cityOrder.indexOf(city);
   return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;

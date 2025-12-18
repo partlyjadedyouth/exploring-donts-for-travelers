@@ -56,7 +56,7 @@ warning in the header.
 
 ### Ordering rules
 
-- Cities are sorted via a fixed narrative order (Seoul → Tokyo → London → Paris → New York).
+- Cities are sorted via a fixed narrative order (Seoul → Tokyo → London → Paris → New York City).
 - Activity/reason labels are ordered by overall frequency (ties broken alphabetically) so stacks and
   heatmaps remain predictable even when filtered.
 
@@ -116,5 +116,5 @@ tag category; omit tags to make a card always show.
 
 - Consistent category ordering is enforced via `aggregate.ts` using the global label order so charts
   stay stable even when filtered.
-- City order is fixed (Seoul → Tokyo → London → Paris → New York) for narrative clarity.
+- City order is fixed (Seoul → Tokyo → London → Paris → New York City) for narrative clarity.
 - Colors are explicitly mapped by label in `lib/colors.ts` to avoid collisions.

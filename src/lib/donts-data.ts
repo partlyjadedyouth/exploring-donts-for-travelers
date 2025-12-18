@@ -1,4 +1,4 @@
-import { DontRow, hashRow } from "@/lib/aggregate";
+import { DontRow, hashRow, normalizeCity } from "@/lib/aggregate";
 
 const activityLabelMap: Record<string, string> = {
   Mobility: "Transit Mistakes",
@@ -70,7 +70,7 @@ export const parseDontsCsv = (text: string): DontRow[] => {
       videoId:
         obj["Video_ID"] || obj["VideoId"] || obj["video_id"] || obj["videoId"],
       videoTitle: obj["Video_Title"],
-      city: obj["City"],
+      city: normalizeCity(obj["City"]),
       activity: obj["Activity"],
       reason: obj["Reason"],
       activityLabel: normalizeLabel(obj["Activity_Simple"], activityLabelMap),

@@ -457,7 +457,7 @@ export const insights: Insight[] = [
   },
 
   // -------------------------
-  // New York
+  // New York City
   // -------------------------
   {
     id: "newyork-attractions-time-is-the-price",
@@ -465,7 +465,7 @@ export const insights: Insight[] = [
     summary:
       "A lot of famous stops are basically queue magnets (and not always worth it). If it’s iconic, check the time cost before you commit.",
     tags: [
-      "city:New York",
+      "city:New York City",
       "activity:Attractions",
       "Reason:Overcrowding",
       "Reason:Price and Quality",
@@ -484,7 +484,7 @@ export const insights: Insight[] = [
     summary:
       "Times Square at the wrong time can wreck your whole day. Go early if you must—or skip it and save the energy.",
     tags: [
-      "city:New York",
+      "city:New York City",
       "activity:Inefficient Planning",
       "Reason:Overcrowding",
     ],
@@ -501,7 +501,7 @@ export const insights: Insight[] = [
     title: "NYC spending: convenience comes with a tourist tax",
     summary:
       "Default choices in NYC can get expensive fast—especially for where you stay and where you eat. A little intention goes a long way here.",
-    tags: ["city:New York", "activity:Shopping", "Reason:Price and Quality"],
+    tags: ["city:New York City", "activity:Shopping", "Reason:Price and Quality"],
     quotes: [
       {
         quote:
@@ -516,7 +516,7 @@ export const insights: Insight[] = [
     summary:
       "NYC is easiest when you treat getting around like a system. Good shoes + smart subway use beats burning time and money on taxis.",
     tags: [
-      "city:New York",
+      "city:New York City",
       "activity:Transit Mistakes",
       "Reason:Price and Quality",
       "Reason:Timing and Distance",
@@ -540,7 +540,7 @@ export const insights: Insight[] = [
     summary:
       "The trap is confusion—“free” offers that suddenly aren’t free. If the interaction feels pushy or the deal isn’t clear, just leave.",
     tags: [
-      "city:New York",
+      "city:New York City",
       "activity:Unsafe Choices",
       "Reason:Safety Concerns",
     ],
