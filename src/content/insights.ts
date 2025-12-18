@@ -7,53 +7,33 @@ export type Insight = {
 };
 
 export const insights: Insight[] = [
-  // =========================
-  // London (6/6)
-  // =========================
+  // -------------------------
+  // London
+  // -------------------------
   {
-    id: "london-attractions-queue-free-culture",
-    title: "In London, timing and free culture beat “tourist nightlife”",
+    id: "london-attractions-curation-over-clubs",
+    title: "London attractions pay off when you curate, not when you default",
     summary:
-      "London DON’Ts cluster around expectation-setting (some touristy nightlife options can feel underwhelming), avoiding peak-time markets, and not missing high-quality free spots like major museums. The dataset’s subtext: in London, what you do matters less than when you do it.",
-    tags: ["city:London", "activity:Attractions", "Reason:Price and Quality"],
+      "London DON’Ts cluster around low-yield defaults (tourist nightlife) and high-yield misses (skipping Tate Modern). Markets show up as a timing problem too—go at peak and the crowd becomes the experience.",
+    tags: [
+      "city:London",
+      "activity:Attractions",
+      "Reason:Price and Quality",
+      "Reason:Overcrowding",
+    ],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
   {
-    id: "london-inefficient-planning-weekend-density",
-    title:
-      "London itineraries fail when you ignore weekend density and queue culture",
+    id: "london-planning-weekend-density-and-queues",
+    title: "London planning mistakes are mostly calendar + queue mistakes",
     summary:
-      "London planning DON’Ts warn that not knowing which areas spike on weekends (and how lines behave) turns simple moves into time sinks. Queue-skipping also shows up as a social friction risk—sometimes the ‘hack’ costs more than it saves.",
+      "The dataset’s London planning DON’Ts say: some places only feel “alive” on certain days (often weekends), and trying to skip queues can backfire socially. In London, the real hack is picking the right day and playing the line culture correctly.",
     tags: [
       "city:London",
       "activity:Inefficient Planning",
       "Reason:Timing and Distance",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "london-shopping-silent-leaks",
-    title:
-      "London’s tourist budget leaks are quiet: VAT, water, and tipping defaults",
-    summary:
-      "London shopping/ spending DON’Ts read like a checklist of silent drains: expecting VAT refunds on designer goods (policy mismatch), ordering bottled water by default, and over-tipping. It’s rarely one big splurge—more often it’s habit-driven overpayment.",
-    tags: ["city:London", "activity:Shopping", "Reason:Regulations"],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "london-social-misconduct-local-signals",
-    title: "In London, ignoring local signals makes you stand out fast",
-    summary:
-      "London social DON’Ts suggest certain phrases, faux-local slang, or gestures can land as performative or irritating. Tiny language and body cues act like a ‘tourist mode’ switch—subtlety reads as competence.",
-    tags: [
-      "city:London",
-      "activity:Social Misconduct",
       "Reason:Cultural Misfits",
     ],
     quotes: [
@@ -61,78 +41,76 @@ export const insights: Insight[] = [
     ],
   },
   {
-    id: "london-transit-local-rules-over-maps",
-    title:
-      "London transit is faster when you follow local rules—not just map apps",
+    id: "london-shopping-policy-and-autopilot-spend",
+    title: "London spending traps are policy surprises + autopilot purchases",
     summary:
-      "London transit DON’Ts converge on small-but-costly mistakes: Google Maps quirks, unrealistic ‘just walk’ assumptions (stairs, distance), rideshare limitations, and micro-rules like escalator sides. In London, knowing the flow is the real time saver.",
+      "London shopping DON’Ts repeatedly warn about VAT-refund assumptions post-Brexit and small “automatic” spends (still water, over-tipping) that add up. It’s not one big mistake—it’s default behavior leaking money.",
     tags: [
       "city:London",
-      "activity:Transit Mistakes",
-      "Reason:Timing and Distance",
+      "activity:Shopping",
+      "Reason:Regulations",
+      "Reason:Price and Quality",
     ],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
   {
-    id: "london-unsafe-choices-crossing-streets",
-    title:
-      "London safety DON’Ts start with the basics: crossing streets your “home way”",
+    id: "london-social-dont-perform-local",
+    title: "In London, don’t ‘perform local’—it reads louder than you think",
     summary:
-      "London unsafe-choice warnings repeatedly center on road-crossing habits. The dataset implies many ‘city risks’ are actually muscle memory—reset the habit, reduce the danger.",
+      "London social DON’Ts point to awkward friction from forced local phrasing and offensive gestures. The safest strategy is neutral, polite communication and low-drama body language.",
+    tags: [
+      "city:London",
+      "activity:Social Misconduct",
+      "Reason:Cultural Misfits",
+      "Reason:Price and Quality",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "london-transit-micro-frictions-stack",
+    title: "London transit is a stack of micro-frictions that compound fast",
+    summary:
+      "London transit DON’Ts repeat the same pattern: map inaccuracies, underestimated walking/steps, confusing bridges, rideshare limits (and safety concerns), and flow rules like the correct escalator side. London rewards “flow literacy,” not brute-force walking.",
+    tags: [
+      "city:London",
+      "activity:Transit Mistakes",
+      "Reason:Timing and Distance",
+      "Reason:Safety Concerns",
+      "Reason:Cultural Misfits",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "london-unsafe-crossing-autopilot",
+    title: "London’s safety DON’T is simple: don’t cross on autopilot",
+    summary:
+      "London unsafe-choice content is blunt: street crossing is where tourists get hurt. Treat every crossing as a deliberate action, not muscle memory from home.",
     tags: ["city:London", "activity:Unsafe Choices", "Reason:Safety Concerns"],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
 
-  // =========================
-  // Paris (6/6)
-  // =========================
+  // -------------------------
+  // Paris
+  // -------------------------
   {
-    id: "paris-attractions-photo-spot-fallacy",
-    title: "Paris punishes “photo-spot obsession”",
+    id: "paris-attractions-postcard-traps",
+    title: "Paris icons underperform when you chase the postcard, not the plan",
     summary:
-      "Paris attractions DON’Ts imply that chasing the same iconic shots (crowds, mediocre viewpoints, pricey areas) lowers satisfaction. The dataset’s hint: optimize for view quality and movement cost, not for the most copied frame.",
-    tags: ["city:Paris", "activity:Attractions", "Reason:Price and Quality"],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "paris-inefficient-planning-prebook-early",
-    title: "Paris is an early-start, pre-booking city",
-    summary:
-      "Paris planning DON’Ts repeatedly penalize spontaneity: buying tickets after you arrive, relying on on-site purchases, and showing up late to crowd-magnet spots. In this dataset, ‘Paris done right’ is reservations + mornings + off-peak.",
+      "Paris attractions DON’Ts hit “icon fixation”: crowded front-of-building photo stops (Arc de Triomphe), Eiffel Tower viewpoints that disappoint from some angles, and treating the tower as the city’s center even though it’s far from other clusters.",
     tags: [
       "city:Paris",
-      "activity:Inefficient Planning",
+      "activity:Attractions",
       "Reason:Overcrowding",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "paris-shopping-food-fear-and-tourist-traps",
-    title:
-      "Paris spending DON’Ts warn against tourist packages and “food fear”",
-    summary:
-      "Tourist-targeted bundles (like certain dinner cruises) appear as overpriced for the quality, and avoiding French food due to unfamiliarity shows up as a self-inflicted loss. The dataset frames ‘local-leaning choices’ as better value than glossy packages.",
-    tags: ["city:Paris", "activity:Shopping", "Reason:Price and Quality"],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "paris-social-misconduct-language-effort",
-    title: "In Paris, language effort matters more than fluency",
-    summary:
-      "Paris social DON’Ts point to friction when travelers assume English is the default. The dataset suggests basic greetings and visible effort lower resistance—even imperfect French improves the experience.",
-    tags: [
-      "city:Paris",
-      "activity:Social Misconduct",
+      "Reason:Price and Quality",
+      "Reason:Timing and Distance",
       "Reason:Cultural Misfits",
     ],
     quotes: [
@@ -140,44 +118,97 @@ export const insights: Insight[] = [
     ],
   },
   {
-    id: "paris-transit-metro-awareness",
-    title: "Paris transit DON’Ts are about awareness, not fear",
+    id: "paris-planning-prebook-early-pace",
+    title: "Paris punishes spontaneity: pre-book, go early, and pace yourself",
     summary:
-      "Paris transit warnings focus on vulnerability signals: phone use near metro doors, distraction, and getting stuck in slow car traffic. In the dataset, successful movement comes from alertness plus smart mode choice.",
-    tags: ["city:Paris", "activity:Transit Mistakes", "Reason:Safety Concerns"],
+      "Paris planning DON’Ts repeatedly warn that tickets can be booked out weeks ahead, buying Eiffel Tower tickets on-site creates long lines, and late starts (e.g., Sacré-Cœur after 9am) spike crowd stress. Summer adds a crowd-and-cost tax on top.",
+    tags: [
+      "city:Paris",
+      "activity:Inefficient Planning",
+      "Reason:Timing and Distance",
+      "Reason:Overcrowding",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "paris-shopping-tourist-meals-and-food-fear",
+    title:
+      "Paris spending is best when it’s local—tourist meals and ‘food fear’ lose value",
+    summary:
+      "Paris shopping DON’Ts warn that tourist-targeted meals (like some Seine dinner cruises) can be overpriced and mediocre, and that avoiding typical French dishes out of unfamiliarity quietly reduces the whole trip’s payoff.",
+    tags: ["city:Paris", "activity:Shopping", "Reason:Price and Quality"],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "paris-social-french-effort",
+    title:
+      "In Paris, effort in French is a real travel skill (not just etiquette)",
+    summary:
+      "Paris social DON’Ts show friction when travelers expect English by default. Even basic French words act like a shortcut: less misunderstanding, smoother service, and a warmer response.",
+    tags: [
+      "city:Paris",
+      "activity:Social Misconduct",
+      "Reason:Cultural Misfits",
+      "Reason:Timing and Distance",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "paris-transit-slow-modes-and-distraction",
+    title: "Paris transit fails when you choose slow modes and look distracted",
+    summary:
+      "Paris transit DON’Ts cluster around time sinks (cars/taxis in traffic, time-limited group tours) and avoidable danger moments (using your phone near metro doors, attention-drawing behavior like whistling). The pattern: move smart and look alert.",
+    tags: [
+      "city:Paris",
+      "activity:Transit Mistakes",
+      "Reason:Timing and Distance",
+      "Reason:Safety Concerns",
+      "Reason:Price and Quality",
+    ],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
   {
     id: "paris-unsafe-pickpocket-baseline",
-    title: "In Paris, treat pickpocketing as a baseline risk",
+    title: "Paris safety DON’Ts treat pickpockets as the default environment",
     summary:
-      "Paris unsafe-choice DON’Ts don’t isolate risk to one neighborhood—they frame it as an always-on condition across common tourist routes. The takeaway: ‘being careful’ in Paris is a continuous posture, not a moment.",
+      "Paris unsafe-choice content frames pickpocketing as common, especially along tourist routes. The win isn’t paranoia—it’s consistent habits: tight valuables, low distraction, no open bags.",
     tags: ["city:Paris", "activity:Unsafe Choices", "Reason:Safety Concerns"],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
 
-  // =========================
-  // New York (6/6)
-  // =========================
+  // -------------------------
+  // New York
+  // -------------------------
   {
-    id: "newyork-attractions-line-value-audit",
-    title: "In New York, a line is basically a price tag",
+    id: "newyork-attractions-time-is-the-price",
+    title: "In NYC, time is the hidden ticket price for famous attractions",
     summary:
-      "NYC attractions DON’Ts highlight that famous spots can become low-value when time cost explodes (e.g., long queues for iconic photo stops). The dataset frames attraction choice as a ‘wait-time willingness’ decision as much as a sightseeing one.",
-    tags: ["city:New York", "activity:Attractions", "Reason:Overcrowding"],
+      "NYC attractions DON’Ts repeatedly flag queue magnets and hype mismatches: long lines at the bull, Statue of Liberty framed as overrated/too expensive, and Times Square shows labeled overrated. The dataset’s logic: if it’s iconic, audit the time cost first.",
+    tags: [
+      "city:New York",
+      "activity:Attractions",
+      "Reason:Overcrowding",
+      "Reason:Price and Quality",
+    ],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
   {
-    id: "newyork-inefficient-planning-times-square-peak",
-    title: "NYC planning DON’Ts: Times Square is all about time-of-day",
+    id: "newyork-planning-times-square-peak-bottleneck",
+    title: "NYC planning DON’T: schedule Times Square at peak hours",
     summary:
-      "NYC planning DON’Ts repeatedly warn that putting Times Square in peak hours turns your itinerary into a human-traffic bottleneck. Same place, different hour—completely different difficulty.",
+      "The dataset isolates one planning failure: Times Square during peak hours. In NYC, one crowd bottleneck can ripple into the rest of your day (missed reservations, longer transit, less time at everything else).",
     tags: [
       "city:New York",
       "activity:Inefficient Planning",
@@ -188,51 +219,36 @@ export const insights: Insight[] = [
     ],
   },
   {
-    id: "newyork-shopping-dont-pay-tourist-rates",
-    title: "NYC spending DON’Ts: don’t pay the ‘tourist rate’ for convenience",
+    id: "newyork-shopping-convenience-tax",
+    title: "NYC shopping DON’Ts: convenience becomes a ‘tourist rate’ tax",
     summary:
-      "NYC shopping/spending DON’Ts focus on convenience traps—overpaying for hotels and defaulting to overpriced chain restaurants. The dataset implies NYC punishes autopilot choices more than deliberate ones.",
+      "NYC spending DON’Ts concentrate on two autopilot choices: overpaying for hotels and eating at overpriced chains with poor quality. The city rewards specific picks and punishes default picks.",
     tags: ["city:New York", "activity:Shopping", "Reason:Price and Quality"],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
   {
-    id: "newyork-social-misconduct-dataset-gap",
+    id: "newyork-transit-system-build",
     title:
-      "NYC has almost no ‘etiquette DON’Ts’ here—your dataset is biased toward money and risk",
+      "NYC transit DON’Ts are really ‘system build’ failures: shoes + subway + fares",
     summary:
-      "In this dataset, New York has little to no Social Misconduct coverage. That absence is itself an insight: creators seem to frame NYC as a city of scams, pricing, and logistics—not a city where etiquette mistakes are the main story.",
-    tags: [
-      "city:New York",
-      "activity:Social Misconduct",
-      "Reason:Price and Quality",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "newyork-transit-walk-subway-taxi-tradeoff",
-    title:
-      "NYC transit DON’Ts are really about failing to build the right walking + subway combo",
-    summary:
-      "NYC transit DON’Ts converge on practical breakdowns: bad shoes for long walking, not using the subway, and taxi inefficiency. In the dataset, transit failure isn’t the route—it’s the missing ‘walk + train’ strategy.",
+      "NYC transit DON’Ts repeat that movement is a system: bad footwear makes walking miserable, taxis are inefficient, and not using public transportation (or paying the wrong way) costs both time and money. The best NYC travelers design a walk + subway loop.",
     tags: [
       "city:New York",
       "activity:Transit Mistakes",
       "Reason:Price and Quality",
+      "Reason:Timing and Distance",
     ],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     ],
   },
   {
-    id: "newyork-unsafe-choices-tourist-tax-scams",
-    title:
-      "NYC unsafe-choice DON’Ts: scams behave like an unofficial tourist tax",
+    id: "newyork-unsafe-ambiguity-scams",
+    title: "NYC unsafe DON’Ts: ambiguity is the trap—scams monetize confusion",
     summary:
-      "Bracelet approaches, ‘free’ mixtapes, and costume-photo hustles share one pattern: anything that starts ambiguous often ends as a demand for money. The dataset’s advice is simple—avoid unclear transactions.",
+      "NYC unsafe-choice DON’Ts cluster around ‘free’ offers that turn into demands (bracelets, mixtapes, costume photos) and risky street behavior like bike-lane confusion. The dataset’s rule: if the transaction is unclear, leave.",
     tags: [
       "city:New York",
       "activity:Unsafe Choices",
@@ -243,18 +259,149 @@ export const insights: Insight[] = [
     ],
   },
 
-  // =========================
-  // Seoul (6/6)
-  // =========================
+  // -------------------------
+  // Seoul
+  // -------------------------
   {
-    id: "seoul-inefficient-planning-season-cards-rules",
-    title:
-      "Seoul planning DON’Ts are a trio: seasons, savings cards, and compliance",
+    id: "seoul-planning-season-savings-paperwork",
+    title: "Seoul planning DON’Ts are season, savings, and compliance",
     summary:
-      "Seoul planning DON’Ts cluster around (1) peak-season price/crowd pressure (spring/fall), (2) missing transit savings options like city passes, and (3) forgetting policy-style checks. The dataset implies Seoul rewards travelers who ‘set the operating system’ first.",
+      "Seoul planning DON’Ts point to peak season pressure (autumn/spring crowds and higher prices), missed savings (not knowing climate cards), and misunderstanding entry rules like K-ETA (including that it can be free for some countries).",
     tags: [
       "city:Seoul",
       "activity:Inefficient Planning",
+      "Reason:Overcrowding",
+      "Reason:Price and Quality",
+      "Reason:Regulations",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "seoul-shopping-unique-local-value",
+    title:
+      "Seoul shopping DON’Ts: stop paying for hype—pay for unique local value",
+    summary:
+      "Seoul shopping DON’Ts cluster around expectation mismatches: Apple Pay isn’t widely accepted, some makeup categories feel overpriced for what you get, and global brands don’t deliver Seoul-specific advantage. The dataset nudges you toward what’s hard to get elsewhere.",
+    tags: [
+      "city:Seoul",
+      "activity:Shopping",
+      "Reason:Price and Quality",
+      "Reason:Timing and Distance",
+      "Reason:Cultural Misfits",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "seoul-social-distance-and-cleanliness",
+    title: "In Seoul, respect is distance + cleanliness, not small talk",
+    summary:
+      "Seoul social DON’Ts repeatedly warn against talking to strangers, staring, wearing shoes indoors, and handling cash in ways seen as unhygienic. The dataset frames politeness as ‘don’t intrude, don’t contaminate.’",
+    tags: [
+      "city:Seoul",
+      "activity:Social Misconduct",
+      "Reason:Cultural Misfits",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "seoul-transit-local-apps-literal-rules",
+    title: "Seoul transit DON’Ts: adopt local apps and follow literal rules",
+    summary:
+      "Seoul transit mistakes cluster around not using Naver/Kakao maps, taxi language friction, using the wrong taxi door side, and breaking explicit rules like drinking on the bus. Seoul becomes easy the moment you switch to the local operating system.",
+    tags: [
+      "city:Seoul",
+      "activity:Transit Mistakes",
+      "Reason:Timing and Distance",
+      "Reason:Regulations",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "seoul-unsafe-theft-plus-boundaries",
+    title: "Seoul unsafe DON’Ts mix theft prevention with boundary mistakes",
+    summary:
+      "Seoul unsafe-choice content combines physical risk (unlocked bikes get stolen) with social risk (unsolicited food to strangers can be disrespectful). The dataset treats safety as both security and social correctness.",
+    tags: [
+      "city:Seoul",
+      "activity:Unsafe Choices",
+      "Reason:Safety Concerns",
+      "Reason:Cultural Misfits",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+
+  // -------------------------
+  // Tokyo
+  // -------------------------
+  {
+    id: "tokyo-planning-location-and-lockers",
+    title:
+      "Tokyo planning DON’Ts are logistics: where you sleep and where you store your bag",
+    summary:
+      "Tokyo planning DON’Ts emphasize that hotel location sets your daily friction, and skipping coin lockers turns movement into an avoidable cost problem. Tokyo rewards travelers who treat the city like a routing puzzle.",
+    tags: [
+      "city:Tokyo",
+      "activity:Inefficient Planning",
+      "Reason:Timing and Distance",
+      "Reason:Price and Quality",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "tokyo-shopping-procedural-spending",
+    title: "Tokyo spending DON’Ts: buying is procedural, not instinctive",
+    summary:
+      "Tokyo shopping DON’Ts cluster around embedded systems and norms: ramen queues waste time, vending machines require color cues, tax-free bags have rule implications, tipping is rude, and eating while walking is socially awkward. In Tokyo, ‘spend well’ means ‘follow the procedure.’",
+    tags: [
+      "city:Tokyo",
+      "activity:Shopping",
+      "Reason:Price and Quality",
+      "Reason:Timing and Distance",
+      "Reason:Cultural Misfits",
+      "Reason:Regulations",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "tokyo-social-checklist-etiquette",
+    title:
+      "Tokyo etiquette DON’Ts read like a checklist: hygiene, space, and signals",
+    summary:
+      "Tokyo social DON’Ts are concrete: footwear rules in changing rooms, showering before onsen, not pointing at animals, backpack etiquette, and correct toilet use. The dataset frames Tokyo manners as ‘be clean and don’t inconvenience others.’",
+    tags: [
+      "city:Tokyo",
+      "activity:Social Misconduct",
+      "Reason:Cultural Misfits",
+      "Reason:Timing and Distance",
+    ],
+    quotes: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    ],
+  },
+  {
+    id: "tokyo-transit-protect-flow",
+    title: "Tokyo transit DON’Ts: protect flow—quiet, space, and clear signals",
+    summary:
+      "Tokyo transit DON’Ts overwhelmingly focus on not disrupting flow: loud talking, hogging space, ignoring escalator rules, misunderstanding out-of-service trains, and even touching taxi doors (they’re automatic). The city is smooth when you stop improvising.",
+    tags: [
+      "city:Tokyo",
+      "activity:Transit Mistakes",
+      "Reason:Cultural Misfits",
+      "Reason:Timing and Distance",
       "Reason:Overcrowding",
     ],
     quotes: [
@@ -262,121 +409,10 @@ export const insights: Insight[] = [
     ],
   },
   {
-    id: "seoul-shopping-payments-beauty-value",
-    title:
-      "Seoul spending DON’Ts: payment assumptions and beauty ‘value illusions’",
+    id: "tokyo-unsafe-safe-city-overconfidence",
+    title: "Tokyo unsafe DON’Ts warn against ‘safe-city overconfidence’",
     summary:
-      "Seoul shopping DON’Ts emphasize that payment habits can backfire, and that some hyped beauty items don’t always deliver proportional value. The dataset pushes a ‘local-value’ mindset: hunt what’s uniquely advantageous in Seoul.",
-    tags: ["city:Seoul", "activity:Shopping", "Reason:Price and Quality"],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "seoul-social-misconduct-boundaries",
-    title:
-      "Seoul etiquette DON’Ts are less about friendliness and more about boundaries",
-    summary:
-      "Seoul social DON’Ts repeatedly point to “light presence”: don’t force small talk with strangers, don’t stare, respect indoor shoe norms, and follow local handling conventions. The dataset’s tone: non-intrusion reads as respect.",
-    tags: [
-      "city:Seoul",
-      "activity:Social Misconduct",
-      "Reason:Cultural Misfits",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "seoul-transit-local-maps-taxi-rules",
-    title:
-      "Seoul transit DON’Ts: if you don’t switch to local apps and taxi rules, movement gets messy",
-    summary:
-      "Seoul transit DON’Ts converge on skipping local map apps, struggling with taxi communication, and missing precise rules that affect pickups and rides. The dataset implies Seoul is extremely convenient—once you adopt the local stack.",
-    tags: [
-      "city:Seoul",
-      "activity:Transit Mistakes",
-      "Reason:Timing and Distance",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "seoul-unsafe-choices-bikes-and-boundaries",
-    title:
-      "Seoul unsafe-choice DON’Ts focus on theft-prevention basics and social risk",
-    summary:
-      "Not locking bikes appears as a straightforward theft risk, while certain unsolicited interactions are framed as boundary violations. In this dataset, Seoul ‘safety’ includes both physical security and social friction.",
-    tags: ["city:Seoul", "activity:Unsafe Choices", "Reason:Safety Concerns"],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-
-  // =========================
-  // Tokyo (5/6)
-  // =========================
-  {
-    id: "tokyo-inefficient-planning-location-lockers",
-    title:
-      "Tokyo planning DON’Ts: hotel location and coin lockers change everything",
-    summary:
-      "Tokyo planning DON’Ts frame logistics as destiny: where you stay sets your daily friction, and ignoring coin lockers turns movement into a stamina drain. The dataset suggests Tokyo planning is less a timetable and more a supply chain.",
-    tags: [
-      "city:Tokyo",
-      "activity:Inefficient Planning",
-      "Reason:Timing and Distance",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "tokyo-shopping-vending-taxfree-norms",
-    title:
-      "Tokyo spending DON’Ts: understand vending, tax-free rules, and tipping norms first",
-    summary:
-      "Tokyo shopping DON’Ts emphasize that buying is system-driven: ramen queues, vending-machine choices, tax-free bag rules, and tipping norms. The dataset’s point: in Tokyo you’re not just buying products—you’re navigating procedures.",
-    tags: ["city:Tokyo", "activity:Shopping", "Reason:Regulations"],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "tokyo-social-misconduct-hygiene-etiquette",
-    title: "Tokyo etiquette DON’Ts are a manual: hygiene, space, and gaze",
-    summary:
-      "Tokyo social DON’Ts appear as highly specific micro-rules: onsen shower steps, footwear norms, backpack positioning, bathroom usage, and even pointing behavior. In this dataset, Tokyo manners read less like vibes and more like a checklist.",
-    tags: [
-      "city:Tokyo",
-      "activity:Social Misconduct",
-      "Reason:Cultural Misfits",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "tokyo-transit-etiquette-is-flow",
-    title: "Tokyo transit DON’Ts: etiquette is the transportation system",
-    summary:
-      "Tokyo transit DON’Ts cluster around behaviors that break flow: loud talking, blocking space, ignoring escalator rules, or treating trains casually. The dataset implies the best navigation skill in Tokyo is moving without disrupting others.",
-    tags: [
-      "city:Tokyo",
-      "activity:Transit Mistakes",
-      "Reason:Cultural Misfits",
-    ],
-    quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    ],
-  },
-  {
-    id: "tokyo-unsafe-choices-night-walk-hazards",
-    title:
-      "Tokyo unsafe-choice DON’Ts: overconfidence at night is the variable",
-    summary:
-      "The dataset flags late-night walking confidence and careless handling of risky items as avoidable problems. Tokyo’s ‘safe reputation’ can create the real danger: relaxed attention and sloppy decisions.",
+      "Tokyo unsafe-choice items flag late-night walking and casual handling of risky items (like flares). The underlying pattern is simple: don’t let a safe reputation lower your guard.",
     tags: ["city:Tokyo", "activity:Unsafe Choices", "Reason:Price and Quality"],
     quotes: [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
