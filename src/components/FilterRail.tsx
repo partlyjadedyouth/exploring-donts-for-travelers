@@ -87,13 +87,13 @@ export default function FilterRail({
         onToggle={(v) => onToggle("city", v)}
       />
       <FilterGroup
-        label="Activity"
+        label="WHAT people don't recommend"
         values={options.activityLabels}
         selected={filters.activityLabel}
         onToggle={(v) => onToggle("activityLabel", v)}
       />
       <FilterGroup
-        label="Reason"
+        label="WHY people don't recommend"
         values={options.reasonLabels}
         selected={filters.reasonLabel}
         onToggle={(v) => onToggle("reasonLabel", v)}
