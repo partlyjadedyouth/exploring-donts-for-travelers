@@ -43,7 +43,7 @@ export default function InsightCard({
               className="relative overflow-hidden rounded-2xl bg-neutral-50 px-4 py-3 shadow-inner"
             >
               <span className="absolute left-3 top-1 text-4xl font-serif leading-none text-indigo-200">
-                "
+                &ldquo;
               </span>
               <p className="relative pl-6 pr-2 text-[15px] font-medium text-neutral-900">
                 {item.quote}
