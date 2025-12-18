@@ -28,12 +28,14 @@ export default function ActivityReasonHeatmap({ matrix, active }: Props) {
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-neutral-900">Heatmap</p>
+          <p className="text-sm font-semibold text-neutral-900">
+            WHAT x WHY Heatmap
+          </p>
           {/* <p className="text-xs text-neutral-500">Quick pulse of which reasons dominate per city.</p> */}
         </div>
-        <span className="rounded-full bg-neutral-100 px-2 py-1 text-[11px] text-neutral-600">
+        {/* <span className="rounded-full bg-neutral-100 px-2 py-1 text-[11px] text-neutral-600">
           Highlights follow filters
-        </span>
+        </span> */}
       </div>
       <div className="overflow-hidden">
         <table

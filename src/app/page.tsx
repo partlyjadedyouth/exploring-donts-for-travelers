@@ -143,19 +143,18 @@ export default function DashboardPage() {
                       }}
                     />
                   </div>
-
+                  <AlluvialCityActivityReason
+                    rows={filteredRows}
+                    cityOrder={options.cities}
+                    activityOrder={options.activityLabels}
+                    reasonOrder={options.reasonLabels}
+                  />
                   <ActivityReasonHeatmap
                     matrix={heatmap}
                     active={{
                       activityLabel: dashboard.filters.activityLabel,
                       reasonLabel: dashboard.filters.reasonLabel,
                     }}
-                  />
-                  <AlluvialCityActivityReason
-                    rows={filteredRows}
-                    cityOrder={options.cities}
-                    activityOrder={options.activityLabels}
-                    reasonOrder={options.reasonLabels}
                   />
                 </div>
               )}
