@@ -21,7 +21,7 @@ export default function InsightPanel({ filters }: Props) {
   );
 
   return (
-    <aside className="flex h-full min-h-65 flex-col gap-4 ring-1 ring-neutral-100 backdrop-blur">
+    <aside className="flex h-full min-h-65 flex-col gap-4 backdrop-blur">
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <p className="text-xs uppercase tracking-wide text-neutral-500">
