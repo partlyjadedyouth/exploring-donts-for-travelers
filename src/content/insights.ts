@@ -24,8 +24,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "london-attractions-curation-over-clubs",
+          "It's in a super crowded and touristy area and the tickets are from 30 pounds per adult.",
+        videoId: "MnXiCx4zkPU",
+      },
+      {
+        quote:
+          "The Notting Hill or brick lane market are really popping off only on the weekend so make sure you center your itinerary",
+        videoId: "kzNjmq63I_E",
       },
     ],
   },
