@@ -22,11 +22,11 @@ export default function InsightPanel({ filters }: Props) {
 
   return (
     <aside className="flex h-full min-h-65 flex-col gap-4 backdrop-blur">
-      <div className="space-y-2">
+      <div className="space-b-2">
         <div className="flex items-center justify-between">
-          <p className="text-xs uppercase tracking-wide text-neutral-500">
+          {/* <p className="text-xs uppercase tracking-wide text-neutral-500">
             Insights
-          </p>
+          </p> */}
           {/* <span className="text-[11px] text-neutral-400">auto-matched</span> */}
         </div>
         {matches.length === 0 && (

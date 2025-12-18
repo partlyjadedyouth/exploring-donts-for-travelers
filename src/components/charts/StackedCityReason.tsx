@@ -84,7 +84,7 @@ export default function StackedCityReason({
               </span>
             </div>
             <div
-              className="relative flex origin-left overflow-visible rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
+              className="relative flex origin-left overflow-visible rounded-full bg-neutral-50 ring-1 ring-neutral-100"
               style={{
                 width: `${Math.max((row.total / maxTotal) * 100, 20)}%`,
                 animation: "bar-grow 650ms ease forwards",
@@ -112,6 +112,10 @@ export default function StackedCityReason({
                       style={{
                         width: `${pctWidth}%`,
                         backgroundColor: color,
+                        borderTopLeftRadius: isFirst ? 999 : 0,
+                        borderBottomLeftRadius: isFirst ? 999 : 0,
+                        borderTopRightRadius: isLast ? 999 : 0,
+                        borderBottomRightRadius: isLast ? 999 : 0,
                       }}
                       className={`group relative z-0 flex origin-left cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-500 ease-out ${
                         isActive
