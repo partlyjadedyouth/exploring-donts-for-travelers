@@ -25,9 +25,9 @@ type Link = {
   color: string;
 };
 
-const MIN_NODE_HEIGHT = 10;
-const MIN_LINK_THICKNESS = 4;
-const BASE_HEIGHT = 440;
+const MIN_NODE_HEIGHT = 16;
+const MIN_LINK_THICKNESS = 7;
+const BASE_HEIGHT = 620;
 const NODE_WIDTH = 96;
 const GAP = 10;
 
