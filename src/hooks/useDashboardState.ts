@@ -1,14 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Filters } from "@/lib/aggregate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-export type Selection =
-  | { type: "city" | "activity_label" | "reason_label" | "video_title"; value: string }
-  | { type: "link"; value: string }
-  | null;
 
 const emptyFilters: Filters = {
   city: undefined,
@@ -62,20 +56,19 @@ export function useDashboardState() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const initialFilters = useMemo(() => parseFiltersFromSearch(searchParams), []);
-  const [filters, setFilters] = useState<Filters>(initialFilters || emptyFilters);
-  const [selection, setSelection] = useState<Selection>(null);
-  const [pinnedRows, setPinnedRows] = useState<string[]>([]);
+  const [filters, setFilters] = useState<Filters>(() =>
+    parseFiltersFromSearch(searchParams),
+  );
 
   useEffect(() => {
     const next = parseFiltersFromSearch(searchParams);
     setFilters((prev) => (filtersEqual(prev, next) ? prev : next));
-  }, [searchParams.toString()]);
+  }, [searchParams]);
 
   useEffect(() => {
     const qs = toQueryString(filters);
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [filters]);
+  }, [filters, pathname, router]);
 
   const toggleValue = (
     field: "city" | "activityLabel" | "reasonLabel",
@@ -97,43 +90,11 @@ export function useDashboardState() {
     });
   };
 
-  const setVideo = (videoTitle?: string) =>
-    setFilters((prev) => ({ ...prev, videoTitle: videoTitle || undefined }));
-
   const resetFilters = () => setFilters(emptyFilters);
-
-  const setFiltersDirect = (next: Filters) => setFilters(next);
-
-  const togglePin = (id: string) =>
-    setPinnedRows((prev) =>
-      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id],
-    );
-
-  const setSelectionWith = (sel: Selection) => setSelection(sel);
-
-  const applyLinkCombo = (activity: string, reason: string) => {
-    setFilters((prev) => {
-      const hasBoth =
-        prev.activityLabel === activity && prev.reasonLabel === reason;
-      return {
-        ...prev,
-        activityLabel: hasBoth ? undefined : activity,
-        reasonLabel: hasBoth ? undefined : reason,
-      };
-    });
-    setSelection({ type: "link", value: `${activity} → ${reason}` });
-  };
 
   return {
     filters,
-    selection,
-    pinnedRows,
     toggleValue,
     resetFilters,
-    setFiltersDirect,
-    setVideo,
-    togglePin,
-    setSelection: setSelectionWith,
-    applyLinkCombo,
   };
 }

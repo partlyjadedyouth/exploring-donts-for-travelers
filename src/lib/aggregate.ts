@@ -22,12 +22,6 @@ export type CityComposition = {
   segments: { label: string; count: number; pct: number }[];
 };
 
-export type LinkStat = {
-  activityLabel: string;
-  reasonLabel: string;
-  count: number;
-};
-
 export type Matrix = {
   activityLabels: string[];
   reasonLabels: string[];
@@ -73,45 +67,43 @@ export function uniqueValues(rows: DontRow[]) {
   const cities = new Set<string>();
   const activityCounts: Record<string, number> = {};
   const reasonCounts: Record<string, number> = {};
-  const videos = new Set<string>();
 
   rows.forEach((row) => {
     cities.add(row.city);
     activityCounts[row.activityLabel] = (activityCounts[row.activityLabel] || 0) + 1;
     reasonCounts[row.reasonLabel] = (reasonCounts[row.reasonLabel] || 0) + 1;
-    videos.add(row.videoTitle);
   });
 
   return {
     cities: sortCities([...cities]),
     activityLabels: orderLabels(activityCounts),
     reasonLabels: orderLabels(reasonCounts),
-    videos: [...videos].sort(),
   };
 }
 
-export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
+type CompositionKey = "activityLabel" | "reasonLabel";
+
+const buildCityComposition = (
+  rows: DontRow[],
+  key: CompositionKey,
+): CityComposition[] => {
   const globalCounts: Record<string, number> = {};
   const grouped: Record<string, Record<string, number>> = {};
   const totals: Record<string, number> = {};
 
   rows.forEach((row) => {
-    const cityMap = grouped[row.city] || (grouped[row.city] = {});
-    cityMap[row.activityLabel] = (cityMap[row.activityLabel] || 0) + 1;
-    totals[row.city] = (totals[row.city] || 0) + 1;
-    globalCounts[row.activityLabel] = (globalCounts[row.activityLabel] || 0) + 1;
+    const city = row.city;
+    const label = row[key];
+    const cityMap = grouped[city] || (grouped[city] = {});
+    cityMap[label] = (cityMap[label] || 0) + 1;
+    totals[city] = (totals[city] || 0) + 1;
+    globalCounts[label] = (globalCounts[label] || 0) + 1;
   });
 
   const order = orderLabels(globalCounts);
 
-  const cityEntries = Object.entries(grouped).sort((a, b) => {
-    const aRank = cityRank(a[0]);
-    const bRank = cityRank(b[0]);
-    if (aRank === bRank) return a[0].localeCompare(b[0]);
-    return aRank - bRank;
-  });
-
-  return cityEntries.map(([city, map]) => {
+  return sortCities(Object.keys(grouped)).map((city) => {
+    const map = grouped[city];
     const total = totals[city] || 1;
     const segments = order
       .filter((label) => map[label])
@@ -125,60 +117,14 @@ export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
       });
     return { city, total, segments };
   });
+};
+
+export function cityActivityComposition(rows: DontRow[]): CityComposition[] {
+  return buildCityComposition(rows, "activityLabel");
 }
 
 export function cityReasonComposition(rows: DontRow[]): CityComposition[] {
-  const globalCounts: Record<string, number> = {};
-  const grouped: Record<string, Record<string, number>> = {};
-  const totals: Record<string, number> = {};
-
-  rows.forEach((row) => {
-    const cityMap = grouped[row.city] || (grouped[row.city] = {});
-    cityMap[row.reasonLabel] = (cityMap[row.reasonLabel] || 0) + 1;
-    totals[row.city] = (totals[row.city] || 0) + 1;
-    globalCounts[row.reasonLabel] = (globalCounts[row.reasonLabel] || 0) + 1;
-  });
-
-  const order = orderLabels(globalCounts);
-
-  const cityEntries = Object.entries(grouped).sort((a, b) => {
-    const aRank = cityRank(a[0]);
-    const bRank = cityRank(b[0]);
-    if (aRank === bRank) return a[0].localeCompare(b[0]);
-    return aRank - bRank;
-  });
-
-  return cityEntries.map(([city, map]) => {
-    const total = totals[city] || 1;
-    const segments = order
-      .filter((label) => map[label])
-      .map((label) => {
-        const count = map[label];
-        return {
-          label,
-          count,
-          pct: Math.round((count / total) * 1000) / 10,
-        };
-      });
-    return { city, total, segments };
-  });
-}
-
-export function topLinks(rows: DontRow[], limit = 8): LinkStat[] {
-  const map: Record<string, number> = {};
-
-  rows.forEach((row) => {
-    const key = `${row.activityLabel}→${row.reasonLabel}`;
-    map[key] = (map[key] || 0) + 1;
-  });
-
-  return Object.entries(map)
-    .map(([key, count]) => {
-      const [activityLabel, reasonLabel] = key.split("→");
-      return { activityLabel, reasonLabel, count };
-    })
-    .sort((a, b) => b.count - a.count)
-    .slice(0, limit);
+  return buildCityComposition(rows, "reasonLabel");
 }
 
 export function hashRow(row: DontRow) {

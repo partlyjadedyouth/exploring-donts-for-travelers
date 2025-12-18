@@ -9,7 +9,6 @@ import {
   CityComposition,
   DontRow,
   filterRows,
-  hashRow,
   uniqueValues,
   cityActivityComposition,
   cityReasonComposition,
@@ -17,84 +16,7 @@ import {
 } from "@/lib/aggregate";
 import { useDashboardState } from "@/hooks/useDashboardState";
 import ActivityReasonHeatmap from "@/components/charts/ActivityReasonHeatmap";
-
-const activityLabelMap: Record<string, string> = {
-  Mobility: "Transit Mistakes",
-  Sights: "Attractions",
-  Logistics: "Inefficient Planning",
-  Commerce: "Shopping",
-  Conduct: "Social Misconduct",
-  Risk: "Unsafe Choices",
-};
-
-const reasonLabelMap: Record<string, string> = {
-  Value: "Price and Quality",
-  Risk: "Safety Concerns",
-  Crowd: "Overcrowding",
-  Norms: "Cultural Misfits",
-  Rules: "Regulations",
-  Friction: "Timing and Distance",
-};
-
-const mapActivityLabel = (value: string) =>
-  activityLabelMap[value?.trim()] || value?.trim() || value;
-
-const mapReasonLabel = (value: string) =>
-  reasonLabelMap[value?.trim()] || value?.trim() || value;
-
-const parseCsvLine = (line: string) => {
-  const values: string[] = [];
-  let current = "";
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
-    if (char === '"' && line[i + 1] === '"') {
-      current += '"';
-      i++;
-      continue;
-    }
-    if (char === '"') {
-      inQuotes = !inQuotes;
-      continue;
-    }
-    if (char === "," && !inQuotes) {
-      values.push(current.trim());
-      current = "";
-      continue;
-    }
-    current += char;
-  }
-  values.push(current.trim());
-  return values;
-};
-
-const parseCsv = (text: string): DontRow[] => {
-  const lines = text.trim().split(/\r?\n/).filter(Boolean);
-  if (lines.length === 0) return [];
-  const headers = parseCsvLine(lines[0]);
-
-  return lines.slice(1).map((line) => {
-    const cols = parseCsvLine(line);
-    const obj: Record<string, string> = {};
-    headers.forEach((h, idx) => {
-      obj[h] = cols[idx]?.trim() ?? "";
-    });
-    const row: DontRow = {
-      id: "",
-      videoId:
-        obj["Video_ID"] || obj["VideoId"] || obj["video_id"] || obj["videoId"],
-      videoTitle: obj["Video_Title"],
-      city: obj["City"],
-      activity: obj["Activity"],
-      reason: obj["Reason"],
-      activityLabel: mapActivityLabel(obj["Activity_Simple"]),
-      reasonLabel: mapReasonLabel(obj["Reason_Simple"]),
-    };
-    row.id = hashRow(row);
-    return row;
-  });
-};
+import { fallbackRows, parseDontsCsv } from "@/lib/donts-data";
 
 export default function DashboardPage() {
   const [rows, setRows] = useState<DontRow[]>([]);
@@ -108,33 +30,12 @@ export default function DashboardPage() {
         const res = await fetch("/data/donts.csv", { cache: "no-store" });
         if (!res.ok) throw new Error("CSV missing, using fallback data.");
         const txt = await res.text();
-        const parsed = parseCsv(txt);
+        const parsed = parseDontsCsv(txt);
         setRows(parsed);
       } catch (err) {
         console.error(err);
         // lightweight fallback so the UI still works
-        setRows([
-          {
-            id: "fallback-1",
-            videoId: "demo1",
-            videoTitle: "Sample Clip A",
-            city: "Tokyo",
-            activity: "crossing busy crossings",
-            reason: "overwhelming crowds",
-            activityLabel: "Transit Mistakes",
-            reasonLabel: "Overcrowding",
-          },
-          {
-            id: "fallback-2",
-            videoId: "demo2",
-            videoTitle: "Sample Clip B",
-            city: "Seoul",
-            activity: "buying souvenirs",
-            reason: "tourist traps",
-            activityLabel: "Shopping",
-            reasonLabel: "Price and Quality",
-          },
-        ]);
+        setRows(fallbackRows);
         setError(
           "Using fallback sample data because /data/donts.csv could not be loaded.",
         );
@@ -174,10 +75,6 @@ export default function DashboardPage() {
     [heatmapRows, options.activityLabels, options.reasonLabels],
   );
 
-  const handleReset = () => {
-    dashboard.resetFilters();
-  };
-
   return (
     <div className="min-h-screen bg-linear-to-br from-indigo-50 via-white to-amber-50 text-neutral-900 lg:h-screen">
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 lg:h-screen lg:min-h-0 lg:overflow-hidden">
@@ -204,7 +101,7 @@ export default function DashboardPage() {
                 filters={dashboard.filters}
                 options={options}
                 onToggle={dashboard.toggleValue}
-                onReset={handleReset}
+                onReset={dashboard.resetFilters}
               />
             </div>
           </aside>
@@ -228,14 +125,9 @@ export default function DashboardPage() {
                     active={dashboard.filters.activityLabel}
                     onToggle={(v) => {
                       dashboard.toggleValue("activityLabel", v);
-                      dashboard.setSelection({
-                        type: "activity_label",
-                        value: v,
-                      });
                     }}
                     onSelectCity={(v) => {
                       dashboard.toggleValue("city", v);
-                      dashboard.setSelection({ type: "city", value: v });
                     }}
                   />
                   <StackedCityReason
@@ -243,14 +135,9 @@ export default function DashboardPage() {
                     active={dashboard.filters.reasonLabel}
                     onToggle={(v) => {
                       dashboard.toggleValue("reasonLabel", v);
-                      dashboard.setSelection({
-                        type: "reason_label",
-                        value: v,
-                      });
                     }}
                     onSelectCity={(v) => {
                       dashboard.toggleValue("city", v);
-                      dashboard.setSelection({ type: "city", value: v });
                     }}
                   />
                 </div>

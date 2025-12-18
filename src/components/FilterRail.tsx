@@ -8,7 +8,6 @@ type Props = {
     cities: string[];
     activityLabels: string[];
     reasonLabels: string[];
-    videos: string[];
   };
   onToggle: (
     field: "city" | "activityLabel" | "reasonLabel",
