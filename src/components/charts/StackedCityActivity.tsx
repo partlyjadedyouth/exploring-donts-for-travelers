@@ -7,6 +7,7 @@ import { colorForLabel } from "@/lib/colors";
 
 type Props = {
   data: CityComposition[];
+  activityOrder: string[];
   active?: string;
   onToggle: (value: string) => void;
   onSelectCity: (value: string) => void;
@@ -14,6 +15,7 @@ type Props = {
 
 export default function StackedCityActivity({
   data,
+  activityOrder,
   active,
   onToggle,
   onSelectCity,
@@ -31,9 +33,14 @@ export default function StackedCityActivity({
     [data],
   );
 
-  const legendLabels = Array.from(
-    new Set(data.flatMap((row) => row.segments.map((seg) => seg.label))),
+  const legendLabels = useMemo(
+    () =>
+      activityOrder.filter((label) =>
+        data.some((row) => row.segments.some((seg) => seg.label === label)),
+      ),
+    [activityOrder, data],
   );
+
   const maxTotal = Math.max(...data.map((d) => d.total), 1);
 
   return (
@@ -84,38 +91,43 @@ export default function StackedCityActivity({
                 animation: "bar-grow 650ms ease forwards",
               }}
             >
-              {row.segments.map((seg) => {
-                const pctWidth = Math.max(seg.pct, 4);
-                const isActive = active === seg.label;
-                const color = colorForLabel(seg.label);
-                return (
-                  <button
-                    key={seg.label}
-                    style={{
-                      width: `${pctWidth}%`,
-                      backgroundColor: color,
-                    }}
-                    className={`group relative flex origin-left cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-500 ease-out ${
-                      isActive
-                        ? "brightness-110 ring-2 ring-white hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
-                        : "hover:brightness-110 hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
-                    }`}
-                    onClick={() => onToggle(seg.label)}
-                    aria-label={`${seg.label} (${seg.count}, ${seg.pct}%)`}
-                  >
-                    <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/5" />
-                    <div className="pointer-events-none absolute -top-12 left-1/2 hidden min-w-40 -translate-x-1/2 flex-col rounded-xl bg-black/80 px-2 py-1 text-[11px] text-white shadow-sm group-hover:flex group-hover:opacity-100">
-                      <span className="font-semibold leading-tight">
-                        {seg.label}
-                      </span>
-                      <span className="leading-tight">
-                        {seg.count} {seg.count == 1 ? "activity" : "activities"}{" "}
-                        · {seg.pct}%
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
+              {activityOrder
+                .map((label) => row.segments.find((seg) => seg.label === label))
+                .filter(Boolean)
+                .map((seg) => {
+                  const segment = seg!;
+                  const pctWidth = Math.max(seg.pct, 4);
+                  const isActive = active === segment.label;
+                  const color = colorForLabel(segment.label);
+                  return (
+                    <button
+                      key={segment.label}
+                      style={{
+                        width: `${pctWidth}%`,
+                        backgroundColor: color,
+                      }}
+                      className={`group relative flex origin-left cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-500 ease-out ${
+                        isActive
+                          ? "brightness-110 ring-2 ring-white hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
+                          : "hover:brightness-110 hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
+                      }`}
+                      onClick={() => onToggle(segment.label)}
+                      aria-label={`${segment.label} (${segment.count}, ${segment.pct}%)`}
+                    >
+                      <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/5" />
+                      <div className="pointer-events-none absolute -top-12 left-1/2 hidden min-w-40 -translate-x-1/2 flex-col rounded-xl bg-black/80 px-2 py-1 text-[11px] text-white shadow-sm group-hover:flex group-hover:opacity-100">
+                        <span className="font-semibold leading-tight">
+                          {segment.label}
+                        </span>
+                        <span className="leading-tight">
+                          {segment.count}{" "}
+                          {segment.count == 1 ? "activity" : "activities"} ·{" "}
+                          {segment.pct}%
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
             </div>
           </div>
         ))}
