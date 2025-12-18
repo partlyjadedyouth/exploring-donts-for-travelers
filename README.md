@@ -26,12 +26,12 @@ The dataset is a CSV stored at `public/data/donts.csv`. Relevant columns:
 - `Activity_Simple` (mapped to display labels)
 - `Reason_Simple` (mapped to display labels)
 
-Label mapping happens on the client in `src/app/page.tsx` so the UI can evolve without reworking
-the CSV schema.
+Parsing, label normalization, and fallback sample rows live in `src/lib/donts-data.ts` so the UI
+logic stays lean. If the CSV is missing, the dashboard falls back to two sample rows.
 
 ## UX Overview
 
-- Filters are single-select: City, Activity, Reason.
+- Filters: City (multi-select), Activity (single), Reason (single).
 - Stacked bars show City × Activity and City × Reason compositions.
 - Activity × Reason heatmap shows density and highlights based on current filters.
 - Insight cards are rule-based and update as filters change.
@@ -46,7 +46,7 @@ src/
     globals.css         # Global styling scale
   components/
     FilterRail.tsx      # City/Activity/Reason filters
-    InsightPanel.tsx    # Insight cards + evidence tabs
+    InsightPanel.tsx    # Insight cards + matching display
     InsightCard.tsx     # Individual insight UI
     charts/
       StackedCityActivity.tsx
@@ -55,9 +55,10 @@ src/
   content/
     insights.ts         # Rule-based insight definitions
   hooks/
-    useDashboardState.ts # Filters + URL sync + selection state
+    useDashboardState.ts # Filters + URL sync
   lib/
     aggregate.ts        # Filtering + aggregation utilities
+    donts-data.ts       # CSV parsing + label normalization + fallback data
     colors.ts           # Deterministic color mapping for categories
     insights-utils.ts   # Insight matching logic
 public/
@@ -68,12 +69,13 @@ public/
 ## Interaction Model
 
 - Filter changes update URL query params without scrolling.
-- Stacked bars are clickable to toggle a single Activity/Reason.
+- Stacked bars are clickable to toggle a single Activity/Reason and to pick cities.
 - Heatmap is read-only; highlights reflect current filters.
 
 ## Design Notes
 
-- Consistent category ordering is enforced in `aggregate.ts` so legends, filters, and heatmaps align.
+- Consistent category ordering is enforced via `aggregate.ts` using the global label order so charts
+  stay stable even when filtered.
 - City order is fixed (Seoul → Tokyo → London → Paris → New York) for narrative clarity.
 - Colors are explicitly mapped by label in `lib/colors.ts` to avoid collisions.
 
