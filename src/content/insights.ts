@@ -3,7 +3,7 @@ export type Insight = {
   title: string;
   summary: string;
   tags?: string[];
-  quotes: string[];
+  quotes: { quote: string; videoId: string }[];
 };
 
 export const insights: Insight[] = [
@@ -22,7 +22,11 @@ export const insights: Insight[] = [
       "Reason:Overcrowding",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "london-attractions-curation-over-clubs",
+      },
     ],
   },
   {
@@ -37,7 +41,11 @@ export const insights: Insight[] = [
       "Reason:Cultural Misfits",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "london-planning-weekend-density-and-queues",
+      },
     ],
   },
   {
@@ -52,7 +60,11 @@ export const insights: Insight[] = [
       "Reason:Price and Quality",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "london-shopping-policy-and-autopilot-spend",
+      },
     ],
   },
   {
@@ -67,7 +79,11 @@ export const insights: Insight[] = [
       "Reason:Price and Quality",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "london-social-dont-perform-local",
+      },
     ],
   },
   {
@@ -83,7 +99,11 @@ export const insights: Insight[] = [
       "Reason:Cultural Misfits",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "london-transit-micro-frictions-stack",
+      },
     ],
   },
   {
@@ -93,7 +113,11 @@ export const insights: Insight[] = [
       "London unsafe-choice content is blunt: street crossing is where tourists get hurt. Treat every crossing as a deliberate action, not muscle memory from home.",
     tags: ["city:London", "activity:Unsafe Choices", "Reason:Safety Concerns"],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "london-unsafe-crossing-autopilot",
+      },
     ],
   },
 
@@ -114,7 +138,11 @@ export const insights: Insight[] = [
       "Reason:Cultural Misfits",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "paris-attractions-postcard-traps",
+      },
     ],
   },
   {
@@ -129,7 +157,11 @@ export const insights: Insight[] = [
       "Reason:Overcrowding",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "paris-planning-prebook-early-pace",
+      },
     ],
   },
   {
@@ -140,7 +172,11 @@ export const insights: Insight[] = [
       "Paris shopping DON’Ts warn that tourist-targeted meals (like some Seine dinner cruises) can be overpriced and mediocre, and that avoiding typical French dishes out of unfamiliarity quietly reduces the whole trip’s payoff.",
     tags: ["city:Paris", "activity:Shopping", "Reason:Price and Quality"],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "paris-shopping-tourist-meals-and-food-fear",
+      },
     ],
   },
   {
@@ -156,7 +192,11 @@ export const insights: Insight[] = [
       "Reason:Timing and Distance",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "paris-social-french-effort",
+      },
     ],
   },
   {
@@ -172,7 +212,11 @@ export const insights: Insight[] = [
       "Reason:Price and Quality",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "paris-transit-slow-modes-and-distraction",
+      },
     ],
   },
   {
@@ -182,7 +226,11 @@ export const insights: Insight[] = [
       "Paris unsafe-choice content frames pickpocketing as common, especially along tourist routes. The win isn’t paranoia—it’s consistent habits: tight valuables, low distraction, no open bags.",
     tags: ["city:Paris", "activity:Unsafe Choices", "Reason:Safety Concerns"],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "paris-unsafe-pickpocket-baseline",
+      },
     ],
   },
 
@@ -201,7 +249,11 @@ export const insights: Insight[] = [
       "Reason:Price and Quality",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "newyork-attractions-time-is-the-price",
+      },
     ],
   },
   {
@@ -215,7 +267,11 @@ export const insights: Insight[] = [
       "Reason:Overcrowding",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "newyork-planning-times-square-peak-bottleneck",
+      },
     ],
   },
   {
@@ -225,7 +281,11 @@ export const insights: Insight[] = [
       "NYC spending DON’Ts concentrate on two autopilot choices: overpaying for hotels and eating at overpriced chains with poor quality. The city rewards specific picks and punishes default picks.",
     tags: ["city:New York", "activity:Shopping", "Reason:Price and Quality"],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "newyork-shopping-convenience-tax",
+      },
     ],
   },
   {
@@ -241,7 +301,11 @@ export const insights: Insight[] = [
       "Reason:Timing and Distance",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "newyork-transit-system-build",
+      },
     ],
   },
   {
@@ -255,7 +319,11 @@ export const insights: Insight[] = [
       "Reason:Safety Concerns",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "newyork-unsafe-ambiguity-scams",
+      },
     ],
   },
 
@@ -275,7 +343,11 @@ export const insights: Insight[] = [
       "Reason:Regulations",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "seoul-planning-season-savings-paperwork",
+      },
     ],
   },
   {
@@ -292,7 +364,11 @@ export const insights: Insight[] = [
       "Reason:Cultural Misfits",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "seoul-shopping-unique-local-value",
+      },
     ],
   },
   {
@@ -306,7 +382,11 @@ export const insights: Insight[] = [
       "Reason:Cultural Misfits",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "seoul-social-distance-and-cleanliness",
+      },
     ],
   },
   {
@@ -321,7 +401,11 @@ export const insights: Insight[] = [
       "Reason:Regulations",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "seoul-transit-local-apps-literal-rules",
+      },
     ],
   },
   {
@@ -336,7 +420,11 @@ export const insights: Insight[] = [
       "Reason:Cultural Misfits",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "seoul-unsafe-theft-plus-boundaries",
+      },
     ],
   },
 
@@ -356,7 +444,11 @@ export const insights: Insight[] = [
       "Reason:Price and Quality",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "tokyo-planning-location-and-lockers",
+      },
     ],
   },
   {
@@ -373,7 +465,11 @@ export const insights: Insight[] = [
       "Reason:Regulations",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "tokyo-shopping-procedural-spending",
+      },
     ],
   },
   {
@@ -389,7 +485,11 @@ export const insights: Insight[] = [
       "Reason:Timing and Distance",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "tokyo-social-checklist-etiquette",
+      },
     ],
   },
   {
@@ -405,7 +505,11 @@ export const insights: Insight[] = [
       "Reason:Overcrowding",
     ],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "tokyo-transit-protect-flow",
+      },
     ],
   },
   {
@@ -415,7 +519,11 @@ export const insights: Insight[] = [
       "Tokyo unsafe-choice items flag late-night walking and casual handling of risky items (like flares). The underlying pattern is simple: don’t let a safe reputation lower your guard.",
     tags: ["city:Tokyo", "activity:Unsafe Choices", "Reason:Price and Quality"],
     quotes: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      {
+        quote:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        videoId: "tokyo-unsafe-safe-city-overconfidence",
+      },
     ],
   },
 ];

@@ -36,11 +36,27 @@ export default function InsightCard({
         <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-500">
           Quotes
         </p>
-        <ul className="space-y-1 text-sm text-neutral-700">
-          {insight.quotes.map((quote) => (
-            <li key={quote} className="flex items-start gap-2">
-              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-500" />
-              <span>{quote}</span>
+        <ul className="space-y-2 text-sm text-neutral-700">
+          {insight.quotes.map((item) => (
+            <li
+              key={`${insight.id}-${item.videoId}-${item.quote.slice(0, 12)}`}
+              className="relative overflow-hidden rounded-2xl bg-neutral-50 px-4 py-3 shadow-inner"
+            >
+              <span className="absolute left-3 top-1 text-4xl font-serif leading-none text-indigo-200">
+                "
+              </span>
+              <p className="relative pl-6 pr-2 text-[15px] font-medium text-neutral-900">
+                {item.quote}
+              </p>
+              <a
+                href={`https://www.youtube.com/shorts/${item.videoId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative mt-1 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-indigo-600 hover:text-indigo-700"
+              >
+                Watch clip
+                <span aria-hidden>↗</span>
+              </a>
             </li>
           ))}
         </ul>
