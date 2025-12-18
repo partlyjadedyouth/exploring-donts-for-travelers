@@ -56,15 +56,28 @@ export default function StackedCityReason({
         </span> */}
       </div>
       <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-neutral-600">
-        {legendLabels.map((label) => (
-          <div key={label} className="flex items-center gap-2">
-            <span
-              className="h-3 w-3 rounded-full"
-              style={{ backgroundColor: colorForLabel(label) }}
-            />
-            <span>{label}</span>
-          </div>
-        ))}
+        {legendLabels.map((label) => {
+          const isActive = active === label;
+          return (
+            <button
+              key={label}
+              type="button"
+              onClick={() => onToggle(label)}
+              className={`inline-flex items-center gap-2 text-xs font-medium transition ${
+                isActive
+                  ? "text-[#0b5c55] underline decoration-2 underline-offset-4"
+                  : "text-neutral-700 hover:text-[#0b5c55] hover:underline hover:underline-offset-4"
+              }`}
+              style={{ cursor: "pointer", background: "transparent", border: "none", padding: 0 }}
+            >
+              <span
+                className="h-3 w-3 rounded-full"
+                style={{ backgroundColor: colorForLabel(label) }}
+              />
+              <span>{label}</span>
+            </button>
+          );
+        })}
         {legendLabels.length === 0 && (
           <span className="text-neutral-400">No segments to display.</span>
         )}
