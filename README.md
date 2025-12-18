@@ -1,4 +1,4 @@
-# Travel Don'ts Research Dashboard
+# Exploring DON'Ts for Travelers
 
 This project is a data-driven dashboard for exploring travel "don’ts" by city, activity, and reason.
 It focuses on a research-story workflow: scan high-level patterns, apply filters, and interpret
