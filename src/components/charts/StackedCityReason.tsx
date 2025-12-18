@@ -84,7 +84,7 @@ export default function StackedCityReason({
               </span>
             </div>
             <div
-              className="relative flex origin-left rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
+              className="relative flex origin-left overflow-visible rounded-2xl bg-neutral-50 ring-1 ring-neutral-100"
               style={{
                 width: `${Math.max((row.total / maxTotal) * 100, 20)}%`,
                 animation: "bar-grow 650ms ease forwards",
@@ -92,12 +92,20 @@ export default function StackedCityReason({
             >
               {reasonOrder
                 .map((label) => row.segments.find((seg) => seg.label === label))
-                .filter(Boolean)
-                .map((seg) => {
-                  const segment = seg!;
+                .filter(
+                  (seg): seg is (typeof row.segments)[number] => Boolean(seg),
+                )
+                .map((segment, idx, ordered) => {
                   const pctWidth = Math.max(segment.pct, 4);
                   const isActive = active === segment.label;
                   const color = colorForLabel(segment.label);
+                  const isFirst = idx === 0;
+                  const isLast = idx === ordered.length - 1;
+                  const tooltipPositionClass = isFirst
+                    ? "left-1 translate-x-0"
+                    : isLast
+                      ? "right-1 translate-x-0"
+                      : "left-1/2 -translate-x-1/2";
                   return (
                     <button
                       key={segment.label}
@@ -105,7 +113,7 @@ export default function StackedCityReason({
                         width: `${pctWidth}%`,
                         backgroundColor: color,
                       }}
-                      className={`group relative flex origin-left cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-500 ease-out ${
+                      className={`group relative z-0 flex origin-left cursor-pointer items-center justify-center px-2 py-3 text-[11px] font-semibold text-white transition-all duration-500 ease-out ${
                         isActive
                           ? "brightness-110 ring-2 ring-white hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
                           : "hover:brightness-110 hover:shadow-[0_0_0_4px_rgba(59,130,246,0.75)] hover:z-10"
@@ -114,7 +122,9 @@ export default function StackedCityReason({
                       aria-label={`${segment.label} (${segment.count}, ${segment.pct}%)`}
                     >
                       <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/5" />
-                      <div className="pointer-events-none absolute -top-12 left-1/2 hidden min-w-40 -translate-x-1/2 flex-col rounded-xl bg-black/80 px-2 py-1 text-[11px] text-white shadow-sm group-hover:flex group-hover:opacity-100">
+                      <div
+                        className={`pointer-events-none absolute -top-12 hidden max-w-60 flex-col rounded-xl bg-black/80 px-2 py-1 text-[11px] text-white shadow-sm group-hover:flex group-hover:opacity-100 group-hover:z-30 ${tooltipPositionClass}`}
+                      >
                         <span className="font-semibold leading-tight">
                           {segment.label}
                         </span>
