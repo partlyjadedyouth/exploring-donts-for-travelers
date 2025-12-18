@@ -4,7 +4,6 @@ Video_ID,Video_Title,City,Activity,Reason,Activity_Simple,Reason_Simple
 1,kzNjmq63I_E,London,checking out the nightlife,limited club options for tourists,Attractions,Price and Quality
 2,5GzACwRHguc,London,using Google Maps,not accurate,Transit Mistakes,Timing and Distance
 2,5GzACwRHguc,London,walking,not practical,Transit Mistakes,Timing and Distance
-2,5GzACwRHguc,London,crossing streets,not safe,Unsafe Choices,Safety Concerns
 2,5GzACwRHguc,London,calling London 'London',not local,Social Misconduct,Price and Quality
 3,nvTHBfZTld4,London,using Uber,dangerous,Transit Mistakes,Safety Concerns
 3,nvTHBfZTld4,London,skipping queues,disrespectful,Inefficient Planning,Cultural Misfits
@@ -78,11 +77,9 @@ Video_ID,Video_Title,City,Activity,Reason,Activity_Simple,Reason_Simple
 21,2HHv1AtwmEo,Tokyo,walking,too crowded,Transit Mistakes,Overcrowding
 21,2HHv1AtwmEo,Tokyo,eating ramen,wasted time and energy,Shopping,Timing and Distance
 21,2HHv1AtwmEo,Tokyo,applying makeup,not necessary,Shopping,Price and Quality
-21,2HHv1AtwmEo,Tokyo,walking at night,not recommended,Unsafe Choices,Price and Quality
 21,2HHv1AtwmEo,Tokyo,shopping,expensive,Shopping,Price and Quality
 21,2HHv1AtwmEo,Tokyo,not staying in a hotel,location,Inefficient Planning,Timing and Distance
 21,2HHv1AtwmEo,Tokyo,not using a coin locker,expensive,Inefficient Planning,Price and Quality
-21,2HHv1AtwmEo,Tokyo,holding a red flare,fun,Unsafe Choices,Price and Quality
 22,e8sAA40ll1Y,Tokyo,boarding out-of-service trains,can be misleading,Transit Mistakes,Timing and Distance
 22,e8sAA40ll1Y,Tokyo,using the train like a jungle gym,disruptive,Transit Mistakes,Cultural Misfits
 22,e8sAA40ll1Y,Tokyo,ignoring vending machine colors,incorrect temperature,Shopping,Timing and Distance

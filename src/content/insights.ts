@@ -14,7 +14,7 @@ export const insights: Insight[] = [
     id: "london-attractions-curation-over-clubs",
     title: "London attractions pay off when you curate, not when you default",
     summary:
-      "London DON’Ts cluster around low-yield defaults (tourist nightlife) and high-yield misses (skipping Tate Modern). Markets show up as a timing problem too—go at peak and the crowd becomes the experience.",
+      "In London, Markets show up as a timing problem too—go at peak and the crowd becomes the experience. Also, not checking out the tourist nightlife is also not recommended",
     tags: [
       "city:London",
       "activity:Attractions",
@@ -29,8 +29,8 @@ export const insights: Insight[] = [
       },
       {
         quote:
-          "The Notting Hill or brick lane market are really popping off only on the weekend so make sure you center your itinerary",
-        videoId: "kzNjmq63I_E",
+          "#3 is not checking out the nightlife in London, (...) and my favorite club there was Cirque.",
+        videoId: "kzNjmq63I_E,",
       },
     ],
   },
@@ -38,7 +38,7 @@ export const insights: Insight[] = [
     id: "london-planning-weekend-density-and-queues",
     title: "London planning mistakes are mostly calendar + queue mistakes",
     summary:
-      "The dataset’s London planning DON’Ts say: some places only feel “alive” on certain days (often weekends), and trying to skip queues can backfire socially. In London, the real hack is picking the right day and playing the line culture correctly.",
+      "Some places in London only feel “alive” on certain days (often weekends), and you have to plan efficiently since the transportation options are limited. In London, the real hack is picking the right day and playing the line culture correctly.",
     tags: [
       "city:London",
       "activity:Inefficient Planning",
@@ -48,8 +48,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "london-planning-weekend-density-and-queues",
+          "Uber's more limited. And the trains aren't always nearby like in New York.",
+        videoId: "RPuZsC35mKk",
+      },
+      {
+        quote:
+          "The Notting Hill or brick lane market are really popping off only on the weekend so make sure you center your itinerary.",
+        videoId: "kzNjmq63I_E",
       },
     ],
   },
@@ -67,8 +72,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "london-shopping-policy-and-autopilot-spend",
+          "Tipping is normal at restaurants in Europe and the US, but a lot of restaurants in London have a service charge already included in the bill. Make sure you check for it so you don't end up tipping twice.",
+        videoId: "WOLrcR6yJyw",
       },
     ],
   },
@@ -86,8 +91,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "london-social-dont-perform-local",
+          "Londoners never say things like London proper or downtown london so if you say those people won't know.",
+        videoId: "5GzACwRHguc",
+      },
+      {
+        quote:
+          "Internationally, this is known as the peace sign, but if you turn around, you could offend some people here.",
+        videoId: "WOLrcR6yJyw",
       },
     ],
   },
@@ -106,22 +116,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "london-transit-micro-frictions-stack",
+          "If you block the way on the left side of the escalator you will have someone very quickly remind you to get out of the way.",
+        videoId: "5GzACwRHguc",
       },
-    ],
-  },
-  {
-    id: "london-unsafe-crossing-autopilot",
-    title: "London’s safety DON’T is simple: don’t cross on autopilot",
-    summary:
-      "London unsafe-choice content is blunt: street crossing is where tourists get hurt. Treat every crossing as a deliberate action, not muscle memory from home.",
-    tags: ["city:London", "activity:Unsafe Choices", "Reason:Safety Concerns"],
-    quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "london-unsafe-crossing-autopilot",
+          "Do not skip the queue. The British people take so much pride in this queue",
+        videoId: "nvTHBfZTld4",
       },
     ],
   },
@@ -145,8 +146,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "paris-attractions-postcard-traps",
+          "If you only stay inside of Paris, you'll miss out on beautiful cities nearby that are just as beautiful like Versailles and Giverny.",
+        videoId: "_WA-kBCxvMc",
       },
     ],
   },
@@ -164,8 +165,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "paris-planning-prebook-early-pace",
+          "Don't wait until you arrive to get tickets to popular attractions, places like the Louvre or the top of Eiffel Tower.",
+        videoId: "-wSYnQzZrWA",
       },
     ],
   },
@@ -179,8 +180,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "paris-shopping-tourist-meals-and-food-fear",
+          "Don't sign up for one of those dinner cruises on the Seine River.",
+        videoId: "-wSYnQzZrWA",
       },
     ],
   },
@@ -199,8 +200,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "paris-social-french-effort",
+          "Don't expect everyone here to speak English. Try your French skills.",
+        videoId: "doHwzBVkCSA",
       },
     ],
   },
@@ -219,8 +220,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "paris-transit-slow-modes-and-distraction",
+          "The roads are busy and they're expensive. The public transport system is very well connected. Don't bother with cars or taxis.",
+        videoId: "doHwzBVkCSA",
       },
     ],
   },
@@ -233,8 +234,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "paris-unsafe-pickpocket-baseline",
+          "Whilst the metro is generally safe, there is a bit of a pickpocketing problem, especially around tourist areas where pickpockets are looking for victims.",
+        videoId: "Kr7PWSxwgd4",
       },
     ],
   },
@@ -256,8 +257,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "newyork-attractions-time-is-the-price",
+          "The Empire State Building may be iconic, but there are better observation decks. Instead, visit Top of the Rock or Summit. (...) Wall-street Bull is a big skit. Why? Because there's always long lines to take photos.",
+        videoId: "i6tcnbseaBw",
       },
     ],
   },
@@ -274,8 +275,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "newyork-planning-times-square-peak-bottleneck",
+          "Avoid peak tourist hours at Times Square and visit early mornings instead.",
+        videoId: "hrqLIA1SWzs",
       },
     ],
   },
@@ -288,8 +289,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "newyork-shopping-convenience-tax",
+          "Save your money when in New York. (...) Hotels in Midtown cost three to four times the price of similar hotels outside of the city center.",
+        videoId: "MEbEcv5hmfc",
       },
     ],
   },
@@ -308,8 +309,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "newyork-transit-system-build",
+          "You'll be walking a lot after getting off the subway, so comfy kicks are a must.",
+        videoId: "MEbEcv5hmfc",
+      },
+      {
+        quote:
+          "Getting from the airport to the city center via cab, it costs $100 and will save you a few minutes versus taking public transport for 11 bucks.",
+        videoId: "MEbEcv5hmfc",
       },
     ],
   },
@@ -326,8 +332,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "newyork-unsafe-ambiguity-scams",
+          "Don't get caught in these scams in Times Square or in any other city, but if you do, this is how you outsmart them.",
+        videoId: "77Tcz8Jb7D0",
       },
     ],
   },
@@ -350,8 +356,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "seoul-planning-season-savings-paperwork",
+          "Number two is to apply for a KETA online and make sure it gets approved before.",
+        videoId: "tXJRRImjWi4",
+      },
+      {
+        quote:
+          "Spring accommodation and flights are really expensive and it will be extremely crowded everywhere.",
+        videoId: "qlntCoEjEbQ",
       },
     ],
   },
@@ -371,8 +382,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "seoul-shopping-unique-local-value",
+          "Most shops in korea accept card payment but keep in mind that apple pay is not common so make sure you bring your physical card for payment.",
+        videoId: "tXJRRImjWi4",
+      },
+      {
+        quote:
+          "You really do not need cushion foundations. Most cushions only have three colors to choose from. They're more expensive for less product.",
+        videoId: "QbIZOru-hJk",
       },
     ],
   },
@@ -389,8 +405,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "seoul-social-distance-and-cleanliness",
+          "Don't say hi to strangers because we Koreans don't really talk to strangers.",
+        videoId: "GCL6LX0MAjs",
       },
     ],
   },
@@ -408,8 +424,18 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "seoul-transit-local-apps-literal-rules",
+          "Taxi drivers do not speak english so make sure you show them the address of your destination in korean number.",
+        videoId: "qlntCoEjEbQ",
+      },
+      {
+        quote:
+          "Google Maps does not work in Korea. I personally prefer using Naver map because it's more english friendly.",
+        videoId: "tXJRRImjWi4",
+      },
+      {
+        quote:
+          "Taking any drinks on the bus is strictly prohibited and will get you kicked off.",
+        videoId: "Fm8ohbqAMKA",
       },
     ],
   },
@@ -427,8 +453,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "seoul-unsafe-theft-plus-boundaries",
+          "Never leave your bike unlocked in Korea. If you do this, don't be surprised if your bike gets stolen.",
+        videoId: "Fm8ohbqAMKA",
       },
     ],
   },
@@ -451,8 +477,13 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "tokyo-planning-location-and-lockers",
+          "Instead of breaking your back and carrying around your bags after shopping, just use one of these coin lockers.",
+        videoId: "2HHv1AtwmEo",
+      },
+      {
+        quote:
+          "I wouldn't recommend an Airbnb. Just stay in a hotel for the best location.",
+        videoId: "2HHv1AtwmEo",
       },
     ],
   },
@@ -472,8 +503,8 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "tokyo-shopping-procedural-spending",
+          "Do not open your tax-free bags until you leave Japan. If you're caught at customs, you will need to pay the tax.",
+        videoId: "mHoPSKu4QT8",
       },
     ],
   },
@@ -491,9 +522,13 @@ export const insights: Insight[] = [
     ],
     quotes: [
       {
+        quote: "Number two, do not wear your shoes into changing rooms. ",
+        videoId: "mHoPSKu4QT8",
+      },
+      {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "tokyo-social-checklist-etiquette",
+          "Don't go wild with Japanese toilet. (...) These signs exist for a reason, so sit the right way unless you want to go viral.",
+        videoId: "Ri2vqt6m0TQ",
       },
     ],
   },
@@ -512,22 +547,12 @@ export const insights: Insight[] = [
     quotes: [
       {
         quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "tokyo-transit-protect-flow",
+          "Don't touch taxi doors. (...) Never wear your backpack the normal way on on crowded trains.",
+        videoId: "Ri2vqt6m0TQ",
       },
-    ],
-  },
-  {
-    id: "tokyo-unsafe-safe-city-overconfidence",
-    title: "Tokyo unsafe DON’Ts warn against ‘safe-city overconfidence’",
-    summary:
-      "Tokyo unsafe-choice items flag late-night walking and casual handling of risky items (like flares). The underlying pattern is simple: don’t let a safe reputation lower your guard.",
-    tags: ["city:Tokyo", "activity:Unsafe Choices", "Reason:Price and Quality"],
-    quotes: [
       {
-        quote:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        videoId: "tokyo-unsafe-safe-city-overconfidence",
+        quote: "Don't talk loudly on trains.",
+        videoId: "xIGEgePw4Cw",
       },
     ],
   },
