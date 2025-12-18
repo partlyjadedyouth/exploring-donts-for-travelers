@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Travel Don’ts Research Dashboard",
+  title: "Exploring DON'Ts for Travelers",
   description: "Interactive research-story explorer for travel don’ts",
 };
 
