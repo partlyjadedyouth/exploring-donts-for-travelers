@@ -17,6 +17,7 @@ import {
 import { useDashboardState } from "@/hooks/useDashboardState";
 import ActivityReasonHeatmap from "@/components/charts/ActivityReasonHeatmap";
 import { fallbackRows, parseDontsCsv } from "@/lib/donts-data";
+import AlluvialCityActivityReason from "@/components/charts/AlluvialCityActivityReason";
 
 export default function DashboardPage() {
   const [rows, setRows] = useState<DontRow[]>([]);
@@ -149,6 +150,12 @@ export default function DashboardPage() {
                       activityLabel: dashboard.filters.activityLabel,
                       reasonLabel: dashboard.filters.reasonLabel,
                     }}
+                  />
+                  <AlluvialCityActivityReason
+                    rows={filteredRows}
+                    cityOrder={options.cities}
+                    activityOrder={options.activityLabels}
+                    reasonOrder={options.reasonLabels}
                   />
                 </div>
               )}

@@ -17,16 +17,10 @@ const colorFor = (count: number, max: number, active: boolean) => {
   return `rgba(99, 102, 241, ${base * alpha})`;
 };
 
-export default function ActivityReasonHeatmap({
-  matrix,
-  active,
-}: Props) {
+export default function ActivityReasonHeatmap({ matrix, active }: Props) {
   const { activityLabels, reasonLabels, max, cells } = matrix;
   const animationKey = useMemo(
-    () =>
-      `${activityLabels.join("|")}::${reasonLabels.join(
-        "|",
-      )}::${max}`,
+    () => `${activityLabels.join("|")}::${reasonLabels.join("|")}::${max}`,
     [activityLabels, reasonLabels, max],
   );
 
@@ -41,10 +35,10 @@ export default function ActivityReasonHeatmap({
           Highlights follow filters
         </span>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-hidden">
         <table
           key={animationKey}
-          className="w-full table-auto text-[11px] align-middle"
+          className="w-full table-fixed text-[11px] align-middle"
         >
           <thead>
             <tr>
@@ -54,7 +48,7 @@ export default function ActivityReasonHeatmap({
               {reasonLabels.map((reason) => (
                 <th
                   key={reason}
-                  className="px-2 py-2 text-center text-neutral-500 text-[11px] whitespace-pre-wrap break-words"
+                  className="px-2 py-2 text-center text-neutral-500 text-[8px] whitespace-normal wrap-break-word"
                 >
                   {reason}
                 </th>
@@ -64,15 +58,18 @@ export default function ActivityReasonHeatmap({
           <tbody>
             {activityLabels.map((activity) => (
               <tr key={activity}>
-                <td className="px-2 py-2 text-[12px] font-semibold text-neutral-800 whitespace-pre-wrap break-words align-top">
+                <td className="px-2 py-2 text-[12px] font-semibold text-neutral-800 whitespace-normal break-words align-top">
                   {activity}
                 </td>
                 {reasonLabels.map((reason) => {
                   const count = cells[activity]?.[reason] ?? 0;
-                  const hasFilter = Boolean(active.activityLabel || active.reasonLabel);
+                  const hasFilter = Boolean(
+                    active.activityLabel || active.reasonLabel,
+                  );
                   const isActive =
                     hasFilter &&
-                    (!active.activityLabel || active.activityLabel === activity) &&
+                    (!active.activityLabel ||
+                      active.activityLabel === activity) &&
                     (!active.reasonLabel || active.reasonLabel === reason);
                   return (
                     <td
