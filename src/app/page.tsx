@@ -95,7 +95,7 @@ export default function DashboardPage() {
         </header>
 
         <div className="mt-4 flex flex-1 flex-col gap-4 lg:min-h-0 lg:flex-row lg:gap-6 lg:overflow-hidden">
-          <aside className="lg:w-[30%] lg:shrink-0 lg:self-start">
+          <aside className="lg:w-[22%] lg:shrink-0 lg:self-start">
             <div className="lg:sticky lg:top-4">
               <FilterRail
                 filters={dashboard.filters}
@@ -106,51 +106,51 @@ export default function DashboardPage() {
             </div>
           </aside>
 
-          <main className="flex flex-col gap-4 lg:min-h-0 lg:w-[70%] lg:overflow-y-auto lg:pr-2">
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              <div className="lg:col-span-2">
-                <InsightPanel filters={dashboard.filters} />
-              </div>
-            </div>
+          <main className="flex flex-col gap-4 lg:min-h-0 lg:flex-1 lg:flex-row lg:overflow-hidden lg:pr-2">
+            <section className="flex-1 lg:w-[38%] lg:min-h-0 lg:overflow-y-auto lg:pr-3">
+              <InsightPanel filters={dashboard.filters} />
+            </section>
 
-            {loading ? (
-              <div className="rounded-3xl bg-white/80 p-6 text-center text-sm text-neutral-600 shadow-sm">
-                Loading CSV…
-              </div>
-            ) : (
-              <div className="flex flex-col gap-4">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <StackedCityActivity
-                    data={cityActivity}
-                    active={dashboard.filters.activityLabel}
-                    onToggle={(v) => {
-                      dashboard.toggleValue("activityLabel", v);
-                    }}
-                    onSelectCity={(v) => {
-                      dashboard.toggleValue("city", v);
-                    }}
-                  />
-                  <StackedCityReason
-                    data={cityReason}
-                    active={dashboard.filters.reasonLabel}
-                    onToggle={(v) => {
-                      dashboard.toggleValue("reasonLabel", v);
-                    }}
-                    onSelectCity={(v) => {
-                      dashboard.toggleValue("city", v);
+            <section className="flex-1 lg:w-[40%] lg:min-h-0 lg:overflow-y-auto lg:pl-3">
+              {loading ? (
+                <div className="rounded-3xl bg-white/80 p-6 text-center text-sm text-neutral-600 shadow-sm">
+                  Loading CSV…
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
+                    <StackedCityActivity
+                      data={cityActivity}
+                      active={dashboard.filters.activityLabel}
+                      onToggle={(v) => {
+                        dashboard.toggleValue("activityLabel", v);
+                      }}
+                      onSelectCity={(v) => {
+                        dashboard.toggleValue("city", v);
+                      }}
+                    />
+                    <StackedCityReason
+                      data={cityReason}
+                      active={dashboard.filters.reasonLabel}
+                      onToggle={(v) => {
+                        dashboard.toggleValue("reasonLabel", v);
+                      }}
+                      onSelectCity={(v) => {
+                        dashboard.toggleValue("city", v);
+                      }}
+                    />
+                  </div>
+
+                  <ActivityReasonHeatmap
+                    matrix={heatmap}
+                    active={{
+                      activityLabel: dashboard.filters.activityLabel,
+                      reasonLabel: dashboard.filters.reasonLabel,
                     }}
                   />
                 </div>
-
-                <ActivityReasonHeatmap
-                  matrix={heatmap}
-                  active={{
-                    activityLabel: dashboard.filters.activityLabel,
-                    reasonLabel: dashboard.filters.reasonLabel,
-                  }}
-                />
-              </div>
-            )}
+              )}
+            </section>
           </main>
         </div>
       </div>

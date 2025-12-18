@@ -42,16 +42,19 @@ export default function ActivityReasonHeatmap({
         </span>
       </div>
       <div className="overflow-x-auto">
-        <table key={animationKey} className="w-full table-fixed text-xs">
+        <table
+          key={animationKey}
+          className="w-full table-auto text-[11px] align-middle"
+        >
           <thead>
             <tr>
-              <th className="w-32 px-2 py-2 text-left text-neutral-500">
+              <th className="w-32 px-2 py-2 text-left text-neutral-500 text-[11px]">
                 What \ Why
               </th>
               {reasonLabels.map((reason) => (
                 <th
                   key={reason}
-                  className="px-2 py-2 text-center text-neutral-500"
+                  className="px-2 py-2 text-center text-neutral-500 text-[11px] whitespace-pre-wrap break-words"
                 >
                   {reason}
                 </th>
@@ -61,7 +64,7 @@ export default function ActivityReasonHeatmap({
           <tbody>
             {activityLabels.map((activity) => (
               <tr key={activity}>
-                <td className="px-2 py-2 text-sm font-semibold text-neutral-800">
+                <td className="px-2 py-2 text-[12px] font-semibold text-neutral-800 whitespace-pre-wrap break-words align-top">
                   {activity}
                 </td>
                 {reasonLabels.map((reason) => {
@@ -74,10 +77,10 @@ export default function ActivityReasonHeatmap({
                   return (
                     <td
                       key={`${activity}-${reason}`}
-                      className="px-2 py-1 text-center"
+                      className="px-2 py-1 text-center align-middle"
                     >
                       <div
-                        className={`flex h-12 w-full items-center justify-center rounded-xl border text-base font-semibold text-neutral-900 transition-all duration-500 ${
+                        className={`flex h-12 w-full items-center justify-center rounded-xl border text-sm font-semibold text-neutral-900 transition-all duration-500 ${
                           isActive
                             ? "border-2 border-indigo-700 ring-4 ring-indigo-400 shadow-[0_0_12px_rgba(79,70,229,0.45)]"
                             : "border-neutral-100"
