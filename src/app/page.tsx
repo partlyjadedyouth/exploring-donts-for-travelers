@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import FilterRail from "@/components/FilterRail";
 import StackedCityActivity from "@/components/charts/StackedCityActivity";
 import StackedCityReason from "@/components/charts/StackedCityReason";
@@ -21,8 +21,9 @@ import AlluvialCityActivityReason from "@/components/charts/AlluvialCityActivity
 
 /**
  * Main dashboard that wires together filters, data loading, and all visualizations.
+ * Separated into a child component so useSearchParams runs within a Suspense boundary.
  */
-export default function DashboardPage() {
+function DashboardContent() {
   const [rows, setRows] = useState<DontRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -171,5 +172,19 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-linear-to-b from-indigo-50 to-amber-50 text-sm text-neutral-700">
+          Loading dashboard…
+        </div>
+      }
+    >
+      <DashboardContent />
+    </Suspense>
   );
 }
