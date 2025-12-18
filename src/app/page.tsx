@@ -87,8 +87,12 @@ export default function DashboardPage() {
             Exploring DON{`'`}Ts for Travelers
           </h1>
           <p className="text-sm text-neutral-600">
-            Click on any chart segment to drive filters. Heatmap highlights
-            follow filters.
+            Click on any chart segment to drive filters. The heatmap and ribbons
+            animate to follow your slice so you can trace how cities, activities
+            and motivations connect.
+            <br />
+            Keep exploring to surface patterns that reveal where travelers
+            hesitate and why.
           </p>
           {error && (
             <p className="text-xs font-semibold text-amber-600">{error}</p>

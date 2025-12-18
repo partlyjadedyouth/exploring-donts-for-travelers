@@ -67,7 +67,6 @@ export default function FilterRail({
         <div>
           <p className="text-sm font-semibold text-neutral-900">Filters</p>
           <p className="text-xs text-neutral-500">
-            Click items in the charts or select from the options below.{" "}
             <b>Multiple cities</b> can be selected, but you can only choose{" "}
             <b>one activity and one reason.</b>
           </p>
