@@ -27,6 +27,10 @@ const normalizeLabel = (
   return map[trimmed] ?? trimmed;
 };
 
+/**
+ * Custom CSV parser that supports quoted fields and escaped quotes.
+ * We avoid importing a full parser to keep the client bundle lean.
+ */
 const parseCsvLine = (line: string) => {
   const values: string[] = [];
   let current = "";
@@ -54,6 +58,10 @@ const parseCsvLine = (line: string) => {
   return values;
 };
 
+/**
+ * Converts a CSV string into strongly typed rows used across visualizations.
+ * Falls back to original values when optional headers are missing.
+ */
 export const parseDontsCsv = (text: string): DontRow[] => {
   const lines = text.trim().split(/\r?\n/).filter(Boolean);
   if (lines.length === 0) return [];
@@ -81,6 +89,9 @@ export const parseDontsCsv = (text: string): DontRow[] => {
   });
 };
 
+/**
+ * Lightweight sample rows to keep the experience interactive when the CSV fails to load.
+ */
 export const fallbackRows: DontRow[] = [
   {
     id: "fallback-1",

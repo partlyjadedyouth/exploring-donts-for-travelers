@@ -2,6 +2,9 @@
 
 import { Insight } from "@/content/insights";
 
+/**
+ * Small helper that renders pill tags for an insight card.
+ */
 const renderTags = (tags: string[]) => (
   <div className="flex flex-wrap gap-2">
     {tags.map((tag) => (
@@ -20,6 +23,9 @@ export default function InsightCard({
 }: {
   insight: Insight;
 }) {
+  /**
+   * Displays an individual research insight along with representative quotes and tags.
+   */
   const tags = insight.tags ?? [];
 
   return (

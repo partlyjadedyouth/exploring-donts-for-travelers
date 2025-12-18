@@ -9,6 +9,10 @@ const normalizeTag = (tag: string) => {
   return `${category}:${value}`;
 };
 
+/**
+ * Builds a list of normalized tags representing the active filters.
+ * Each category includes an `any` tag to denote that category is in play.
+ */
 export const buildFilterTags = (filters: Filters) => {
   const tags: string[] = [];
   if (filters.city && filters.city.length > 0) {
@@ -40,6 +44,10 @@ const groupTags = (tags: string[]) =>
     return acc;
   }, {});
 
+/**
+ * Determines whether an insight's tag set satisfies all active filter categories.
+ * A category must have at least one overlapping tag to count as a match.
+ */
 export const insightMatches = (insight: Insight, filterTags: string[]) => {
   const tags = (insight.tags ?? []).map(normalizeTag);
   const normalizedFilters = filterTags.map(normalizeTag);
@@ -57,6 +65,10 @@ export const insightMatches = (insight: Insight, filterTags: string[]) => {
   return true;
 };
 
+/**
+ * Returns the subset of an insight's tags that are currently matched by filters.
+ * Used to highlight which rule(s) triggered the surfaced card.
+ */
 export const matchedInsightTags = (insight: Insight, filterTags: string[]) => {
   const tags = insight.tags ?? [];
   if (tags.length === 0 || filterTags.length === 0) return [];

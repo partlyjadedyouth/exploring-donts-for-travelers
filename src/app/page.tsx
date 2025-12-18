@@ -19,6 +19,9 @@ import ActivityReasonHeatmap from "@/components/charts/ActivityReasonHeatmap";
 import { fallbackRows, parseDontsCsv } from "@/lib/donts-data";
 import AlluvialCityActivityReason from "@/components/charts/AlluvialCityActivityReason";
 
+/**
+ * Main dashboard that wires together filters, data loading, and all visualizations.
+ */
 export default function DashboardPage() {
   const [rows, setRows] = useState<DontRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +38,7 @@ export default function DashboardPage() {
         setRows(parsed);
       } catch (err) {
         console.error(err);
-        // lightweight fallback so the UI still works
+        // Lightweight fallback keeps the UI interactive in local/offline environments.
         setRows(fallbackRows);
         setError(
           "Using fallback sample data because /data/donts.csv could not be loaded.",
@@ -53,6 +56,7 @@ export default function DashboardPage() {
     [rows, dashboard.filters],
   );
 
+  // Pre-compute aggregations for each visualization so components stay lean.
   const cityActivity: CityComposition[] = useMemo(
     () => cityActivityComposition(filteredRows, options.activityLabels),
     [filteredRows, options.activityLabels],

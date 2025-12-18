@@ -26,6 +26,10 @@ const cityLabelMap: Record<string, string> = {
   "New York": "New York City",
 };
 
+/**
+ * Normalizes a city label so that visualizations group equivalent values together.
+ * Trims whitespace and remaps known aliases (e.g., "New York" -> "New York City").
+ */
 export const normalizeCity = (value?: string) => {
   const trimmed = value?.trim();
   if (!trimmed) return value ?? "";
@@ -44,6 +48,12 @@ const orderLabels = (counts: Record<string, number>) =>
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     .map(([label]) => label);
 
+/**
+ * Returns true when the provided value should be included based on the filter selection.
+ * - Strings must match exactly.
+ * - Arrays act as a whitelist.
+ * - Undefined/empty filters allow everything through.
+ */
 const includeIfSet = (selected: string | string[] | undefined, value: string) => {
   if (!selected || (Array.isArray(selected) && selected.length === 0)) return true;
   if (Array.isArray(selected)) return selected.includes(value);
@@ -63,6 +73,9 @@ const sortCities = (cities: string[]) =>
     return aRank - bRank;
   });
 
+/**
+ * Filters the dataset based on optional city, activity, reason, and video constraints.
+ */
 export function filterRows(rows: DontRow[], filters: Filters) {
   return rows.filter(
     (row) =>
@@ -73,6 +86,10 @@ export function filterRows(rows: DontRow[], filters: Filters) {
   );
 }
 
+/**
+ * Calculates distinct lists (and sensible ordering) for dropdowns and legends.
+ * Orders are frequency-first with alphabetical tie-breaks.
+ */
 export function uniqueValues(rows: DontRow[]) {
   const cities = new Set<string>();
   const activityCounts: Record<string, number> = {};
@@ -93,6 +110,10 @@ export function uniqueValues(rows: DontRow[]) {
 
 type CompositionKey = "activityLabel" | "reasonLabel";
 
+/**
+ * Builds a per-city composition where each segment represents activity or reason counts.
+ * Supports injecting a fixed label order so colors and columns stay stable across renders.
+ */
 const buildCityComposition = (
   rows: DontRow[],
   key: CompositionKey,
@@ -131,6 +152,9 @@ const buildCityComposition = (
   });
 };
 
+/**
+ * Returns a city-by-activity composition for stacked bar charts.
+ */
 export function cityActivityComposition(
   rows: DontRow[],
   labelOrder?: string[],
@@ -138,6 +162,9 @@ export function cityActivityComposition(
   return buildCityComposition(rows, "activityLabel", labelOrder);
 }
 
+/**
+ * Returns a city-by-reason composition for stacked bar charts.
+ */
 export function cityReasonComposition(
   rows: DontRow[],
   labelOrder?: string[],
@@ -145,10 +172,17 @@ export function cityReasonComposition(
   return buildCityComposition(rows, "reasonLabel", labelOrder);
 }
 
+/**
+ * Stable identifier for a data row to avoid duplication across charts.
+ */
 export function hashRow(row: DontRow) {
   return `${row.videoId}-${row.activityLabel}-${row.reasonLabel}-${row.city}-${row.activity}`;
 }
 
+/**
+ * Builds a matrix of activity x reason counts for heatmap rendering.
+ * Keeps track of the maximum value for consistent color scaling across selections.
+ */
 export function activityReasonMatrix(
   rows: DontRow[],
   labelOrder?: { activityLabels: string[]; reasonLabels: string[] },

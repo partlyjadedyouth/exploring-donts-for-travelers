@@ -20,6 +20,9 @@ export default function StackedCityReason({
   onToggle,
   onSelectCity,
 }: Props) {
+  /**
+   * Key that forces Tailwind transition re-runs when data shape changes between filters.
+   */
   const animationKey = useMemo(
     () =>
       data
@@ -42,6 +45,10 @@ export default function StackedCityReason({
   );
   const maxTotal = Math.max(...data.map((d) => d.total), 1);
 
+  /**
+   * 100% stacked bars showing why people avoid each city.
+   * Segments are clickable to toggle a reason filter; city names set the city filter.
+   */
   return (
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between">

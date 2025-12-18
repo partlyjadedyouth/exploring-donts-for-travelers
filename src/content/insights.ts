@@ -6,6 +6,10 @@ export type Insight = {
   quotes: { quote: string; videoId: string }[];
 };
 
+/**
+ * Curated set of qualitative insights surfaced when filters align with their tags.
+ * Tags follow the format `${category}:${value}` to support grouped matching.
+ */
 export const insights: Insight[] = [
   // -------------------------
   // Seoul

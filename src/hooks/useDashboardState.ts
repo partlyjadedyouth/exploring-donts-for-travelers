@@ -4,6 +4,10 @@ import { useMemo } from "react";
 import { Filters, normalizeCity } from "@/lib/aggregate";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+/**
+ * Reads filters from the current query string and normalizes values.
+ * Supports multi-select cities and single-select activity/reason/video.
+ */
 const parseFiltersFromSearch = (params: URLSearchParams): Filters => {
   const cityParam = params.get("city");
   const cities = cityParam
@@ -20,6 +24,9 @@ const parseFiltersFromSearch = (params: URLSearchParams): Filters => {
   };
 };
 
+/**
+ * Serializes filter state back to a query string so URLs stay shareable/bookmarkable.
+ */
 const toQueryString = (filters: Filters) => {
   const params = new URLSearchParams();
   if (filters.city && filters.city.length > 0) {
@@ -34,6 +41,10 @@ const toQueryString = (filters: Filters) => {
   return params.toString();
 };
 
+/**
+ * Keeps filter state in sync with the URL and exposes helpers for toggling values.
+ * City supports multiple selections; the rest behave like radio buttons.
+ */
 export function useDashboardState() {
   const searchParams = useSearchParams();
   const router = useRouter();

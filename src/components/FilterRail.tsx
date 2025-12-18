@@ -27,6 +27,9 @@ const FilterGroup = ({
   selected?: string | string[];
   onToggle: (value: string) => void;
 }) => (
+  /**
+   * Lightweight button group that supports multi- or single-select depending on caller state.
+   */
   <div className="space-y-2">
     <div className="text-sm font-semibold text-neutral-800">{label}</div>
     <div className="flex flex-wrap gap-2">
@@ -61,6 +64,9 @@ export default function FilterRail({
   onToggle,
   onReset,
 }: Props) {
+  /**
+   * Sidebar that exposes quick filters. Cities are multi-select; activity/reason behave like radios.
+   */
   return (
     <aside className="flex h-fit flex-col gap-6 rounded-3xl bg-white/80 p-4 shadow-sm ring-1 ring-neutral-100 backdrop-blur">
       <div className="flex items-center justify-between">

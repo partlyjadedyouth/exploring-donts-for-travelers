@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: "Interactive research-story explorer for travel don’ts",
 };
 
+/**
+ * Root layout sets global fonts and applies metadata shared across routes.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

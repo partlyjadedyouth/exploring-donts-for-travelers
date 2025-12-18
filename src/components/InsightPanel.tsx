@@ -11,6 +11,9 @@ type Props = {
 };
 
 export default function InsightPanel({ filters }: Props) {
+  /**
+   * Convert filters into tags so rule-based insights can be matched declaratively.
+   */
   const filterTags = useMemo(() => buildFilterTags(filters), [filters]);
   const matches = useMemo(
     () =>
@@ -20,6 +23,9 @@ export default function InsightPanel({ filters }: Props) {
     [filterTags],
   );
 
+  /**
+   * Renders a list of insights that satisfy the active filters, or an empty state if none hit.
+   */
   return (
     <aside className="flex h-full min-h-65 flex-col gap-4 backdrop-blur">
       <div className="space-b-2">

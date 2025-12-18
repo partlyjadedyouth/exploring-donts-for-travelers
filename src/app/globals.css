@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  /* Light theme baseline colors; swapped in dark mode below. */
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -10,6 +11,7 @@ html {
 }
 
 @theme inline {
+  /* Expose design tokens for Tailwind's @theme layer. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -27,10 +29,12 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
+  /* Default to Geist with sensible fallbacks for environments without the font loaded yet. */
   font-family: var(--font-geist-sans), "Inter", system-ui, -apple-system,
     sans-serif;
 }
 
+/* Used by stacked bar charts to animate growth from 0 to 100%. */
 @keyframes bar-grow {
   from {
     transform: scaleX(0);
@@ -40,6 +44,7 @@ body {
   }
 }
 
+/* Soft pop-in animation for heatmap cells. */
 @keyframes heatmap-pop {
   from {
     opacity: 0;

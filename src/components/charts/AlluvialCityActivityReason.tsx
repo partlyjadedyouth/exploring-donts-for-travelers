@@ -48,6 +48,10 @@ const buildNodes = (
   return { nodes, height: y };
 };
 
+/**
+ * Creates ribbon links between two columns, stacking offsets as we walk the pairs.
+ * Colors are chosen by the target label so downstream categories share a hue.
+ */
 const buildLinks = (
   pairs: Record<string, Record<string, number>>,
   fromNodes: Record<string, Node>,
@@ -85,6 +89,10 @@ const buildLinks = (
 const formatPct = (value: number, total: number) =>
   total === 0 ? "0%" : `${Math.round((value / total) * 1000) / 10}%`;
 
+/**
+ * Renders a three-column alluvial diagram (City → Activity → Reason) with dynamic sizing.
+ * Uses ResizeObserver to adapt the SVG width so the ribbons stay legible at any viewport.
+ */
 export default function AlluvialCityActivityReason({
   rows,
   cityOrder,

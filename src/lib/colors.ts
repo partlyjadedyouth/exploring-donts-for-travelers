@@ -33,6 +33,10 @@ const predefined: Record<string, string> = {
 const assigned = new Map<string, string>();
 let nextIndex = 0;
 
+/**
+ * Returns a consistent, high-contrast color for a given label.
+ * Prefers predefined mappings; otherwise cycles through the palette and caches assignments.
+ */
 export function colorForLabel(label: string) {
   if (predefined[label]) return predefined[label];
   if (assigned.has(label)) return assigned.get(label)!;

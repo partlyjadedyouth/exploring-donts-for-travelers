@@ -9,6 +9,9 @@ type Props = {
   active: { activityLabel?: string; reasonLabel?: string };
 };
 
+/**
+ * Maps a cell count into a heatmap color with slight easing and optional emphasis for active filters.
+ */
 const colorFor = (count: number, max: number, active: boolean) => {
   const pct = count / max;
   const eased = Math.pow(pct, 0.7);
@@ -17,6 +20,10 @@ const colorFor = (count: number, max: number, active: boolean) => {
   return `rgba(99, 102, 241, ${base * alpha})`;
 };
 
+/**
+ * Displays a WHAT x WHY heatmap so users can see which motivations dominate each activity.
+ * Highlights cells that align with active filters to guide attention.
+ */
 export default function ActivityReasonHeatmap({ matrix, active }: Props) {
   const { activityLabels, reasonLabels, max, cells } = matrix;
   const animationKey = useMemo(

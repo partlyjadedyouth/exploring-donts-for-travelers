@@ -20,6 +20,9 @@ export default function StackedCityActivity({
   onToggle,
   onSelectCity,
 }: Props) {
+  /**
+   * Key that forces animation restart when composition totals shift after filtering.
+   */
   const animationKey = useMemo(
     () =>
       data
@@ -43,6 +46,10 @@ export default function StackedCityActivity({
 
   const maxTotal = Math.max(...data.map((d) => d.total), 1);
 
+  /**
+   * 100% stacked bars showing what travelers avoid in each city.
+   * Segment clicks toggle activity filters; city names toggle the city filter.
+   */
   return (
     <div className="rounded-3xl border border-neutral-100 bg-white p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
